@@ -15,3 +15,25 @@ model Manager {
 
   @@map("managers")
 }
+
+model Provider {
+  id         String   @unique
+  password   String
+  name       String
+  cnpj       String   @unique
+  segment_id String
+  segment    Segment  @relation(fields: [segment_id], references: [id])
+  avatar     String?
+  created_at DateTime @default(now())
+
+  @@map("providers")
+}
+
+model Segment {
+  id         String     @id @default(uuid())
+  name       String     @unique
+  created_at DateTime   @default(now())
+  providers  Provider[]
+
+  @@map("segments")
+}

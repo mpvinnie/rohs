@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
+import { jwt } from '@config/auth'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { ITokenProvider } from '@shared/containers/providers/TokenProvider/interfaces/ITokenProvider'
@@ -38,7 +39,10 @@ export class AuthenticateManagerUseCase {
       throw new AppError('Email or Password incorrect!', 401)
     }
 
-    const token = this.tokenProvider.generate(manager.id)
+    const token = this.tokenProvider.generate(
+      manager.id,
+      jwt.manager_auth_secret
+    )
 
     const secureManager = exclude(manager, 'password')
 

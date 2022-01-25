@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 
 import { AppError } from './AppError'
 
-export function asyncErrors(
+export async function asyncErrors(
   err: Error,
   request: Request,
   response: Response,

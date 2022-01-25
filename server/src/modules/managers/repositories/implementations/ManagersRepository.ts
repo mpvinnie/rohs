@@ -25,4 +25,12 @@ export class ManagersRepository implements IManagersRepository {
 
     return manager
   }
+
+  async findById(id: string): Promise<Manager | null> {
+    const manager = await prisma.manager.findUnique({
+      where: { id }
+    })
+
+    return manager
+  }
 }

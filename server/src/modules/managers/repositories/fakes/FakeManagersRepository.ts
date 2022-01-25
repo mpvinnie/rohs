@@ -26,4 +26,10 @@ export class FakeManagersRepository implements IManagersRepository {
 
     return manager
   }
+
+  async findById(id: string): Promise<Manager | undefined> {
+    const manager = this.managers.find(manager => manager.id === id)
+
+    return manager
+  }
 }
