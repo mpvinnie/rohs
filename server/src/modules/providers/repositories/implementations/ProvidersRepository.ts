@@ -51,4 +51,15 @@ export class ProvidersRepository implements IProvidersRepository {
 
     return provider
   }
+
+  async update(provider: Provider): Promise<Provider> {
+    const updatedProvider = await prisma.provider.update({
+      where: {
+        id: provider.id
+      },
+      data: provider
+    })
+
+    return updatedProvider
+  }
 }

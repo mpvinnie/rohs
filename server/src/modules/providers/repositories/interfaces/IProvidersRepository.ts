@@ -5,4 +5,5 @@ export interface IProvidersRepository {
   findByCnpj(cnpj: string): Promise<Provider | null | undefined>
   findById(id: string): Promise<Provider | null | undefined>
   create(data: ICreateProviderDTO): Promise<Provider>
+  update(provider: Provider): Promise<Provider>
 }

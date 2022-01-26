@@ -41,4 +41,14 @@ export class FakeProvidersRepository implements IProvidersRepository {
 
     return provider
   }
+
+  async update(provider: Provider): Promise<Provider> {
+    const findIndex = this.providers.findIndex(
+      findProvider => findProvider.id === provider.id
+    )
+
+    this.providers[findIndex] = provider
+
+    return provider
+  }
 }
