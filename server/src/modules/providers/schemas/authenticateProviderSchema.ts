@@ -8,6 +8,6 @@ export const authenticateProviderSchema = joi.object<IRequest>({
     .length(8)
     .required()
     .regex(/^\d+$/)
-    .message('"cnpj" must only have digits'),
+    .message('"id" must only have digits'),
   password: joi.string().required()
 })

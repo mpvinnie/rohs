@@ -22,9 +22,11 @@ model Provider {
   name       String
   cnpj       String   @unique
   segment_id String
-  segment    Segment  @relation(fields: [segment_id], references: [id])
   avatar     String?
   created_at DateTime @default(now())
+
+  segment  Segment   @relation(fields: [segment_id], references: [id])
+  contacts Contact[]
 
   @@map("providers")
 }
@@ -36,4 +38,30 @@ model Segment {
   providers  Provider[]
 
   @@map("segments")
+}
+
+model Contact {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  position     String
+  phone_number String   @unique
+  created_at   DateTime @default(now())
+
+  department_id String
+  department    Department @relation(fields: [department_id], references: [id])
+
+  provider_id String
+  provider    Provider @relation(fields: [provider_id], references: [id])
+
+  @@map("contacts")
+}
+
+model Department {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  created_at DateTime  @default(now())
+  contacts   Contact[]
+
+  @@map("departments")
 }
