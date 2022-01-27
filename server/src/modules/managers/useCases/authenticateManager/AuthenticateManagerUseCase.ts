@@ -5,7 +5,6 @@ import { IManagersRepository } from '@modules/managers/repositories/interfaces/I
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { ITokenProvider } from '@shared/containers/providers/TokenProvider/interfaces/ITokenProvider'
 import { AppError } from '@shared/errors/AppError'
-import { exclude } from '@utils/exclude'
 
 export interface IRequest {
   email: string
@@ -44,10 +43,8 @@ export class AuthenticateManagerUseCase {
       jwt.manager_auth_secret
     )
 
-    const secureManager = exclude(manager, 'password')
-
     return {
-      manager: secureManager,
+      manager,
       token
     }
   }

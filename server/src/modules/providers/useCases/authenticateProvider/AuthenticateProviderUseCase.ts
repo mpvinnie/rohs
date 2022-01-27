@@ -5,7 +5,6 @@ import { IProvidersRepository } from '@modules/providers/repositories/interfaces
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { ITokenProvider } from '@shared/containers/providers/TokenProvider/interfaces/ITokenProvider'
 import { AppError } from '@shared/errors/AppError'
-import { exclude } from '@utils/exclude'
 
 export interface IRequest {
   id: string
@@ -44,10 +43,8 @@ export class AuthenticateProviderUseCase {
       jwt.provider_auth_secret
     )
 
-    const secureProvider = exclude(provider, 'password')
-
     return {
-      provider: secureProvider,
+      provider,
       token
     }
   }

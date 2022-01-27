@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { authenticateProviderSchema } from '@modules/providers/schemas/authenticateProviderSchema'
+import { serializeModel } from '@utils/serializeModel'
 import validateParams from '@utils/validateParams'
 
 import {
@@ -22,6 +23,8 @@ export class AuthenticateProviderController {
       password
     })
 
-    return response.json({ provider, token })
+    const serializedProvider = serializeModel(provider, 'avatar')
+
+    return response.json({ provider: serializedProvider, token })
   }
 }
