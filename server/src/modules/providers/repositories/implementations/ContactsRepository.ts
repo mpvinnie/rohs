@@ -55,4 +55,17 @@ export class ContactsRepository implements IContactsRepository {
 
     return contact
   }
+
+  async findByProviderId(provider_id: string): Promise<Contact[]> {
+    const contacts = await prisma.contact.findMany({
+      where: {
+        provider_id
+      },
+      include: {
+        department: true
+      }
+    })
+
+    return contacts
+  }
 }

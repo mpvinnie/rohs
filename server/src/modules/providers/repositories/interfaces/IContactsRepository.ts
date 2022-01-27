@@ -5,4 +5,5 @@ export interface IContactsRepository {
   create(data: ICreateContactDTO): Promise<Contact>
   findByEmail(email: string): Promise<Contact | null | undefined>
   findByPhoneNumber(phone_number: string): Promise<Contact | null | undefined>
+  findByProviderId(provider_id: string): Promise<Contact[]>
 }
