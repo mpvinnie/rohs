@@ -68,4 +68,26 @@ export class ContactsRepository implements IContactsRepository {
 
     return contacts
   }
+
+  async findProviderContactById(
+    provider_id: string,
+    contact_id: string
+  ): Promise<Contact | null | undefined> {
+    const contact = await prisma.contact.findFirst({
+      where: {
+        provider_id,
+        id: contact_id
+      }
+    })
+
+    return contact
+  }
+
+  async delete(contact: Contact): Promise<void> {
+    await prisma.contact.delete({
+      where: {
+        id: contact.id
+      }
+    })
+  }
 }

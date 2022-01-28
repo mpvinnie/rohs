@@ -53,4 +53,22 @@ export class FakeContactsRepository implements IContactsRepository {
 
     return contacts
   }
+
+  async findProviderContactById(
+    provider_id: string,
+    contact_id: string
+  ): Promise<Contact | null | undefined> {
+    const contact = this.contacts.find(
+      contact =>
+        contact.id === contact_id && contact.provider_id === provider_id
+    )
+
+    return contact
+  }
+
+  async delete(contact: Contact): Promise<void> {
+    this.contacts = this.contacts.filter(
+      findContact => findContact.id !== contact.id
+    )
+  }
 }
