@@ -11,4 +11,10 @@ export interface IContactsRepository {
     contact_id: string
   ): Promise<Contact | null | undefined>
   delete(contact: Contact): Promise<void>
+  update(
+    contact: { department: string } & Pick<
+      Contact,
+      'id' | 'email' | 'name' | 'phone_number' | 'position'
+    >
+  ): Promise<Contact>
 }

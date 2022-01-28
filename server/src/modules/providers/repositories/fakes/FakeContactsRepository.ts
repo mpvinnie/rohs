@@ -71,4 +71,33 @@ export class FakeContactsRepository implements IContactsRepository {
       findContact => findContact.id !== contact.id
     )
   }
+
+  async update({
+    id,
+    name,
+    email,
+    phone_number,
+    position
+  }: { department: string } & Pick<
+    Contact,
+    'id' | 'email' | 'name' | 'phone_number' | 'position'
+  >): Promise<Contact> {
+    const findIndex = this.contacts.findIndex(contact => contact.id === id)
+    const contact = this.contacts[findIndex]
+
+    const updatedContact: Contact = {
+      id,
+      name,
+      email,
+      phone_number,
+      position,
+      created_at: contact.created_at,
+      department_id: uuid(),
+      provider_id: contact.provider_id
+    }
+
+    this.contacts[findIndex] = updatedContact
+
+    return updatedContact
+  }
 }

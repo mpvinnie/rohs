@@ -90,4 +90,38 @@ export class ContactsRepository implements IContactsRepository {
       }
     })
   }
+
+  async update({
+    id,
+    department,
+    name,
+    email,
+    phone_number,
+    position
+  }: { department: string } & Pick<
+    Contact,
+    'id' | 'email' | 'name' | 'phone_number' | 'position'
+  >): Promise<Contact> {
+    const updatedContact = await prisma.contact.update({
+      where: { id },
+      data: {
+        name,
+        email,
+        phone_number,
+        position,
+        department: {
+          connectOrCreate: {
+            where: {
+              name: department
+            },
+            create: {
+              name: department
+            }
+          }
+        }
+      }
+    })
+
+    return updatedContact
+  }
 }
