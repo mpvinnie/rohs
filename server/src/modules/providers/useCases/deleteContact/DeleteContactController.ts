@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { deleteContactSchema } from '@modules/providers/schemas/deleteContactSchema'
+import { deleteContactSchema } from '@modules/providers/schemas/contactSchemas'
 import validateParams from '@utils/validateParams'
 
 import { DeleteContactUseCase, IRequest } from './DeleteContactUseCase'

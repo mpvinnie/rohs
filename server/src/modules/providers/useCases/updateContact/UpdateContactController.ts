@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { IUpdateContactDTO } from '@modules/providers/dtos/IUpdateContactDTO'
-import { updateContactSchema } from '@modules/providers/schemas/updateContactSchema'
+import { updateContactSchema } from '@modules/providers/schemas/contactSchemas'
 import validateParams from '@utils/validateParams'
 
 import { UpdateContactUseCase } from './UpdateContactUseCase'

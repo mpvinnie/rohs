@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { ICreateContactDTO } from '@modules/providers/dtos/ICreateContactDTO'
-import { createContactSchema } from '@modules/providers/schemas/createContactSchema'
+import { createContactSchema } from '@modules/providers/schemas/contactSchemas'
 import validateParams from '@utils/validateParams'
 
 import { CreateContactUseCase } from './CreateContactUseCase'

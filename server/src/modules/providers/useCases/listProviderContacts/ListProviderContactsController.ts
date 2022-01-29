@@ -1,19 +1,20 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { listProviderContactsSchema } from '@modules/providers/schemas/listProviderContactsSchema'
+import { IListProviderContactsDTO } from '@modules/providers/dtos/IListProviderContactsDTO'
+import { listProviderContactsSchema } from '@modules/providers/schemas/contactSchemas'
 import validateParams from '@utils/validateParams'
 
-import {
-  IRequest,
-  ListProviderContactsUseCase
-} from './ListProviderContactsUseCase'
+import { ListProviderContactsUseCase } from './ListProviderContactsUseCase'
 
 export class ListProviderContactsController {
   async handle(request: Request, response: Response) {
     const { provider_id } = request
 
-    validateParams<IRequest>({ provider_id }, listProviderContactsSchema)
+    validateParams<IListProviderContactsDTO>(
+      { provider_id },
+      listProviderContactsSchema
+    )
 
     const listProviderContacts = container.resolve(ListProviderContactsUseCase)
 

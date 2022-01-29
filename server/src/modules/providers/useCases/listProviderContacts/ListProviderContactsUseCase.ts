@@ -1,12 +1,9 @@
 import { inject, injectable } from 'tsyringe'
 
+import { IListProviderContactsDTO } from '@modules/providers/dtos/IListProviderContactsDTO'
 import { IContactsRepository } from '@modules/providers/repositories/interfaces/IContactsRepository'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { AppError } from '@shared/errors/AppError'
-
-export interface IRequest {
-  provider_id: string
-}
 
 @injectable()
 export class ListProviderContactsUseCase {
@@ -17,7 +14,7 @@ export class ListProviderContactsUseCase {
     private contactsRepository: IContactsRepository
   ) {}
 
-  async execute({ provider_id }: IRequest) {
+  async execute({ provider_id }: IListProviderContactsDTO) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {
