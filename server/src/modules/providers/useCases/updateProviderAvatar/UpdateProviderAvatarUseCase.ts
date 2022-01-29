@@ -3,7 +3,6 @@ import { inject, injectable } from 'tsyringe'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { IStorageProvider } from '@shared/containers/providers/StorageProvider/interfaces/IStorageProvider'
 import { AppError } from '@shared/errors/AppError'
-import { exclude } from '@utils/exclude'
 
 export interface IRequest {
   provider_id: string
@@ -42,8 +41,6 @@ export class UpdateProviderAvatarUseCase {
 
     const updatedProvider = await this.providersRepository.update(provider)
 
-    const secureUpdatedProvider = exclude(updatedProvider, 'password')
-
-    return secureUpdatedProvider
+    return updatedProvider
   }
 }

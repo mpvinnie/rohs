@@ -1,10 +1,19 @@
 import { Manager, Provider } from '@prisma/client'
 
-import { exclude } from './exclude'
-
 type ModelType = Partial<Manager> & Partial<Provider>
 
 type UrlType = 'avatar' | 'document' | 'subpart'
+
+export function exclude<Model, Key extends keyof Model>(
+  model: Model,
+  ...keys: Key[]
+): Omit<Model, Key> {
+  for (const key of keys) {
+    delete model[key]
+  }
+
+  return model
+}
 
 export function single<Model extends ModelType>(
   model: Model,

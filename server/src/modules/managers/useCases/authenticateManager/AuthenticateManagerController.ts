@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { authenticateManagerSchema } from '@modules/managers/schemas/authenticateManagerSchema'
-import { serializeModel } from '@utils/serializeModel'
+import { single } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 
 import {
@@ -23,7 +23,7 @@ export class AuthenticateManagerController {
       password
     })
 
-    const serializedManager = serializeModel(manager)
+    const serializedManager = single(manager)
 
     return response.json({ manager: serializedManager, token })
   }
