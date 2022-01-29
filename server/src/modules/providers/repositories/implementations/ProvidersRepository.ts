@@ -62,4 +62,14 @@ export class ProvidersRepository implements IProvidersRepository {
 
     return updatedProvider
   }
+
+  async find(): Promise<Provider[]> {
+    const providers = await prisma.provider.findMany({
+      include: {
+        segment: true
+      }
+    })
+
+    return providers
+  }
 }

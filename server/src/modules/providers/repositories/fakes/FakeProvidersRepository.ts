@@ -51,4 +51,10 @@ export class FakeProvidersRepository implements IProvidersRepository {
 
     return provider
   }
+
+  async find(): Promise<Provider[]> {
+    const providers = this.providers
+
+    return providers
+  }
 }
