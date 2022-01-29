@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { createProviderSchema } from '@modules/providers/schemas/createProviderSchema'
+import { createProviderSchema } from '@modules/managers/schemas/createProviderSchema'
 import validateParams from '@utils/validateParams'
 
 import { CreateProviderUseCase, IRequest } from './CreateProviderUseCase'

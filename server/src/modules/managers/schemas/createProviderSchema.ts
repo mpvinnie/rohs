@@ -1,6 +1,6 @@
 import joi from 'joi'
 
-import { IRequest } from '../useCases/createProvider/CreateProviderUseCase'
+import { IRequest } from '../../managers/useCases/createProvider/CreateProviderUseCase'
 
 export const createProviderSchema = joi.object<IRequest>({
   name: joi.string().required(),
