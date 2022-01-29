@@ -37,9 +37,10 @@ export class UpdateProviderAvatarUseCase {
       'avatar'
     )
 
-    provider.avatar = filename
-
-    const updatedProvider = await this.providersRepository.update(provider)
+    const updatedProvider = await this.providersRepository.updateAvatar(
+      provider_id,
+      filename
+    )
 
     return updatedProvider
   }

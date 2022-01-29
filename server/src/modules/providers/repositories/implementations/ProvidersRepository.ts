@@ -52,12 +52,12 @@ export class ProvidersRepository implements IProvidersRepository {
     return provider
   }
 
-  async update(provider: Provider): Promise<Provider> {
+  async updateAvatar(id: string, avatar_filename: string): Promise<Provider> {
     const updatedProvider = await prisma.provider.update({
-      where: {
-        id: provider.id
-      },
-      data: provider
+      where: { id },
+      data: {
+        avatar: avatar_filename
+      }
     })
 
     return updatedProvider
@@ -71,5 +71,41 @@ export class ProvidersRepository implements IProvidersRepository {
     })
 
     return providers
+  }
+
+  async update({
+    id,
+    cnpj,
+    name,
+    segment,
+    password
+  }: Omit<Provider, 'created_at' | 'segment_id' | 'avatar'> & {
+    segment: string
+  }): Promise<Provider> {
+    const updatedProvider = await prisma.provider.update({
+      where: {
+        id
+      },
+      data: {
+        cnpj,
+        name,
+        password,
+        segment: {
+          connectOrCreate: {
+            where: {
+              name: segment
+            },
+            create: {
+              name: segment
+            }
+          }
+        }
+      },
+      include: {
+        segment: true
+      }
+    })
+
+    return updatedProvider
   }
 }
