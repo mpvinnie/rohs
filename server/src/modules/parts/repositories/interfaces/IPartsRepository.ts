@@ -7,4 +7,5 @@ export interface IPartsRepository {
     code: string
   ): Promise<Part | null | undefined>
   create(data: ICreatePartDTO): Promise<Part>
+  findByProviderId(provider_id: string): Promise<Part[]>
 }

@@ -36,4 +36,18 @@ export class PartsRepository implements IPartsRepository {
 
     return part
   }
+
+  async findByProviderId(provider_id: string): Promise<Part[]> {
+    const parts = await prisma.part.findMany({
+      where: {
+        provider_id
+      },
+      include: {
+        disaproval_reason: true,
+        subparts: true
+      }
+    })
+
+    return parts
+  }
 }

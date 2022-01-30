@@ -4,3 +4,7 @@ export interface ICreatePartDTO {
   description: string
   comment?: string
 }
+
+export interface IListProviderPartsDTO {
+  provider_id: string
+}
