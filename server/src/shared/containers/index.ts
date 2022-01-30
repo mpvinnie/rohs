@@ -4,6 +4,8 @@ import './providers'
 
 import { ManagersRepository } from '@modules/managers/repositories/implementations/ManagersRepository'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
+import { PartsRepository } from '@modules/parts/repositories/implementations/PartsRepository'
+import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
 import { ContactsRepository } from '@modules/providers/repositories/implementations/ContactsRepository'
 import { ProvidersRepository } from '@modules/providers/repositories/implementations/ProvidersRepository'
 import { IContactsRepository } from '@modules/providers/repositories/interfaces/IContactsRepository'
@@ -22,4 +24,9 @@ container.registerSingleton<IProvidersRepository>(
 container.registerSingleton<IContactsRepository>(
   'ContactsRepository',
   ContactsRepository
+)
+
+container.registerSingleton<IPartsRepository>(
+  'PartsRepository',
+  PartsRepository
 )
