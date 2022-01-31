@@ -118,8 +118,8 @@ model Subpart {
   subgroup_id String
   subgroup    Subgroup? @relation(fields: [subgroup_id], references: [id])
 
-  part_id String?
-  part    Part?   @relation(fields: [part_id], references: [id])
+  part_id String
+  part    Part   @relation(fields: [part_id], references: [id])
 
   @@map("subparts")
 }

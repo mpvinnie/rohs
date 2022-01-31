@@ -37,7 +37,7 @@ export class PartsRepository implements IPartsRepository {
     return part
   }
 
-  async findByProviderId(provider_id: string): Promise<Part[]> {
+  async findAllByProviderId(provider_id: string): Promise<Part[]> {
     const parts = await prisma.part.findMany({
       where: {
         provider_id
@@ -49,5 +49,19 @@ export class PartsRepository implements IPartsRepository {
     })
 
     return parts
+  }
+
+  async findByProviderId(
+    provider_id: string,
+    part_id: string
+  ): Promise<Part | null> {
+    const part = await prisma.part.findFirst({
+      where: {
+        provider_id,
+        id: part_id
+      }
+    })
+
+    return part
   }
 }

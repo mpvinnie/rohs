@@ -3,7 +3,7 @@ import { container } from 'tsyringe'
 
 import { IUpdateProviderProfileDTO } from '@modules/providers/dtos/IUpdateProviderProfileDTO'
 import { updateProviderProfileSchema } from '@modules/providers/schemas/updateProviderProfileShema'
-import { single } from '@utils/serialize'
+import { serializeModel } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 
 import { UpdateProviderProfileUseCase } from './UpdateProviderProfileUseCase'
@@ -39,7 +39,7 @@ export class UpdateProviderProfileController {
       password
     })
 
-    const serializedProvider = single(updatedProvider, 'avatar')
+    const serializedProvider = serializeModel(updatedProvider, 'provider')
 
     return response.json(serializedProvider)
   }

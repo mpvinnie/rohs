@@ -21,7 +21,7 @@ export class ListProviderPartsUseCase {
       throw new AppError('No provider found for this id', 404)
     }
 
-    const parts = await this.partsRepository.findByProviderId(provider_id)
+    const parts = await this.partsRepository.findAllByProviderId(provider_id)
 
     return parts
   }

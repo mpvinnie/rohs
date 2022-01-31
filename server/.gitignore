@@ -1,3 +1,15 @@
 node_modules
 .env
 coverage
+
+tmp/*
+!tmp/uploads
+
+tmp/uploads/avatars/*
+!tmp/uploads/avatars/.gitkeep
+
+tmp/uploads/documents/*
+!tmp/uploads/documents/.gitkeep
+
+tmp/uploads/subparts/*
+!tmp/uploads/subparts/.gitkeep

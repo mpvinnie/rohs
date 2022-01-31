@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { updateProviderAvatarSchema } from '@modules/providers/schemas/updateProviderAvatarSchema'
-import { single } from '@utils/serialize'
+import { serializeModel } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 
 import {
@@ -28,7 +28,7 @@ export class UpdateProviderAvatarController {
       avatar_filename
     })
 
-    const serializedProvider = single(provider, 'avatar')
+    const serializedProvider = serializeModel(provider, 'provider')
 
     return response.json(serializedProvider)
   }

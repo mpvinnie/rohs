@@ -44,9 +44,20 @@ export class FakePartsRepository implements IPartsRepository {
     return part
   }
 
-  async findByProviderId(provider_id: string): Promise<Part[]> {
+  async findAllByProviderId(provider_id: string): Promise<Part[]> {
     const parts = this.parts.filter(part => part.provider_id === provider_id)
 
     return parts
+  }
+
+  async findByProviderId(
+    provider_id: string,
+    part_id: string
+  ): Promise<Part | null | undefined> {
+    const part = this.parts.find(
+      part => part.id === part_id && part.provider_id === provider_id
+    )
+
+    return part
   }
 }

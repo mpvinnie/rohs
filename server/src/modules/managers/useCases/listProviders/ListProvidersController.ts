@@ -3,7 +3,7 @@ import { container } from 'tsyringe'
 
 import { IListProvidersDTO } from '@modules/managers/dtos/IListProvidersDTO'
 import { listProvidersSchema } from '@modules/managers/schemas/providerSchemas'
-import { many } from '@utils/serialize'
+import { serializeModels } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 
 import { ListProvidersUseCase } from './ListProvidersUseCase'
@@ -20,7 +20,7 @@ export class ListProvidersController {
       manager_id
     })
 
-    const serializedProviders = many(providers, 'avatar')
+    const serializedProviders = serializeModels(providers, 'provider')
 
     return response.json(serializedProviders)
   }
