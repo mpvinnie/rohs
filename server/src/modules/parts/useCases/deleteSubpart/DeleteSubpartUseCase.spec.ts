@@ -122,85 +122,42 @@ describe('DeleteSubpart', () => {
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  // it('should not be able to delete a subpart if part is currently approved', async () => {
-  //   const provider = await providersRepository.create({
-  //     id: '12345678',
-  //     name: 'Provider Name',
-  //     cnpj: '12345679801234',
-  //     password: 'password',
-  //     segment: 'Segment'
-  //   })
+  it('should not be able to delete a subpart if part is currently approved or under_analysis', async () => {
+    const provider = await providersRepository.create({
+      id: '12345678',
+      name: 'Provider Name',
+      cnpj: '12345679801234',
+      password: 'password',
+      segment: 'Segment'
+    })
 
-  //   const part = await partsRepository.create({
-  //     provider_id: provider.id,
-  //     code: '123456',
-  //     description: 'Part Description',
-  //     comment: 'Comment'
-  //   })
+    const part = await partsRepository.create({
+      provider_id: provider.id,
+      code: '123456',
+      description: 'Part Description',
+      comment: 'Comment'
+    })
 
-  //   const subpart = await subpartsRepository.create({
-  //     provider_id: provider.id,
-  //     part_id: part.id,
-  //     name: 'Subpart Name',
-  //     gwi_11a1: 'gwi_11a1.doc',
-  //     fisp_msds: 'fisp.doc',
-  //     rohs_report: 'rohs.doc',
-  //     subgroup: 'subgroup'
-  //   })
+    const subpart = await subpartsRepository.create({
+      provider_id: provider.id,
+      part_id: part.id,
+      name: 'Subpart Name',
+      gwi_11a1: 'gwi_11a1.doc',
+      fisp_msds: 'fisp.doc',
+      rohs_report: 'rohs.doc',
+      subgroup: 'subgroup'
+    })
 
-  //   await deleteSubpart.execute({
-  //     provider_id: provider.id,
-  //     part_id: part.id,
-  //     subpart_id: subpart.id
-  //   })
+    part.status = 'APPROVED'
 
-  //   const deletedSubpart = await subpartsRepository.findByPartId(
-  //     part.id,
-  //     subpart.id
-  //   )
-
-  //   expect(deletedSubpart).toBeUndefined()
-  // })
-
-  // it('should not be able to delete a subpart if part is currently under analysis', async () => {
-  //   const provider = await providersRepository.create({
-  //     id: '12345678',
-  //     name: 'Provider Name',
-  //     cnpj: '12345679801234',
-  //     password: 'password',
-  //     segment: 'Segment'
-  //   })
-
-  //   const part = await partsRepository.create({
-  //     provider_id: provider.id,
-  //     code: '123456',
-  //     description: 'Part Description',
-  //     comment: 'Comment'
-  //   })
-
-  //   const subpart = await subpartsRepository.create({
-  //     provider_id: provider.id,
-  //     part_id: part.id,
-  //     name: 'Subpart Name',
-  //     gwi_11a1: 'gwi_11a1.doc',
-  //     fisp_msds: 'fisp.doc',
-  //     rohs_report: 'rohs.doc',
-  //     subgroup: 'subgroup'
-  //   })
-
-  //   await deleteSubpart.execute({
-  //     provider_id: provider.id,
-  //     part_id: part.id,
-  //     subpart_id: subpart.id
-  //   })
-
-  //   const deletedSubpart = await subpartsRepository.findByPartId(
-  //     part.id,
-  //     subpart.id
-  //   )
-
-  //   expect(deletedSubpart).toBeUndefined()
-  // })
+    await expect(
+      deleteSubpart.execute({
+        provider_id: provider.id,
+        part_id: part.id,
+        subpart_id: subpart.id
+      })
+    ).rejects.toBeInstanceOf(AppError)
+  })
 
   it('should be able to delete a non-existent subpart', async () => {
     const provider = await providersRepository.create({
