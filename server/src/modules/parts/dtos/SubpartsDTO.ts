@@ -7,3 +7,9 @@ export interface ICreateSubpartDTO {
   rohs_report: string
   subgroup: string
 }
+
+export interface IDeleteSubpartDTO {
+  provider_id: string
+  part_id: string
+  subpart_id: string
+}

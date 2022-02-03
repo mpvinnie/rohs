@@ -2,6 +2,7 @@ import { Router } from 'express'
 
 import uploadConfig from '@config/upload'
 import { CreateSubpartController } from '@modules/parts/useCases/createSubpart/CreateSubpartController'
+import { DeleteSubpartController } from '@modules/parts/useCases/deleteSubpart/DeleteSubpartController'
 import { ensureProviderAuthenticated } from '@modules/providers/infra/http/middlewares/ensureProviderAuthenticated'
 
 export const subpartsRoutes = Router()
@@ -28,3 +29,5 @@ subpartsRoutes.post(
   ]),
   new CreateSubpartController().handle
 )
+
+subpartsRoutes.delete('/:part_id/:id', new DeleteSubpartController().handle)

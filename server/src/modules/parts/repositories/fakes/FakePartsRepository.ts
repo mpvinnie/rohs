@@ -30,7 +30,7 @@ export class FakePartsRepository implements IPartsRepository {
       provider_id,
       code,
       description,
-      status: 'WAITING',
+      status: 'NOT_SENT',
       comment: comment || null,
       created_at: new Date(),
       is_active: true,

@@ -42,4 +42,26 @@ export class SubpartsRepository implements ISubpartsRepository {
 
     return subpart
   }
+
+  async findByPartId(
+    part_id: string,
+    subpart_id: string
+  ): Promise<Subpart | null> {
+    const subpart = await prisma.subpart.findFirst({
+      where: {
+        part_id,
+        id: subpart_id
+      }
+    })
+
+    return subpart
+  }
+
+  async delete(subpart: Subpart): Promise<void> {
+    await prisma.subpart.delete({
+      where: {
+        id: subpart.id
+      }
+    })
+  }
 }

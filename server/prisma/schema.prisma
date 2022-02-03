@@ -54,7 +54,7 @@ model Contact {
   department    Department @relation(fields: [department_id], references: [id])
 
   provider_id String
-  provider    Provider @relation(fields: [provider_id], references: [id])
+  provider    Provider @relation(fields: [provider_id], references: [id], onDelete: Cascade)
 
   @@map("contacts")
 }
@@ -69,8 +69,9 @@ model Department {
 }
 
 enum Status {
+  NOT_SENT
+  UNDER_ANALYSIS
   APPROVED
-  WAITING
   DISAPPROVED
 }
 
@@ -78,7 +79,7 @@ model Part {
   id          String   @id @default(uuid())
   code        String   @unique
   description String
-  status      Status   @default(WAITING)
+  status      Status   @default(NOT_SENT)
   is_active   Boolean  @default(true)
   is_blocked  Boolean  @default(true)
   comment     String?
@@ -86,12 +87,12 @@ model Part {
   updated_at  DateTime @updatedAt
 
   disaproval_reason_id String?           @unique
-  disaproval_reason    DisaprovalReason? @relation(fields: [disaproval_reason_id], references: [id])
+  disaproval_reason    DisaprovalReason? @relation(fields: [disaproval_reason_id], references: [id], onDelete: SetNull)
 
   subparts Subpart[]
 
   provider_id String
-  provider    Provider @relation(fields: [provider_id], references: [id])
+  provider    Provider @relation(fields: [provider_id], references: [id], onDelete: Cascade)
 
   @@map("parts")
 }
@@ -119,7 +120,7 @@ model Subpart {
   subgroup    Subgroup? @relation(fields: [subgroup_id], references: [id])
 
   part_id String
-  part    Part   @relation(fields: [part_id], references: [id])
+  part    Part   @relation(fields: [part_id], references: [id], onDelete: Cascade)
 
   @@map("subparts")
 }

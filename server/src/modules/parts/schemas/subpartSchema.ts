@@ -1,6 +1,6 @@
 import joi from 'joi'
 
-import { ICreateSubpartDTO } from '../dtos/SubpartsDTO'
+import { ICreateSubpartDTO, IDeleteSubpartDTO } from '../dtos/SubpartsDTO'
 
 export const createSubpartSchema = joi.object<ICreateSubpartDTO>({
   provider_id: joi
@@ -15,4 +15,15 @@ export const createSubpartSchema = joi.object<ICreateSubpartDTO>({
   fisp_msds: joi.string().required(),
   rohs_report: joi.string().required(),
   subgroup: joi.string().required()
+})
+
+export const deleteSubpartSchema = joi.object<IDeleteSubpartDTO>({
+  provider_id: joi
+    .string()
+    .length(8)
+    .required()
+    .regex(/^\d+$/)
+    .message('"provider_id" must only have digits'),
+  part_id: joi.string().uuid().required(),
+  subpart_id: joi.string().uuid().required()
 })
