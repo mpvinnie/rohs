@@ -72,4 +72,26 @@ export class PartsRepository implements IPartsRepository {
 
     return part
   }
+
+  async findById(id: string): Promise<Part | null> {
+    const part = await prisma.part.findUnique({
+      where: { id },
+      include: {
+        disaproval_reason: true
+      }
+    })
+
+    return part
+  }
+
+  async update(part: Part): Promise<Part> {
+    const updatedPart = await prisma.part.update({
+      where: {
+        id: part.id
+      },
+      data: part
+    })
+
+    return updatedPart
+  }
 }

@@ -60,4 +60,18 @@ export class FakePartsRepository implements IPartsRepository {
 
     return part
   }
+
+  async findById(id: string): Promise<Part | undefined> {
+    const part = this.parts.find(part => part.id === id)
+
+    return part
+  }
+
+  async update(part: Part): Promise<Part> {
+    const findIndex = this.parts.findIndex(findPart => findPart.id === part.id)
+
+    this.parts[findIndex] = part
+
+    return this.parts[findIndex]
+  }
 }

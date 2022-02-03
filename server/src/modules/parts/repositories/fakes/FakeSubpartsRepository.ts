@@ -48,4 +48,12 @@ export class FakeSubpartsRepository implements ISubpartsRepository {
       findSubpart => findSubpart.id !== subpart.id
     )
   }
+
+  async findAllByPartId(part_id: string): Promise<Subpart[]> {
+    const subparts = this.subparts.filter(
+      subpart => subpart.part_id === part_id
+    )
+
+    return subparts
+  }
 }

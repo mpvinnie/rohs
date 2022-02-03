@@ -8,4 +8,5 @@ export interface ISubpartsRepository {
     subpart_id: string
   ): Promise<Subpart | null | undefined>
   delete(subpart: Subpart): Promise<void>
+  findAllByPartId(part_id: string): Promise<Subpart[]>
 }

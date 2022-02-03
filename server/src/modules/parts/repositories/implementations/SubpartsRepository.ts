@@ -64,4 +64,15 @@ export class SubpartsRepository implements ISubpartsRepository {
       }
     })
   }
+
+  async findAllByPartId(part_id: string): Promise<Subpart[]> {
+    const subparts = await prisma.subpart.findMany({
+      where: { part_id },
+      include: {
+        subgroup: true
+      }
+    })
+
+    return subparts
+  }
 }

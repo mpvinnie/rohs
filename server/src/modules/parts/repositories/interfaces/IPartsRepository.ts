@@ -12,4 +12,6 @@ export interface IPartsRepository {
     provider_id: string,
     part_id: string
   ): Promise<Part | null | undefined>
+  findById(id: string): Promise<Part | null | undefined>
+  update(part: Part): Promise<Part>
 }
