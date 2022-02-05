@@ -1,13 +1,10 @@
 import { inject, injectable } from 'tsyringe'
 
+import { ICreateManagerDTO } from '@modules/managers/dtos/ManagersDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { IPasswordProvider } from '@shared/containers/providers/PasswordProvider/interfaces/IPasswordProvider'
 import { AppError } from '@shared/errors/AppError'
-
-export interface IRequest {
-  email: string
-}
 
 @injectable()
 export class CreateManagerUseCase {
@@ -20,7 +17,7 @@ export class CreateManagerUseCase {
     private hashProvider: IHashProvider
   ) {}
 
-  async execute({ email }: IRequest) {
+  async execute({ email }: ICreateManagerDTO) {
     const managerExists = await this.managersRepository.findByEmail(email)
 
     if (managerExists) {

@@ -1,11 +1,14 @@
-import { ICreateManagerDTO } from '@modules/managers/dtos/ICreateManagerDTO'
+import { ICreateManagerDTO } from '@modules/managers/dtos/ManagersDTO'
 import { Manager } from '@prisma/client'
 import { prisma } from '@shared/infra/prisma'
 
 import { IManagersRepository } from '../interfaces/IManagersRepository'
 
 export class ManagersRepository implements IManagersRepository {
-  async create({ email, password }: ICreateManagerDTO): Promise<Manager> {
+  async create({
+    email,
+    password
+  }: ICreateManagerDTO & { password: string }): Promise<Manager> {
     const manager = await prisma.manager.create({
       data: {
         email,

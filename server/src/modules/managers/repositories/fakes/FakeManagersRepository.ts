@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import { ICreateManagerDTO } from '@modules/managers/dtos/ICreateManagerDTO'
+import { ICreateManagerDTO } from '@modules/managers/dtos/ManagersDTO'
 import { Manager } from '@prisma/client'
 
 import { IManagersRepository } from '../interfaces/IManagersRepository'
@@ -8,7 +8,10 @@ import { IManagersRepository } from '../interfaces/IManagersRepository'
 export class FakeManagersRepository implements IManagersRepository {
   private managers: Manager[] = []
 
-  async create({ email, password }: ICreateManagerDTO): Promise<Manager> {
+  async create({
+    email,
+    password
+  }: ICreateManagerDTO & { password: string }): Promise<Manager> {
     const manager: Manager = {
       id: uuid(),
       email,

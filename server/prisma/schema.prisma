@@ -13,6 +13,8 @@ model Manager {
   password   String
   created_at DateTime @default(now())
 
+  parts_under_review PartUnderReview[]
+
   @@map("managers")
 }
 
@@ -70,9 +72,10 @@ model Department {
 
 enum Status {
   NOT_SENT
-  UNDER_ANALYSIS
+  SENT_FOR_REVIEW
   APPROVED
   DISAPPROVED
+  EXPIRED
 }
 
 model Part {
@@ -80,8 +83,6 @@ model Part {
   code        String   @unique
   description String
   status      Status   @default(NOT_SENT)
-  is_active   Boolean  @default(true)
-  is_blocked  Boolean  @default(true)
   comment     String?
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
@@ -93,6 +94,8 @@ model Part {
 
   provider_id String
   provider    Provider @relation(fields: [provider_id], references: [id], onDelete: Cascade)
+
+  part_under_review PartUnderReview?
 
   @@map("parts")
 }
@@ -132,4 +135,17 @@ model Subgroup {
   subparts   Subpart[]
 
   @@map("subgroups")
+}
+
+model PartUnderReview {
+  id        String  @id @default(uuid())
+  is_active Boolean @default(true)
+
+  manager_id String
+  manager    Manager @relation(fields: [manager_id], references: [id], onDelete: SetNull)
+
+  part_id String @unique
+  part    Part   @relation(fields: [part_id], references: [id], onDelete: Cascade)
+
+  @@map("parts_under_review")
 }

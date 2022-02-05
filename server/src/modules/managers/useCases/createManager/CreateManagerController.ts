@@ -1,16 +1,17 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { createManagerSchema } from '@modules/managers/schemas/createManagerSchema'
+import { ICreateManagerDTO } from '@modules/managers/dtos/ManagersDTO'
+import { createManagerSchema } from '@modules/managers/schemas/managerSchemas'
 import validateParams from '@utils/validateParams'
 
-import { CreateManagerUseCase, IRequest } from './CreateManagerUseCase'
+import { CreateManagerUseCase } from './CreateManagerUseCase'
 
 export class CreateManagerController {
   async handle(request: Request, response: Response) {
     const { email } = request.body
 
-    validateParams<IRequest>({ email }, createManagerSchema)
+    validateParams<ICreateManagerDTO>({ email }, createManagerSchema)
 
     const createManager = container.resolve(CreateManagerUseCase)
 
