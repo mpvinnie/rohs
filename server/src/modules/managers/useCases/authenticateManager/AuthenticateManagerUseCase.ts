@@ -1,15 +1,11 @@
 import { inject, injectable } from 'tsyringe'
 
 import { jwt } from '@config/auth'
+import { IAuthenticateManagerDTO } from '@modules/managers/dtos/ManagersDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { ITokenProvider } from '@shared/containers/providers/TokenProvider/interfaces/ITokenProvider'
 import { AppError } from '@shared/errors/AppError'
-
-export interface IRequest {
-  email: string
-  password: string
-}
 
 @injectable()
 export class AuthenticateManagerUseCase {
@@ -22,7 +18,7 @@ export class AuthenticateManagerUseCase {
     private tokenProvider: ITokenProvider
   ) {}
 
-  async execute({ email, password }: IRequest) {
+  async execute({ email, password }: IAuthenticateManagerDTO) {
     const manager = await this.managersRepository.findByEmail(email)
 
     if (!manager) {
