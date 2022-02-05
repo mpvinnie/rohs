@@ -63,10 +63,6 @@ export class PartsRepository implements IPartsRepository {
       where: {
         provider_id,
         id: part_id
-      },
-      include: {
-        subparts: true,
-        disaproval_reason: true
       }
     })
 
@@ -75,10 +71,7 @@ export class PartsRepository implements IPartsRepository {
 
   async findById(id: string): Promise<Part | null> {
     const part = await prisma.part.findUnique({
-      where: { id },
-      include: {
-        disaproval_reason: true
-      }
+      where: { id }
     })
 
     return part
