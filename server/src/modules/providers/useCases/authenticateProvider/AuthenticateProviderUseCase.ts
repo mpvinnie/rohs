@@ -1,15 +1,11 @@
 import { inject, injectable } from 'tsyringe'
 
 import { jwt } from '@config/auth'
+import { IAuthenticateProviderDTO } from '@modules/providers/dtos/ProvidersDTO'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { ITokenProvider } from '@shared/containers/providers/TokenProvider/interfaces/ITokenProvider'
 import { AppError } from '@shared/errors/AppError'
-
-export interface IRequest {
-  id: string
-  password: string
-}
 
 @injectable()
 export class AuthenticateProviderUseCase {
@@ -22,7 +18,7 @@ export class AuthenticateProviderUseCase {
     private tokenProvider: ITokenProvider
   ) {}
 
-  async execute({ id, password }: IRequest) {
+  async execute({ id, password }: IAuthenticateProviderDTO) {
     const provider = await this.providersRepository.findById(id)
 
     if (!provider) {
