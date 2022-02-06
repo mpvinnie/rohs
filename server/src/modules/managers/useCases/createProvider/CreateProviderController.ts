@@ -1,10 +1,11 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { createProviderSchema } from '@modules/managers/schemas/createProviderSchema'
+import { ICreateProviderDTO } from '@modules/managers/dtos/ProvidersDTO'
+import { createProviderSchema } from '@modules/managers/schemas/providerSchemas'
 import validateParams from '@utils/validateParams'
 
-import { CreateProviderUseCase, IRequest } from './CreateProviderUseCase'
+import { CreateProviderUseCase } from './CreateProviderUseCase'
 
 export class CreateProviderController {
   async handle(request: Request, response: Response) {
@@ -12,9 +13,7 @@ export class CreateProviderController {
 
     const { manager_id } = request
 
-    console.log(manager_id)
-
-    validateParams<IRequest>(
+    validateParams<ICreateProviderDTO>(
       {
         name,
         cnpj,

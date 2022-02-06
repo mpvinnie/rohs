@@ -1,4 +1,4 @@
-import { ICreateProviderDTO } from '@modules/providers/dtos/ICreateProviderDTO'
+import { ICreateProviderDTO } from '@modules/managers/dtos/ProvidersDTO'
 import { Provider } from '@prisma/client'
 import { prisma } from '@shared/infra/prisma'
 
@@ -29,7 +29,10 @@ export class ProvidersRepository implements IProvidersRepository {
     name,
     cnpj,
     segment
-  }: ICreateProviderDTO): Promise<Provider> {
+  }: Omit<ICreateProviderDTO, 'manager_id'> & {
+    id: string
+    password: string
+  }): Promise<Provider> {
     const provider = await prisma.provider.create({
       data: {
         id,

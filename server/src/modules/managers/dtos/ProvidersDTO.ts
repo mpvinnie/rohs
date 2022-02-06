@@ -1,6 +1,5 @@
 export interface ICreateProviderDTO {
-  id: string
-  password: string
+  manager_id: string
   name: string
   cnpj: string
   segment: string

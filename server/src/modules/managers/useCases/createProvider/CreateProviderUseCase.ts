@@ -1,18 +1,12 @@
 import { inject, injectable } from 'tsyringe'
 
+import { ICreateProviderDTO } from '@modules/managers/dtos/ProvidersDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { IPasswordProvider } from '@shared/containers/providers/PasswordProvider/interfaces/IPasswordProvider'
 import { AppError } from '@shared/errors/AppError'
 import generateId from '@utils/generateId'
-
-export interface IRequest {
-  manager_id: string
-  name: string
-  cnpj: string
-  segment: string
-}
 
 @injectable()
 export class CreateProviderUseCase {
@@ -27,7 +21,7 @@ export class CreateProviderUseCase {
     private hashProvider: IHashProvider
   ) {}
 
-  async execute({ manager_id, name, cnpj, segment }: IRequest) {
+  async execute({ manager_id, name, cnpj, segment }: ICreateProviderDTO) {
     const manager = await this.managersRepository.findById(manager_id)
 
     if (!manager) {

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import { ICreateProviderDTO } from '@modules/providers/dtos/ICreateProviderDTO'
+import { ICreateProviderDTO } from '@modules/managers/dtos/ProvidersDTO'
 import { Provider } from '@prisma/client'
 
 import { IProvidersRepository } from '../interfaces/IProvidersRepository'
@@ -24,9 +24,11 @@ export class FakeProvidersRepository implements IProvidersRepository {
     id,
     password,
     name,
-    cnpj,
-    segment: _segment
-  }: ICreateProviderDTO): Promise<Provider> {
+    cnpj
+  }: Omit<ICreateProviderDTO, 'manager_id'> & {
+    id: string
+    password: string
+  }): Promise<Provider> {
     const provider: Provider = {
       id,
       password,
