@@ -31,8 +31,7 @@ describe('UpdateProviderProfile', () => {
     const updatedProvider = await updateProviderProfile.execute({
       provider_id: provider.id,
       name: 'New Provider Name',
-      cnpj: '01234567890123',
-      segment: 'New Segment'
+      cnpj: '01234567890123'
     })
 
     const findUpdatedProvider = (await providersRepository.findById(
@@ -49,7 +48,6 @@ describe('UpdateProviderProfile', () => {
         provider_id: 'non-existent-provider-id',
         name: 'New Provider Name',
         cnpj: '01234567890123',
-        segment: 'New Segment',
         old_password: 'password',
         password: 'new_password'
       })
@@ -78,7 +76,6 @@ describe('UpdateProviderProfile', () => {
         provider_id: provider1.id,
         name: 'New Provider Name',
         cnpj: provider2.cnpj,
-        segment: 'New Segment',
         old_password: 'password',
         password: 'new_password'
       })
@@ -98,7 +95,6 @@ describe('UpdateProviderProfile', () => {
       provider_id: provider.id,
       name: 'New Provider Name',
       cnpj: '01234567890123',
-      segment: 'New Segment',
       old_password: 'password',
       password: 'new_password'
     })
@@ -125,7 +121,6 @@ describe('UpdateProviderProfile', () => {
         provider_id: provider.id,
         name: 'New Provider Name',
         cnpj: '01234567890123',
-        segment: 'New Segment',
         old_password: 'wrong_password',
         password: 'new_password'
       })

@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IUpdateProviderProfileDTO } from '@modules/providers/dtos/IUpdateProviderProfileDTO'
+import { IUpdateProviderProfileDTO } from '@modules/providers/dtos/ProvidersDTO'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { IHashProvider } from '@shared/containers/providers/HashProvider/interfaces/IHashProvider'
 import { AppError } from '@shared/errors/AppError'
@@ -18,7 +18,6 @@ export class UpdateProviderProfileUseCase {
     provider_id,
     name,
     cnpj,
-    segment,
     old_password,
     password
   }: IUpdateProviderProfileDTO) {
@@ -34,8 +33,6 @@ export class UpdateProviderProfileUseCase {
       throw new AppError('The cnpj provided is already in use')
     }
 
-    let hashedPassword
-
     if (old_password && password) {
       const passwordsMatched = await this.hashProvider.compareHash(
         old_password,
@@ -46,16 +43,17 @@ export class UpdateProviderProfileUseCase {
         throw new AppError('Old password is incorrect', 401)
       }
 
-      hashedPassword = await this.hashProvider.generateHash(password)
+      const hashedPassword = await this.hashProvider.generateHash(password)
+
+      provider.password = hashedPassword
+
+      await this.providersRepository.update(provider)
     }
 
-    const updatedProvider = await this.providersRepository.update({
-      id: provider_id,
-      name,
-      cnpj,
-      segment,
-      password: hashedPassword || provider.password
-    })
+    provider.name = name
+    provider.cnpj = cnpj
+
+    const updatedProvider = await this.providersRepository.update(provider)
 
     return updatedProvider
   }

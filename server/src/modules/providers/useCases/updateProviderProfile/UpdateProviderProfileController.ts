@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { IUpdateProviderProfileDTO } from '@modules/providers/dtos/IUpdateProviderProfileDTO'
-import { updateProviderProfileSchema } from '@modules/providers/schemas/updateProviderProfileShema'
+import { IUpdateProviderProfileDTO } from '@modules/providers/dtos/ProvidersDTO'
+import { updateProviderProfileSchema } from '@modules/providers/schemas/providerSchemas'
 import { serializeModel } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 
@@ -10,7 +10,7 @@ import { UpdateProviderProfileUseCase } from './UpdateProviderProfileUseCase'
 
 export class UpdateProviderProfileController {
   async handle(request: Request, response: Response) {
-    const { name, cnpj, segment, old_password, password } = request.body
+    const { name, cnpj, old_password, password } = request.body
 
     const { provider_id } = request
 
@@ -19,7 +19,6 @@ export class UpdateProviderProfileController {
         provider_id,
         name,
         cnpj,
-        segment,
         old_password,
         password
       },
@@ -34,7 +33,6 @@ export class UpdateProviderProfileController {
       provider_id,
       cnpj,
       name,
-      segment,
       old_password,
       password
     })
