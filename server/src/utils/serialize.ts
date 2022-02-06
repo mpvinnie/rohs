@@ -4,7 +4,7 @@ type Model = Partial<Manager> &
   Partial<Provider> &
   Partial<Part> &
   Partial<Subpart>
-type Type = 'manager' | 'provider' | 'part' | 'subpart'
+type Type = 'manager' | 'provider' | 'part' | 'subpart' | 'partWithProvider'
 
 function exclude<Model, Key extends keyof Model>(
   model: Model,
@@ -48,6 +48,15 @@ function serializePart(part: Part & { subparts: Subpart[] }) {
   return serializedPart
 }
 
+function serializePartWithProvider(part: Part & { provider: Provider }) {
+  const serializedPart = {
+    ...part,
+    provider: serializeProvider(part.provider)
+  }
+
+  return serializedPart
+}
+
 function serializeSubpart(subpart: Subpart) {
   return {
     ...subpart,
@@ -71,6 +80,11 @@ export function serializeModel(model: Model, type: Type) {
   if (type === 'part') {
     const part = model as Part & { subparts: Subpart[] }
     return serializePart(part)
+  }
+
+  if (type === 'partWithProvider') {
+    const part = model as Part & { provider: Provider }
+    return serializePartWithProvider(part)
   }
 
   if (type === 'subpart') {

@@ -87,4 +87,17 @@ export class PartsRepository implements IPartsRepository {
 
     return updatedPart
   }
+
+  async findAllSentForReview(): Promise<Part[]> {
+    const parts = await prisma.part.findMany({
+      where: {
+        status: 'SENT_FOR_REVIEW'
+      },
+      include: {
+        provider: true
+      }
+    })
+
+    return parts
+  }
 }

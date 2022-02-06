@@ -23,8 +23,6 @@ export class ListProviderPartsController {
       provider_id
     })
 
-    const serializedParts = serializeModels(parts, 'part')
-
-    return response.json(serializedParts)
+    return response.json(parts)
   }
 }
