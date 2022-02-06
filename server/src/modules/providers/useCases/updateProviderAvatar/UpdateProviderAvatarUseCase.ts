@@ -1,13 +1,9 @@
 import { inject, injectable } from 'tsyringe'
 
+import { IUpdateProviderAvatarDTO } from '@modules/providers/dtos/ProvidersDTO'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { IStorageProvider } from '@shared/containers/providers/StorageProvider/interfaces/IStorageProvider'
 import { AppError } from '@shared/errors/AppError'
-
-export interface IRequest {
-  provider_id: string
-  avatar_filename: string
-}
 
 @injectable()
 export class UpdateProviderAvatarUseCase {
@@ -18,7 +14,7 @@ export class UpdateProviderAvatarUseCase {
     private storageProvider: IStorageProvider
   ) {}
 
-  async execute({ provider_id, avatar_filename }: IRequest) {
+  async execute({ provider_id, avatar_filename }: IUpdateProviderAvatarDTO) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {
@@ -37,10 +33,9 @@ export class UpdateProviderAvatarUseCase {
       'avatar'
     )
 
-    const updatedProvider = await this.providersRepository.updateAvatar(
-      provider_id,
-      filename
-    )
+    provider.avatar = filename
+
+    const updatedProvider = await this.providersRepository.update(provider)
 
     return updatedProvider
   }

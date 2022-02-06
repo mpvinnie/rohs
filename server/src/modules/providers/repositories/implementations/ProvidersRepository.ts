@@ -17,7 +17,10 @@ export class ProvidersRepository implements IProvidersRepository {
 
   async findById(id: string): Promise<Provider | null> {
     const provider = await prisma.provider.findUnique({
-      where: { id }
+      where: { id },
+      include: {
+        segment: true
+      }
     })
 
     return provider
@@ -55,17 +58,6 @@ export class ProvidersRepository implements IProvidersRepository {
     return provider
   }
 
-  async updateAvatar(id: string, avatar_filename: string): Promise<Provider> {
-    const updatedProvider = await prisma.provider.update({
-      where: { id },
-      data: {
-        avatar: avatar_filename
-      }
-    })
-
-    return updatedProvider
-  }
-
   async find(): Promise<Provider[]> {
     const providers = await prisma.provider.findMany({
       include: {
@@ -78,31 +70,20 @@ export class ProvidersRepository implements IProvidersRepository {
 
   async update({
     id,
-    cnpj,
     name,
-    segment,
+    cnpj,
+    avatar,
     password
-  }: Omit<Provider, 'created_at' | 'segment_id' | 'avatar'> & {
-    segment: string
-  }): Promise<Provider> {
+  }: Provider): Promise<Provider> {
     const updatedProvider = await prisma.provider.update({
       where: {
         id
       },
       data: {
-        cnpj,
         name,
-        password,
-        segment: {
-          connectOrCreate: {
-            where: {
-              name: segment
-            },
-            create: {
-              name: segment
-            }
-          }
-        }
+        cnpj,
+        avatar,
+        password
       },
       include: {
         segment: true

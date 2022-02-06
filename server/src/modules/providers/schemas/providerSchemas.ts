@@ -1,8 +1,8 @@
 import joi from 'joi'
 
-import { IRequest } from '../useCases/updateProviderAvatar/UpdateProviderAvatarUseCase'
+import { IUpdateProviderAvatarDTO } from '../dtos/ProvidersDTO'
 
-export const updateProviderAvatarSchema = joi.object<IRequest>({
+export const updateProviderAvatarSchema = joi.object<IUpdateProviderAvatarDTO>({
   provider_id: joi
     .string()
     .length(8)

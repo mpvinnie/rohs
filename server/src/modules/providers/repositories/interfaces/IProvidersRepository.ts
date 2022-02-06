@@ -10,11 +10,6 @@ export interface IProvidersRepository {
       password: string
     }
   ): Promise<Provider>
-  updateAvatar(id: string, avatar_filename: string): Promise<Provider>
   find(): Promise<Provider[]>
-  update(
-    data: Omit<Provider, 'created_at' | 'segment_id' | 'avatar'> & {
-      segment: string
-    }
-  ): Promise<Provider>
+  update(provider: Provider): Promise<Provider>
 }

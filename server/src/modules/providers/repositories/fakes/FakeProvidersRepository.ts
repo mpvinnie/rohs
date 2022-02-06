@@ -44,43 +44,18 @@ export class FakeProvidersRepository implements IProvidersRepository {
     return provider
   }
 
-  async updateAvatar(id: string, avatar_filename: string): Promise<Provider> {
-    const findIndex = this.providers.findIndex(provider => provider.id === id)
-
-    this.providers[findIndex].avatar = avatar_filename
-
-    return this.providers[findIndex]
-  }
-
   async find(): Promise<Provider[]> {
     const providers = this.providers
 
     return providers
   }
 
-  async update({
-    id,
-    cnpj,
-    name,
-    password
-  }: Omit<Provider, 'created_at' | 'segment_id' | 'avatar'> & {
-    segment: string
-  }): Promise<Provider> {
-    const findIndex = this.providers.findIndex(provider => provider.id === id)
+  async update(provider: Provider): Promise<Provider> {
+    const findIndex = this.providers.findIndex(
+      findProvider => findProvider.id === provider.id
+    )
 
-    const provider = this.providers[findIndex]
-
-    const updatedProvider: Provider = {
-      id,
-      cnpj,
-      name,
-      password,
-      avatar: provider.avatar,
-      created_at: provider.created_at,
-      segment_id: uuid()
-    }
-
-    this.providers[findIndex] = updatedProvider
+    this.providers[findIndex] = provider
 
     return this.providers[findIndex]
   }
