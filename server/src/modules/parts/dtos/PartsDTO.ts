@@ -9,11 +9,6 @@ export interface IListProviderPartsDTO {
   provider_id: string
 }
 
-export interface IShowPartDTO {
-  provider_id: string
-  part_id: string
-}
-
 export interface ISendPartToAnalysisDTO {
   provider_id: string
   part_id: string

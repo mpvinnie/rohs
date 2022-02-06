@@ -3,8 +3,7 @@ import joi from 'joi'
 import {
   ICreatePartDTO,
   IListProviderPartsDTO,
-  ISendPartToAnalysisDTO,
-  IShowPartDTO
+  ISendPartToAnalysisDTO
 } from '../dtos/PartsDTO'
 
 export const createPartSchema = joi.object<ICreatePartDTO>({
@@ -26,16 +25,6 @@ export const listProviderPartsSchema = joi.object<IListProviderPartsDTO>({
     .required()
     .regex(/^\d+$/)
     .message('"provider_id" must only have digits')
-})
-
-export const showPartSchema = joi.object<IShowPartDTO>({
-  provider_id: joi
-    .string()
-    .length(8)
-    .required()
-    .regex(/^\d+$/)
-    .message('"provider_id" must only have digits'),
-  part_id: joi.string().uuid().required()
 })
 
 export const sendPartToAnalysisSchema = joi.object<ISendPartToAnalysisDTO>({
