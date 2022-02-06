@@ -3,27 +3,27 @@ import { FakeSubpartsRepository } from '@modules/parts/repositories/fakes/FakeSu
 import { FakeProvidersRepository } from '@modules/providers/repositories/fakes/FakeProvidersRepository'
 import { AppError } from '@shared/errors/AppError'
 
-import { SendPartToAnalysisUseCase } from './SendPartToAnalysisUseCase'
+import { SendPartForReviewUseCase } from './SendPartForReviewUseCase'
 
 let providersRepository: FakeProvidersRepository
 let partsRepository: FakePartsRepository
 let subpartsRepository: FakeSubpartsRepository
-let sendPartToAnalysis: SendPartToAnalysisUseCase
+let sendPartForReview: SendPartForReviewUseCase
 
-describe('SendPartToAnalysis', () => {
+describe('SendPartForReview', () => {
   beforeEach(() => {
     providersRepository = new FakeProvidersRepository()
     partsRepository = new FakePartsRepository()
     subpartsRepository = new FakeSubpartsRepository()
 
-    sendPartToAnalysis = new SendPartToAnalysisUseCase(
+    sendPartForReview = new SendPartForReviewUseCase(
       providersRepository,
       partsRepository,
       subpartsRepository
     )
   })
 
-  it('should be able to send part to analysis', async () => {
+  it('should be able to send part for review', async () => {
     const provider = await providersRepository.create({
       id: '12345678',
       name: 'Provider Name',
@@ -51,16 +51,16 @@ describe('SendPartToAnalysis', () => {
 
     expect(part.status).toBe('NOT_SENT')
 
-    const partSentToAnalysis = await sendPartToAnalysis.exucute({
+    const partSentForReview = await sendPartForReview.exucute({
       provider_id: provider.id,
       part_id: part.id
     })
 
-    expect(part.id).toBe(partSentToAnalysis.id)
-    expect(partSentToAnalysis.status).toBe('UNDER_ANALYSIS')
+    expect(part.id).toBe(partSentForReview.id)
+    expect(partSentForReview.status).toBe('SENT_FOR_REVIEW')
   })
 
-  it('should not be able to send part to analysis if provider non-exists', async () => {
+  it('should not be able to send part for review if provider non-exists', async () => {
     const part = await partsRepository.create({
       code: '123456',
       description: 'Description',
@@ -79,14 +79,14 @@ describe('SendPartToAnalysis', () => {
     })
 
     await expect(
-      sendPartToAnalysis.exucute({
+      sendPartForReview.exucute({
         provider_id: 'non-existent-provider-id',
         part_id: part.id
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to send part to analysis if it non-exists', async () => {
+  it('should not be able to send part for review if it non-exists', async () => {
     const provider = await providersRepository.create({
       id: '12345678',
       name: 'Provider Name',
@@ -96,14 +96,14 @@ describe('SendPartToAnalysis', () => {
     })
 
     await expect(
-      sendPartToAnalysis.exucute({
+      sendPartForReview.exucute({
         provider_id: provider.id,
         part_id: 'non-existent-part-id'
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to send to analysis a part if its status is not `NOT_SENT`', async () => {
+  it('should not be able to send for review a part if its status is not `NOT_SENT`', async () => {
     const provider = await providersRepository.create({
       id: '12345678',
       name: 'Provider Name',
@@ -131,20 +131,20 @@ describe('SendPartToAnalysis', () => {
 
     expect(part.status).toBe('NOT_SENT')
 
-    await sendPartToAnalysis.exucute({
+    await sendPartForReview.exucute({
       provider_id: provider.id,
       part_id: part.id
     })
 
     await expect(
-      sendPartToAnalysis.exucute({
+      sendPartForReview.exucute({
         provider_id: provider.id,
         part_id: part.id
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should be able to send part to analysis if it has no subparts', async () => {
+  it('should be able to send part for review if it has no subparts', async () => {
     const provider = await providersRepository.create({
       id: '12345678',
       name: 'Provider Name',
@@ -161,7 +161,7 @@ describe('SendPartToAnalysis', () => {
     })
 
     await expect(
-      sendPartToAnalysis.exucute({
+      sendPartForReview.exucute({
         provider_id: provider.id,
         part_id: part.id
       })

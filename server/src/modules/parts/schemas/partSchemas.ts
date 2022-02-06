@@ -3,7 +3,7 @@ import joi from 'joi'
 import {
   ICreatePartDTO,
   IListProviderPartsDTO,
-  ISendPartToAnalysisDTO
+  ISendPartForReviewDTO
 } from '../dtos/PartsDTO'
 
 export const createPartSchema = joi.object<ICreatePartDTO>({
@@ -27,7 +27,7 @@ export const listProviderPartsSchema = joi.object<IListProviderPartsDTO>({
     .message('"provider_id" must only have digits')
 })
 
-export const sendPartToAnalysisSchema = joi.object<ISendPartToAnalysisDTO>({
+export const sendPartForReviewSchema = joi.object<ISendPartForReviewDTO>({
   provider_id: joi
     .string()
     .length(8)

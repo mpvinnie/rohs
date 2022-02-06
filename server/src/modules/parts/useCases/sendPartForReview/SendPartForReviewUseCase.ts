@@ -1,13 +1,13 @@
 import { inject, injectable } from 'tsyringe'
 
-import { ISendPartToAnalysisDTO } from '@modules/parts/dtos/PartsDTO'
+import { ISendPartForReviewDTO } from '@modules/parts/dtos/PartsDTO'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
 import { ISubpartsRepository } from '@modules/parts/repositories/interfaces/ISubpartsRepository'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { AppError } from '@shared/errors/AppError'
 
 @injectable()
-export class SendPartToAnalysisUseCase {
+export class SendPartForReviewUseCase {
   constructor(
     @inject('ProvidersRepository')
     private providersRepository: IProvidersRepository,
@@ -17,7 +17,7 @@ export class SendPartToAnalysisUseCase {
     private subpartsRepository: ISubpartsRepository
   ) {}
 
-  async exucute({ provider_id, part_id }: ISendPartToAnalysisDTO) {
+  async exucute({ provider_id, part_id }: ISendPartForReviewDTO) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {
@@ -35,21 +35,20 @@ export class SendPartToAnalysisUseCase {
 
     if (part.status !== 'NOT_SENT') {
       throw new AppError(
-        `This part cannot be sent to analysis because its status is ${part.status}`
+        `This part cannot be sent for review because its status is ${part.status}`
       )
     }
 
     const subparts = await this.subpartsRepository.findAllByPartId(part_id)
 
     if (subparts.length === 0) {
-      throw new AppError('You cannot send to analysis a part without subparts')
+      throw new AppError('You cannot send for review a part without subparts')
     }
 
-    part.is_blocked = true
-    part.status = 'UNDER_ANALYSIS'
+    part.status = 'SENT_FOR_REVIEW'
 
-    const sentToAnalysis = await this.partsRepository.update(part)
+    const sentForReview = await this.partsRepository.update(part)
 
-    return sentToAnalysis
+    return sentForReview
   }
 }
