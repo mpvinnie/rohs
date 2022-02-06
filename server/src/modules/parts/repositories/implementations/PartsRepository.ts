@@ -44,11 +44,7 @@ export class PartsRepository implements IPartsRepository {
       },
       include: {
         disaproval_reason: true,
-        subparts: {
-          include: {
-            subgroup: true
-          }
-        }
+        part_under_review: true
       }
     })
 
