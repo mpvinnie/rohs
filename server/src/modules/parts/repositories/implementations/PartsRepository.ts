@@ -59,6 +59,10 @@ export class PartsRepository implements IPartsRepository {
       where: {
         provider_id,
         id: part_id
+      },
+      include: {
+        disaproval_reason: true,
+        part_under_review: true
       }
     })
 

@@ -13,3 +13,8 @@ export interface ISendPartForReviewDTO {
   provider_id: string
   part_id: string
 }
+
+export interface IShowPartWithSubpartsDTO {
+  provider_id: string
+  part_id: string
+}
