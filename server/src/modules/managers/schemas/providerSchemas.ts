@@ -1,7 +1,6 @@
 import joi from 'joi'
 
-import { IListProvidersDTO } from '../dtos/IListProvidersDTO'
-import { ICreateProviderDTO } from '../dtos/ProvidersDTO'
+import { ICreateProviderDTO, IListProvidersDTO } from '../dtos/ProvidersDTO'
 
 export const listProvidersSchema = joi.object<IListProvidersDTO>({
   manager_id: joi.string().uuid()

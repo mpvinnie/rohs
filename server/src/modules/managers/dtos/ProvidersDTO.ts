@@ -4,3 +4,7 @@ export interface ICreateProviderDTO {
   cnpj: string
   segment: string
 }
+
+export interface IListProvidersDTO {
+  manager_id: string
+}

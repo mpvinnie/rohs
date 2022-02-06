@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { IListProvidersDTO } from '@modules/managers/dtos/IListProvidersDTO'
+import { IListProvidersDTO } from '@modules/managers/dtos/ProvidersDTO'
 import { listProvidersSchema } from '@modules/managers/schemas/providerSchemas'
 import { serializeModels } from '@utils/serialize'
 import validateParams from '@utils/validateParams'

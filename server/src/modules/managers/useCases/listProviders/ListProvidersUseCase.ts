@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IListProvidersDTO } from '@modules/managers/dtos/IListProvidersDTO'
+import { IListProvidersDTO } from '@modules/managers/dtos/ProvidersDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { AppError } from '@shared/errors/AppError'
