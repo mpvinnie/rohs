@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { IDeleteSubpartDTO } from '@modules/parts/dtos/SubpartsDTO'
-import { deleteSubpartSchema } from '@modules/parts/schemas/subpartSchema'
+import { deleteSubpartSchema } from '@modules/parts/schemas/subpartSchemas'
 import validateParams from '@utils/validateParams'
 
 import { DeleteSubpartUseCase } from './DeleteSubpartUseCase'

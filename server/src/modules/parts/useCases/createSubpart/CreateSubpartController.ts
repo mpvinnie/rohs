@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { ICreateSubpartDTO } from '@modules/parts/dtos/SubpartsDTO'
-import { createSubpartSchema } from '@modules/parts/schemas/subpartSchema'
+import { createSubpartSchema } from '@modules/parts/schemas/subpartSchemas'
 import { serializeModel } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 
