@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe'
 
-import { ICreateReviewDTO } from '@modules/managers/dtos/ReviewsDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
-import { IReviewsRepository } from '@modules/parts/repositories/interfaces/IReviewsRepository'
+import { ICreateReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
+import { IReviewsRepository } from '@modules/reviews/repositories/interfaces/IReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
 
 @injectable()

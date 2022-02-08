@@ -1,4 +1,4 @@
-import { ICreateReviewDTO } from '@modules/managers/dtos/ReviewsDTO'
+import { ICreateReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { Review } from '@prisma/client'
 import { prisma } from '@shared/infra/prisma'
 
@@ -28,6 +28,17 @@ export class ReviewsRepository implements IReviewsRepository {
     })
 
     return review
+  }
+
+  async findAllByManagerId(manager_id: string): Promise<Review[]> {
+    const reviews = await prisma.review.findMany({
+      where: { manager_id },
+      include: {
+        part: true
+      }
+    })
+
+    return reviews
   }
 
   async update({ id, comment, resolve }: Review): Promise<Review> {

@@ -1,13 +1,13 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IApprovePartDTO } from '@modules/managers/dtos/PartsDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
-import { IReviewsRepository } from '@modules/parts/repositories/interfaces/IReviewsRepository'
+import { IApproveReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
+import { IReviewsRepository } from '@modules/reviews/repositories/interfaces/IReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
 
 @injectable()
-export class ApprovePartUseCase {
+export class ApproveReviewUseCase {
   constructor(
     @inject('ManagersRepository')
     private managersRepository: IManagersRepository,
@@ -17,7 +17,7 @@ export class ApprovePartUseCase {
     private reviewsRepository: IReviewsRepository
   ) {}
 
-  async execute({ manager_id, part_id, comment }: IApprovePartDTO) {
+  async execute({ manager_id, part_id, comment }: IApproveReviewDTO) {
     const manager = await this.managersRepository.findById(manager_id)
 
     if (!manager) {
@@ -41,7 +41,7 @@ export class ApprovePartUseCase {
 
     if (review.resolve !== 'NOT_RESOLVED') {
       throw new AppError(
-        `This part cannot be approved because its status resolved is ${review.resolve}`
+        `This review cannot be approved because its status resolved is ${review.resolve}`
       )
     }
 
@@ -53,12 +53,12 @@ export class ApprovePartUseCase {
     part.status = 'APPROVED'
     part.approval_date = new Date()
 
-    const approvedPart = await this.partsRepository.update(part)
+    const approvedReview = await this.partsRepository.update(part)
 
     return {
       id: part.id,
-      status: approvedPart.status,
-      approval_date: approvedPart.approval_date
+      status: approvedReview.status,
+      approval_date: approvedReview.approval_date
     }
   }
 }

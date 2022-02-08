@@ -1,29 +1,29 @@
 import { FakeManagersRepository } from '@modules/managers/repositories/fakes/FakeManagersRepository'
 import { FakePartsRepository } from '@modules/parts/repositories/fakes/FakePartsRepository'
-import { FakeReviewsRepository } from '@modules/parts/repositories/fakes/FakeReviewsRepository'
+import { FakeReviewsRepository } from '@modules/reviews/repositories/fakes/FakeReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
 
-import { ApprovePartUseCase } from './ApprovePartUseCase'
+import { ApproveReviewUseCase } from './ApproveReviewUseCase'
 
 let managersRepository: FakeManagersRepository
 let partsRepository: FakePartsRepository
 let reviewsRepository: FakeReviewsRepository
-let approvePart: ApprovePartUseCase
+let approveReview: ApproveReviewUseCase
 
-describe('ApprovePart', () => {
+describe('ApproveReview', () => {
   beforeEach(() => {
     managersRepository = new FakeManagersRepository()
     partsRepository = new FakePartsRepository()
     reviewsRepository = new FakeReviewsRepository()
 
-    approvePart = new ApprovePartUseCase(
+    approveReview = new ApproveReviewUseCase(
       managersRepository,
       partsRepository,
       reviewsRepository
     )
   })
 
-  it('should be able to approve a part', async () => {
+  it('should be able to approve a review', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
@@ -40,17 +40,17 @@ describe('ApprovePart', () => {
       part_id: part.id
     })
 
-    const approvedPart = await approvePart.execute({
+    const approvedReview = await approveReview.execute({
       manager_id: manager.id,
       part_id: part.id
     })
 
-    expect(approvedPart.id).toBe(part.id)
-    expect(approvedPart.status).toBe('APPROVED')
-    expect(approvedPart.approval_date).not.toBeFalsy()
+    expect(approvedReview.id).toBe(part.id)
+    expect(approvedReview.status).toBe('APPROVED')
+    expect(approvedReview.approval_date).not.toBeFalsy()
   })
 
-  it('should not be able to approve a part if manager non exists', async () => {
+  it('should not be able to approve a review if manager non exists', async () => {
     const part = await partsRepository.create({
       provider_id: 'provider_id',
       code: '123456',
@@ -63,28 +63,28 @@ describe('ApprovePart', () => {
     })
 
     await expect(
-      approvePart.execute({
+      approveReview.execute({
         manager_id: 'non-existent-manager-id',
         part_id: part.id
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to approve a non-existent part', async () => {
+  it('should not be able to approve a review if part non exists', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
     })
 
     await expect(
-      approvePart.execute({
+      approveReview.execute({
         manager_id: manager.id,
         part_id: 'non-existent-part-id'
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to approve a part that is not under review', async () => {
+  it('should not be able to approve a non existent review', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
@@ -97,14 +97,14 @@ describe('ApprovePart', () => {
     })
 
     await expect(
-      approvePart.execute({
+      approveReview.execute({
         manager_id: manager.id,
         part_id: part.id
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to approve a resolved part', async () => {
+  it('should not be able to approve a resolved review', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
@@ -121,13 +121,13 @@ describe('ApprovePart', () => {
       part_id: part.id
     })
 
-    await approvePart.execute({
+    await approveReview.execute({
       manager_id: manager.id,
       part_id: part.id
     })
 
     await expect(
-      approvePart.execute({
+      approveReview.execute({
         manager_id: manager.id,
         part_id: part.id
       })

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { ICreateReviewDTO } from '@modules/managers/dtos/ReviewsDTO'
-import { createReviewSchema } from '@modules/managers/schemas/reviewSchemas'
+import { ICreateReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
+import { createReviewSchema } from '@modules/reviews/schemas/reviewSchemas'
 import validateParams from '@utils/validateParams'
 
 import { ReviewPartUseCase } from './ReviewPartUseCase'

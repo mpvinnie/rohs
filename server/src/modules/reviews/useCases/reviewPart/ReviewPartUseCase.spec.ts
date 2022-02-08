@@ -1,6 +1,6 @@
 import { FakeManagersRepository } from '@modules/managers/repositories/fakes/FakeManagersRepository'
 import { FakePartsRepository } from '@modules/parts/repositories/fakes/FakePartsRepository'
-import { FakeReviewsRepository } from '@modules/parts/repositories/fakes/FakeReviewsRepository'
+import { FakeReviewsRepository } from '@modules/reviews/repositories/fakes/FakeReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
 
 import { ReviewPartUseCase } from './ReviewPartUseCase'

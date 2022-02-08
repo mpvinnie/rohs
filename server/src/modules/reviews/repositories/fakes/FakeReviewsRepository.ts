@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import { ICreateReviewDTO } from '@modules/managers/dtos/ReviewsDTO'
+import { ICreateReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { Review } from '@prisma/client'
 
 import { IReviewsRepository } from '../interfaces/IReviewsRepository'
@@ -32,6 +32,14 @@ export class FakeReviewsRepository implements IReviewsRepository {
     )
 
     return review
+  }
+
+  async findAllByManagerId(manager_id: string): Promise<Review[]> {
+    const reviews = this.reviews.filter(
+      review => review.manager_id === manager_id
+    )
+
+    return reviews
   }
 
   async update(review: Review): Promise<Review> {
