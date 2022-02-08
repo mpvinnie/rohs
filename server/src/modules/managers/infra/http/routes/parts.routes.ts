@@ -2,6 +2,7 @@ import { Router } from 'express'
 
 import { ApprovePartController } from '@modules/managers/useCases/approvePart/ApprovePartController'
 import { ListPartsAvailableForReviewController } from '@modules/managers/useCases/listPartsAvailableForReview/ListPartsAvailableForReviewController'
+import { ReviewPartController } from '@modules/managers/useCases/reviewPart/ReviewPartController'
 
 import { ensureManagerAuthenticated } from '../middlewares/ensureManagerAuthenticated'
 
@@ -18,3 +19,5 @@ managerPartsRoutes.get(
   '/sentForReview',
   new ListPartsAvailableForReviewController().handle
 )
+
+managerPartsRoutes.post('/:part_id/review', new ReviewPartController().handle)

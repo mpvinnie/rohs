@@ -43,8 +43,7 @@ export class PartsRepository implements IPartsRepository {
         provider_id
       },
       include: {
-        disaproval_reason: true,
-        part_under_review: true
+        reviews: true
       }
     })
 
@@ -61,8 +60,7 @@ export class PartsRepository implements IPartsRepository {
         id: part_id
       },
       include: {
-        disaproval_reason: true,
-        part_under_review: true
+        reviews: true
       }
     })
 
@@ -77,15 +75,32 @@ export class PartsRepository implements IPartsRepository {
     return part
   }
 
-  async update(part: Part): Promise<Part> {
+  async update({
+    id,
+    provider_id,
+    code,
+    status,
+    description,
+    comment,
+    approval_date,
+    created_at,
+    updated_at
+  }: Part): Promise<Part> {
     const updatedPart = await prisma.part.update({
-      where: {
-        id: part.id
+      where: { id },
+      data: {
+        id,
+        provider_id,
+        code,
+        status,
+        description,
+        comment,
+        approval_date,
+        created_at,
+        updated_at
       },
-      data: part,
       include: {
-        disaproval_reason: true,
-        part_under_review: true
+        reviews: true
       }
     })
 

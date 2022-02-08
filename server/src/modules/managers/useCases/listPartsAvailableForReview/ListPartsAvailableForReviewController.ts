@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { IListPartsAvailableForReviewDTO } from '@modules/managers/dtos/ManagersDTO'
-import { listPartsAvailableForReviewSchema } from '@modules/managers/schemas/managerSchemas'
+import { IListPartsAvailableForReviewDTO } from '@modules/managers/dtos/PartsDTO'
+import { listPartsAvailableForReviewSchema } from '@modules/parts/schemas/partSchemas'
 import { serializeModels } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 

@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IListPartsAvailableForReviewDTO } from '@modules/managers/dtos/ManagersDTO'
+import { IListPartsAvailableForReviewDTO } from '@modules/managers/dtos/PartsDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
 import { AppError } from '@shared/errors/AppError'

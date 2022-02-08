@@ -32,9 +32,9 @@ export class FakePartsRepository implements IPartsRepository {
       description,
       status: 'NOT_SENT',
       comment: comment || null,
+      approval_date: null,
       created_at: new Date(),
-      updated_at: new Date(),
-      disaproval_reason_id: null
+      updated_at: new Date()
     }
 
     this.parts.push(part)

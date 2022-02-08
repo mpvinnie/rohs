@@ -1,5 +1,7 @@
 import joi from 'joi'
 
+import { IListPartsAvailableForReviewDTO } from '@modules/managers/dtos/PartsDTO'
+
 import {
   ICreatePartDTO,
   IListProviderPartsDTO,
@@ -47,3 +49,8 @@ export const showPartWithSubpartsSchema = joi.object<IShowPartWithSubpartsDTO>({
     .message('"provider_id" must only have digits'),
   part_id: joi.string().uuid().required()
 })
+
+export const listPartsAvailableForReviewSchema =
+  joi.object<IListPartsAvailableForReviewDTO>({
+    manager_id: joi.string().uuid().required()
+  })

@@ -13,7 +13,7 @@ model Manager {
   password   String
   created_at DateTime @default(now())
 
-  parts_under_review PartUnderReview[]
+  reviews Review[]
 
   @@map("managers")
 }
@@ -70,7 +70,7 @@ model Department {
   @@map("departments")
 }
 
-enum Status {
+enum PartStatus {
   NOT_SENT
   SENT_FOR_REVIEW
   UNDER_REVIEW
@@ -80,35 +80,23 @@ enum Status {
 }
 
 model Part {
-  id          String   @id @default(uuid())
-  code        String   @unique
-  description String
-  status      Status   @default(NOT_SENT)
-  comment     String?
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-
-  disaproval_reason_id String?           @unique
-  disaproval_reason    DisaprovalReason? @relation(fields: [disaproval_reason_id], references: [id], onDelete: SetNull)
+  id            String     @id @default(uuid())
+  code          String     @unique
+  description   String
+  status        PartStatus @default(NOT_SENT)
+  comment       String?
+  approval_date DateTime?
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
 
   subparts Subpart[]
 
   provider_id String
   provider    Provider @relation(fields: [provider_id], references: [id], onDelete: Cascade)
 
-  part_under_review PartUnderReview?
+  reviews Review[]
 
   @@map("parts")
-}
-
-model DisaprovalReason {
-  id         String   @id @default(uuid())
-  message    String
-  created_at DateTime @default(now())
-
-  part Part?
-
-  @@map("disproval_reasons")
 }
 
 model Subpart {
@@ -138,15 +126,23 @@ model Subgroup {
   @@map("subgroups")
 }
 
-model PartUnderReview {
-  id        String  @id @default(uuid())
-  is_active Boolean @default(true)
+enum ResolveReview {
+  NOT_RESOLVED
+  APPROVED
+  DISAPPROVED
+}
+
+model Review {
+  id         String        @id @default(uuid())
+  resolve    ResolveReview @default(NOT_RESOLVED)
+  comment    String?
+  created_at DateTime      @default(now())
 
   manager_id String
   manager    Manager @relation(fields: [manager_id], references: [id], onDelete: SetNull)
 
-  part_id String @unique
+  part_id String
   part    Part   @relation(fields: [part_id], references: [id], onDelete: Cascade)
 
-  @@map("parts_under_review")
+  @@map("reviews")
 }
