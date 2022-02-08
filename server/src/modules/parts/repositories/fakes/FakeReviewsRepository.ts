@@ -22,4 +22,25 @@ export class FakeReviewsRepository implements IReviewsRepository {
 
     return review
   }
+
+  async findOneByManagerId(
+    manager_id: string,
+    part_id: string
+  ): Promise<Review | undefined> {
+    const review = this.reviews.find(
+      review => review.manager_id === manager_id && review.part_id === part_id
+    )
+
+    return review
+  }
+
+  async update(review: Review): Promise<Review> {
+    const findIndex = this.reviews.findIndex(
+      findReview => findReview.id === review.id
+    )
+
+    this.reviews[findIndex] = review
+
+    return this.reviews[findIndex]
+  }
 }
