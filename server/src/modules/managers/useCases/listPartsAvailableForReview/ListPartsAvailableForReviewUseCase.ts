@@ -1,12 +1,12 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IListPartsSentForReviewDTO } from '@modules/managers/dtos/ManagersDTO'
+import { IListPartsAvailableForReviewDTO } from '@modules/managers/dtos/ManagersDTO'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
 import { AppError } from '@shared/errors/AppError'
 
 @injectable()
-export class ListPartsSentForReviewUseCase {
+export class ListPartsAvailableForReviewUseCase {
   constructor(
     @inject('ManagersRepository')
     private managersRepository: IManagersRepository,
@@ -14,15 +14,16 @@ export class ListPartsSentForReviewUseCase {
     private partsRepository: IPartsRepository
   ) {}
 
-  async execute({ manager_id }: IListPartsSentForReviewDTO) {
+  async execute({ manager_id }: IListPartsAvailableForReviewDTO) {
     const manager = await this.managersRepository.findById(manager_id)
 
     if (!manager) {
       throw new AppError('No manager found for this id', 404)
     }
 
-    const partsSentForReview = await this.partsRepository.findAllSentForReview()
+    const partsAvailableForReview =
+      await this.partsRepository.findAllAvailableForReview()
 
-    return partsSentForReview
+    return partsAvailableForReview
   }
 }

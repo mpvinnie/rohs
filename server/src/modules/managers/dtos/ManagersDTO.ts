@@ -7,6 +7,6 @@ export interface IAuthenticateManagerDTO {
   password: string
 }
 
-export interface IListPartsSentForReviewDTO {
+export interface IListPartsAvailableForReviewDTO {
   manager_id: string
 }

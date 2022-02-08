@@ -3,7 +3,7 @@ import joi from 'joi'
 import {
   IAuthenticateManagerDTO,
   ICreateManagerDTO,
-  IListPartsSentForReviewDTO
+  IListPartsAvailableForReviewDTO
 } from '../dtos/ManagersDTO'
 
 export const createManagerSchema = joi.object<ICreateManagerDTO>({
@@ -15,7 +15,7 @@ export const authenticateManagerSchema = joi.object<IAuthenticateManagerDTO>({
   password: joi.string().required()
 })
 
-export const listPartsSentForReviewSchema =
-  joi.object<IListPartsSentForReviewDTO>({
+export const listPartsAvailableForReviewSchema =
+  joi.object<IListPartsAvailableForReviewDTO>({
     manager_id: joi.string().uuid().required()
   })

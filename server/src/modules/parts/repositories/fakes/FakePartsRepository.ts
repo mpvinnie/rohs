@@ -73,7 +73,7 @@ export class FakePartsRepository implements IPartsRepository {
     return this.parts[findIndex]
   }
 
-  async findAllSentForReview(): Promise<Part[]> {
+  async findAllAvailableForReview(): Promise<Part[]> {
     const parts = this.parts.filter(part => part.status === 'SENT_FOR_REVIEW')
 
     return parts

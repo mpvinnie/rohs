@@ -92,10 +92,11 @@ export class PartsRepository implements IPartsRepository {
     return updatedPart
   }
 
-  async findAllSentForReview(): Promise<Part[]> {
+  async findAllAvailableForReview(): Promise<Part[]> {
     const parts = await prisma.part.findMany({
       where: {
-        status: 'SENT_FOR_REVIEW'
+        status: 'SENT_FOR_REVIEW',
+        part_under_review: null
       },
       include: {
         provider: true

@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import { ApprovePartController } from '@modules/managers/useCases/approvePart/ApprovePartController'
-import { ListPartsSentForReviewController } from '@modules/managers/useCases/listPartsSentForReview/ListPartsSentForReviewController'
+import { ListPartsAvailableForReviewController } from '@modules/managers/useCases/listPartsAvailableForReview/ListPartsAvailableForReviewController'
 
 import { ensureManagerAuthenticated } from '../middlewares/ensureManagerAuthenticated'
 
@@ -16,5 +16,5 @@ managerPartsRoutes.patch(
 
 managerPartsRoutes.get(
   '/sentForReview',
-  new ListPartsSentForReviewController().handle
+  new ListPartsAvailableForReviewController().handle
 )
