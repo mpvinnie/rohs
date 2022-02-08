@@ -36,10 +36,8 @@ export class DeleteSubpartUseCase {
       throw new AppError('No part found for this id', 404)
     }
 
-    if (part.status === 'APPROVED' || part.status === 'UNDER_ANALYSIS') {
-      throw new AppError(
-        'This part cannot be deleted because its status is currently approved or under analysis'
-      )
+    if (part.status !== 'NOT_SENT' && part.status !== 'DISAPPROVED') {
+      throw new AppError('This part cannot be deleted')
     }
 
     const subpart = await this.subpartsRepository.findByPartId(

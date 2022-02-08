@@ -122,7 +122,7 @@ describe('DeleteSubpart', () => {
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to delete a subpart if part is currently approved or under_analysis', async () => {
+  it('should not be able to delete a subpart if part is currently not `not_set` and `disapproved`', async () => {
     const provider = await providersRepository.create({
       id: '12345678',
       name: 'Provider Name',
