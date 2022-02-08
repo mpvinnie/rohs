@@ -73,6 +73,7 @@ model Department {
 enum Status {
   NOT_SENT
   SENT_FOR_REVIEW
+  UNDER_REVIEW
   APPROVED
   DISAPPROVED
   EXPIRED
