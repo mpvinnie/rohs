@@ -44,6 +44,12 @@ export class CreateSubpartUseCase {
       throw new AppError('No part found for this id', 404)
     }
 
+    if (part.status !== 'NOT_SENT' && part.status !== 'DISAPPROVED') {
+      throw new AppError(
+        'You cannot create a subpart to this part because its status is not `not_sent` or `disapproved`'
+      )
+    }
+
     const gwi_11a1_filename = await this.storageProvider.saveFile(
       gwi_11a1,
       'subpart'

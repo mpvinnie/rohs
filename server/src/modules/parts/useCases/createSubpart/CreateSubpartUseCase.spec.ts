@@ -97,4 +97,36 @@ describe('CreateSubpart', () => {
       })
     ).rejects.toBeInstanceOf(AppError)
   })
+
+  it('should be able create a subpart', async () => {
+    const provider = await providersRepository.create({
+      id: '12345678',
+      name: 'Provider Name',
+      cnpj: '12345679801234',
+      password: 'password',
+      segment: 'Segment'
+    })
+
+    const part = await partsRepository.create({
+      code: '123456',
+      provider_id: provider.id,
+      description: 'Description'
+    })
+
+    part.status = 'APPROVED'
+
+    await partsRepository.update(part)
+
+    await expect(
+      createSubpart.execute({
+        provider_id: provider.id,
+        part_id: part.id,
+        name: 'Part Name',
+        gwi_11a1: 'gwi_11a1.doc',
+        fisp_msds: 'fisp_msds.doc',
+        rohs_report: 'rosh_report.doc',
+        subgroup: 'subgroup'
+      })
+    ).rejects.toBeInstanceOf(AppError)
+  })
 })

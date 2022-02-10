@@ -33,7 +33,7 @@ export class SendPartForReviewUseCase {
       throw new AppError('No part found for this provider and part id', 404)
     }
 
-    if (part.status !== 'NOT_SENT') {
+    if (part.status !== 'NOT_SENT' && part.status !== 'DISAPPROVED') {
       throw new AppError(
         `This part cannot be sent for review because its status is ${part.status}`
       )

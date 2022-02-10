@@ -36,7 +36,7 @@ export class ApproveReviewUseCase {
 
     if (review.resolve !== 'NOT_RESOLVED') {
       throw new AppError(
-        `This review cannot be approved because its status resolved is ${review.resolve}`
+        'This review cannot be approved because its status resolved is not `not_resolved`'
       )
     }
 
