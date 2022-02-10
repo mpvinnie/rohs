@@ -6,7 +6,8 @@ import {
   ICreatePartDTO,
   IListProviderPartsDTO,
   ISendPartForReviewDTO,
-  IShowPartWithSubpartsDTO
+  IShowPartWithSubpartsDTO,
+  IUpdatePartDTO
 } from '../dtos/PartsDTO'
 
 export const createPartSchema = joi.object<ICreatePartDTO>({
@@ -54,3 +55,15 @@ export const listPartsAvailableForReviewSchema =
   joi.object<IListPartsAvailableForReviewDTO>({
     manager_id: joi.string().uuid().required()
   })
+
+export const updatePartSchema = joi.object<IUpdatePartDTO>({
+  provider_id: joi
+    .string()
+    .length(8)
+    .required()
+    .regex(/^\d+$/)
+    .message('"provider_id" must only have digits'),
+  part_id: joi.string().uuid().required(),
+  description: joi.string().required(),
+  comment: joi.string()
+})

@@ -18,3 +18,10 @@ export interface IShowPartWithSubpartsDTO {
   provider_id: string
   part_id: string
 }
+
+export interface IUpdatePartDTO {
+  provider_id: string
+  part_id: string
+  description: string
+  comment?: string
+}
