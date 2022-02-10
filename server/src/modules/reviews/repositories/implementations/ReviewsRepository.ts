@@ -18,12 +18,12 @@ export class ReviewsRepository implements IReviewsRepository {
 
   async findOneByManagerId(
     manager_id: string,
-    part_id: string
+    review_id: string
   ): Promise<Review | null> {
     const review = await prisma.review.findFirst({
       where: {
-        manager_id,
-        part_id
+        id: review_id,
+        manager_id
       }
     })
 

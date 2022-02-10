@@ -9,7 +9,7 @@ import { ReviewPartUseCase } from './ReviewPartUseCase'
 
 export class ReviewPartController {
   async handle(request: Request, response: Response) {
-    const { part_id } = request.params
+    const { part_id } = request.body
 
     const { manager_id } = request
 

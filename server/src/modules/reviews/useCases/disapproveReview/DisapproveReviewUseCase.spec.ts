@@ -3,27 +3,27 @@ import { FakePartsRepository } from '@modules/parts/repositories/fakes/FakeParts
 import { FakeReviewsRepository } from '@modules/reviews/repositories/fakes/FakeReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
 
-import { ApproveReviewUseCase } from './ApproveReviewUseCase'
+import { DisapproveReviewUseCase } from './DisapproveReviewUseCase'
 
 let managersRepository: FakeManagersRepository
 let partsRepository: FakePartsRepository
 let reviewsRepository: FakeReviewsRepository
-let approveReview: ApproveReviewUseCase
+let disapproveReview: DisapproveReviewUseCase
 
-describe('ApproveReview', () => {
+describe('DisapproveReview', () => {
   beforeEach(() => {
     managersRepository = new FakeManagersRepository()
     partsRepository = new FakePartsRepository()
     reviewsRepository = new FakeReviewsRepository()
 
-    approveReview = new ApproveReviewUseCase(
+    disapproveReview = new DisapproveReviewUseCase(
       managersRepository,
       partsRepository,
       reviewsRepository
     )
   })
 
-  it('should be able to approve a review', async () => {
+  it('should be able to disapprove a review', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
@@ -40,16 +40,17 @@ describe('ApproveReview', () => {
       part_id: part.id
     })
 
-    const approvedReview = await approveReview.execute({
+    const approvedReview = await disapproveReview.execute({
       manager_id: manager.id,
-      review_id: review.id
+      review_id: review.id,
+      comment: 'Comment'
     })
 
     expect(approvedReview.id).toBe(review.id)
-    expect(approvedReview.resolve).toBe('APPROVED')
+    expect(approvedReview.resolve).toBe('DISAPPROVED')
   })
 
-  it('should not be able to approve a review if manager non exists', async () => {
+  it('should not be able to disapprove a review if manager non exists', async () => {
     const part = await partsRepository.create({
       provider_id: 'provider_id',
       code: '123456',
@@ -62,28 +63,30 @@ describe('ApproveReview', () => {
     })
 
     await expect(
-      approveReview.execute({
+      disapproveReview.execute({
         manager_id: 'non-existent-manager-id',
-        review_id: review.id
+        review_id: review.id,
+        comment: 'Comment'
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to approve a non existent review', async () => {
+  it('should not be able to disapprove a non existent review', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
     })
 
     await expect(
-      approveReview.execute({
+      disapproveReview.execute({
         manager_id: manager.id,
-        review_id: 'non-existent-review-id'
+        review_id: 'non-existent-review-id',
+        comment: 'Comment'
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to approve a non not_resolved review', async () => {
+  it('should not be able to disapprove a non not_resolved review', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
@@ -100,15 +103,17 @@ describe('ApproveReview', () => {
       part_id: part.id
     })
 
-    await approveReview.execute({
+    await disapproveReview.execute({
       manager_id: manager.id,
-      review_id: review.id
+      review_id: review.id,
+      comment: 'Comment'
     })
 
     await expect(
-      approveReview.execute({
+      disapproveReview.execute({
         manager_id: manager.id,
-        review_id: review.id
+        review_id: review.id,
+        comment: 'Comment'
       })
     ).rejects.toBeInstanceOf(AppError)
   })

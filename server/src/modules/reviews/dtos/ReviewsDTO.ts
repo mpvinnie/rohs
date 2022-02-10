@@ -9,6 +9,12 @@ export interface IListManagerReviews {
 
 export interface IApproveReviewDTO {
   manager_id: string
-  part_id: string
+  review_id: string
   comment?: string
+}
+
+export interface IDisapproveReview {
+  manager_id: string
+  review_id: string
+  comment: string
 }

@@ -9,13 +9,13 @@ import { ApproveReviewUseCase } from './ApproveReviewUseCase'
 
 export class ApproveReviewController {
   async handle(request: Request, response: Response) {
-    const { part_id } = request.params
+    const { id: review_id } = request.params
     const { comment } = request.body
 
     const { manager_id } = request
 
     validateParams<IApproveReviewDTO>(
-      { manager_id, part_id, comment },
+      { manager_id, review_id, comment },
       approveReviewSchema
     )
 
@@ -23,7 +23,7 @@ export class ApproveReviewController {
 
     const approvedReview = await approveReview.execute({
       manager_id,
-      part_id,
+      review_id,
       comment
     })
 
