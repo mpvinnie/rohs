@@ -42,10 +42,12 @@ describe('ShowPartWithSubparts', () => {
       provider_id: provider.id,
       part_id: part.id,
       name: 'Subpart Name',
-      gwi_11a1: 'gwi_11a1.doc',
-      fisp_msds: 'fisp_msds.doc',
-      rohs_report: 'rohs_report',
-      subgroup: 'subgroup'
+      gwi4_11a1: 'gwi_11a1.doc',
+      fispq_msds: 'fisp.doc',
+      rohs_report: 'rohs.doc',
+      rohs_report_date: new Date(),
+      rohs_report_expiration_date: new Date(),
+      material_type: 'METAL'
     })
 
     const partWithSubparts = await showPartWithSubparts.execute({
@@ -69,10 +71,12 @@ describe('ShowPartWithSubparts', () => {
       provider_id: 'provider_id',
       part_id: part.id,
       name: 'Subpart Name',
-      gwi_11a1: 'gwi_11a1.doc',
-      fisp_msds: 'fisp_msds.doc',
-      rohs_report: 'rohs_report',
-      subgroup: 'subgroup'
+      gwi4_11a1: 'gwi_11a1.doc',
+      fispq_msds: 'fisp.doc',
+      rohs_report: 'rohs.doc',
+      rohs_report_date: new Date(),
+      rohs_report_expiration_date: new Date(),
+      material_type: 'METAL'
     })
 
     await expect(
