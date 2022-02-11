@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe'
 
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
-import { IDisapproveReview } from '@modules/reviews/dtos/ReviewsDTO'
+import { IDisapproveReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { IReviewsRepository } from '@modules/reviews/repositories/interfaces/IReviewsRepository'
 import { Part } from '@prisma/client'
 import { AppError } from '@shared/errors/AppError'
@@ -17,7 +17,7 @@ export class DisapproveReviewUseCase {
     @inject('ReviewsRepository')
     private reviewsRepository: IReviewsRepository
   ) {}
-  async execute({ manager_id, review_id, comment }: IDisapproveReview) {
+  async execute({ manager_id, review_id, comment }: IDisapproveReviewDTO) {
     const manager = await this.managersRepository.findById(manager_id)
 
     if (!manager) {

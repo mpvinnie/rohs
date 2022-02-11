@@ -3,7 +3,7 @@ export interface ICreateReviewDTO {
   part_id: string
 }
 
-export interface IListManagerReviews {
+export interface IListManagerReviewsDTO {
   manager_id: string
 }
 
@@ -13,7 +13,7 @@ export interface IApproveReviewDTO {
   comment?: string
 }
 
-export interface IDisapproveReview {
+export interface IDisapproveReviewDTO {
   manager_id: string
   review_id: string
   comment: string

@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
-import { IListManagerReviews } from '@modules/reviews/dtos/ReviewsDTO'
+import { IListManagerReviewsDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { IReviewsRepository } from '@modules/reviews/repositories/interfaces/IReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
 
@@ -14,7 +14,7 @@ export class ListManagerReviewsUseCase {
     private reviewsRepository: IReviewsRepository
   ) {}
 
-  async execute({ manager_id }: IListManagerReviews) {
+  async execute({ manager_id }: IListManagerReviewsDTO) {
     const manager = await this.managersRepository.findById(manager_id)
 
     if (!manager) {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { IDisapproveReview } from '@modules/reviews/dtos/ReviewsDTO'
+import { IDisapproveReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { disapproveReviewSchema } from '@modules/reviews/schemas/reviewSchemas'
 import validateParams from '@utils/validateParams'
 
@@ -14,7 +14,7 @@ export class DisapproveReviewController {
 
     const { manager_id } = request
 
-    validateParams<IDisapproveReview>(
+    validateParams<IDisapproveReviewDTO>(
       { manager_id, review_id, comment },
       disapproveReviewSchema
     )

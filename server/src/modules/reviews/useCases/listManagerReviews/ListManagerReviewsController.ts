@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { IListManagerReviews } from '@modules/reviews/dtos/ReviewsDTO'
+import { IListManagerReviewsDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { listManagerReviewsSchema } from '@modules/reviews/schemas/reviewSchemas'
 import validateParams from '@utils/validateParams'
 
@@ -11,7 +11,7 @@ export class ListManagerReviewsController {
   async handle(request: Request, response: Response) {
     const { manager_id } = request
 
-    validateParams<IListManagerReviews>(
+    validateParams<IListManagerReviewsDTO>(
       { manager_id },
       listManagerReviewsSchema
     )

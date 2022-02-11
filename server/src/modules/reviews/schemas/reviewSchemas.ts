@@ -3,8 +3,8 @@ import joi from 'joi'
 import {
   IApproveReviewDTO,
   ICreateReviewDTO,
-  IDisapproveReview,
-  IListManagerReviews
+  IDisapproveReviewDTO,
+  IListManagerReviewsDTO
 } from '../dtos/ReviewsDTO'
 
 export const createReviewSchema = joi.object<ICreateReviewDTO>({
@@ -12,7 +12,7 @@ export const createReviewSchema = joi.object<ICreateReviewDTO>({
   part_id: joi.string().uuid().required()
 })
 
-export const listManagerReviewsSchema = joi.object<IListManagerReviews>({
+export const listManagerReviewsSchema = joi.object<IListManagerReviewsDTO>({
   manager_id: joi.string().uuid().required()
 })
 
@@ -22,7 +22,7 @@ export const approveReviewSchema = joi.object<IApproveReviewDTO>({
   comment: joi.string()
 })
 
-export const disapproveReviewSchema = joi.object<IDisapproveReview>({
+export const disapproveReviewSchema = joi.object<IDisapproveReviewDTO>({
   manager_id: joi.string().uuid().required(),
   review_id: joi.string().uuid().required(),
   comment: joi.string().required()
