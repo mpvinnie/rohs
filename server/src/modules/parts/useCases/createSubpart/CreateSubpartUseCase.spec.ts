@@ -46,10 +46,11 @@ describe('CreateSubpart', () => {
       provider_id: provider.id,
       part_id: part.id,
       name: 'Part Name',
-      gwi_11a1: 'gwi_11a1.doc',
-      fisp_msds: 'fisp_msds.doc',
+      gwi4_11a1: 'gwi_11a1.doc',
+      fispq_msds: 'fisp_msds.doc',
       rohs_report: 'rosh_report.doc',
-      subgroup: 'subgroup'
+      rohs_report_date: new Date(),
+      material_type: 'METAL'
     })
 
     expect(subpart).toHaveProperty('id')
@@ -68,10 +69,11 @@ describe('CreateSubpart', () => {
         provider_id: 'non-existent-provider-id',
         part_id: part.id,
         name: 'Part Name',
-        gwi_11a1: 'gwi_11a1.doc',
-        fisp_msds: 'fisp_msds.doc',
+        gwi4_11a1: 'gwi_11a1.doc',
+        fispq_msds: 'fisp_msds.doc',
         rohs_report: 'rosh_report.doc',
-        subgroup: 'subgroup'
+        rohs_report_date: new Date(),
+        material_type: 'METAL'
       })
     ).rejects.toBeInstanceOf(AppError)
   })
@@ -90,15 +92,16 @@ describe('CreateSubpart', () => {
         provider_id: provider.id,
         part_id: 'non-existent-part-id',
         name: 'Part Name',
-        gwi_11a1: 'gwi_11a1.doc',
-        fisp_msds: 'fisp_msds.doc',
+        gwi4_11a1: 'gwi_11a1.doc',
+        fispq_msds: 'fisp_msds.doc',
         rohs_report: 'rosh_report.doc',
-        subgroup: 'subgroup'
+        rohs_report_date: new Date(),
+        material_type: 'METAL'
       })
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should be able create a subpart', async () => {
+  it('should not be able create a subpart if its status is not `not_sent` and not `disapproved`', async () => {
     const provider = await providersRepository.create({
       id: '12345678',
       name: 'Provider Name',
@@ -122,10 +125,11 @@ describe('CreateSubpart', () => {
         provider_id: provider.id,
         part_id: part.id,
         name: 'Part Name',
-        gwi_11a1: 'gwi_11a1.doc',
-        fisp_msds: 'fisp_msds.doc',
+        gwi4_11a1: 'gwi_11a1.doc',
+        fispq_msds: 'fisp_msds.doc',
         rohs_report: 'rosh_report.doc',
-        subgroup: 'subgroup'
+        rohs_report_date: new Date(),
+        material_type: 'METAL'
       })
     ).rejects.toBeInstanceOf(AppError)
   })

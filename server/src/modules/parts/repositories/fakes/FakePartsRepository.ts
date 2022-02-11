@@ -32,7 +32,6 @@ export class FakePartsRepository implements IPartsRepository {
       description,
       status: 'NOT_SENT',
       comment: comment || null,
-      approval_date: null,
       created_at: new Date(),
       updated_at: new Date()
     }

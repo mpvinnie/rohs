@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { inject, injectable } from 'tsyringe'
 
 import { ICreateSubpartDTO } from '@modules/parts/dtos/SubpartsDTO'
@@ -24,11 +25,12 @@ export class CreateSubpartUseCase {
     provider_id,
     part_id,
     name,
-    gwi_11a1,
-    fisp_msds,
+    gwi4_11a1,
+    fispq_msds,
     rohs_report,
-    subgroup
-  }: ICreateSubpartDTO) {
+    rohs_report_date,
+    material_type
+  }: Omit<ICreateSubpartDTO, 'rohs_report_expiration_date'>) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {
@@ -51,11 +53,11 @@ export class CreateSubpartUseCase {
     }
 
     const gwi_11a1_filename = await this.storageProvider.saveFile(
-      gwi_11a1,
+      gwi4_11a1,
       'subpart'
     )
     const fisp_msds_filename = await this.storageProvider.saveFile(
-      fisp_msds,
+      fispq_msds,
       'subpart'
     )
     const rohs_report_filename = await this.storageProvider.saveFile(
@@ -63,13 +65,19 @@ export class CreateSubpartUseCase {
       'subpart'
     )
 
+    const rohs_report_expiration_date = dayjs(rohs_report_date)
+      .add(2, 'year')
+      .toDate()
+
     const subpart = await this.subpartsRepository.create({
       part_id,
       name,
-      gwi_11a1: gwi_11a1_filename,
-      fisp_msds: fisp_msds_filename,
+      gwi4_11a1: gwi_11a1_filename,
+      fispq_msds: fisp_msds_filename,
       rohs_report: rohs_report_filename,
-      subgroup
+      rohs_report_date,
+      rohs_report_expiration_date,
+      material_type
     })
 
     return subpart

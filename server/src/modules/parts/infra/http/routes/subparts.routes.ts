@@ -15,11 +15,11 @@ subpartsRoutes.post(
   '/:part_id',
   upload.fields([
     {
-      name: 'gwi_11a1',
+      name: 'gwi4_11a1',
       maxCount: 1
     },
     {
-      name: 'fisp_msds',
+      name: 'fispq_msds',
       maxCount: 1
     },
     {

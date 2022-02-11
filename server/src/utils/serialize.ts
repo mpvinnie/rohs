@@ -65,8 +65,8 @@ function serializePartWithProvider(part: Part & { provider: Provider }) {
 function serializeSubpart(subpart: Subpart) {
   return {
     ...subpart,
-    gw1_11a1_url: `${process.env.APP_API_URL}/files/subparts/${subpart.gwi_11a1}`,
-    fisp_msds_url: `${process.env.APP_API_URL}/files/subparts/${subpart.fisp_msds}`,
+    gwi4_11a1_url: `${process.env.APP_API_URL}/files/subparts/${subpart.gwi4_11a1}`,
+    fispq_msds_url: `${process.env.APP_API_URL}/files/subparts/${subpart.fispq_msds}`,
     rohs_report_url: `${process.env.APP_API_URL}/files/subparts/${subpart.rohs_report}`
   }
 }

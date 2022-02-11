@@ -1,11 +1,15 @@
+import { MaterialTypeName } from '@prisma/client'
+
 export interface ICreateSubpartDTO {
   provider_id: string
   part_id: string
   name: string
-  gwi_11a1: string
-  fisp_msds: string
+  gwi4_11a1: string
+  fispq_msds: string
   rohs_report: string
-  subgroup: string
+  rohs_report_date: Date
+  rohs_report_expiration_date: Date
+  material_type: MaterialTypeName
 }
 
 export interface IDeleteSubpartDTO {

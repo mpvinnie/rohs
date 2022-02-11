@@ -11,18 +11,22 @@ export class FakeSubpartsRepository implements ISubpartsRepository {
   async create({
     part_id,
     name,
-    gwi_11a1,
-    fisp_msds,
-    rohs_report
+    gwi4_11a1,
+    fispq_msds,
+    rohs_report,
+    rohs_report_date,
+    rohs_report_expiration_date
   }: ICreateSubpartDTO): Promise<Subpart> {
     const subpart: Subpart = {
       id: uuid(),
       part_id,
       name,
-      gwi_11a1,
-      fisp_msds,
+      gwi4_11a1,
+      fispq_msds,
       rohs_report,
-      subgroup_id: uuid(),
+      rohs_report_date,
+      rohs_report_expiration_date,
+      material_type_id: uuid(),
       created_at: new Date(),
       updated_at: new Date()
     }

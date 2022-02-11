@@ -82,7 +82,6 @@ export class PartsRepository implements IPartsRepository {
     status,
     description,
     comment,
-    approval_date,
     created_at,
     updated_at
   }: Part): Promise<Part> {
@@ -95,7 +94,6 @@ export class PartsRepository implements IPartsRepository {
         status,
         description,
         comment,
-        approval_date,
         created_at,
         updated_at
       },

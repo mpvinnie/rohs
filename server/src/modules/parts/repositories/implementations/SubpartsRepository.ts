@@ -8,10 +8,12 @@ export class SubpartsRepository implements ISubpartsRepository {
   async create({
     part_id,
     name,
-    gwi_11a1,
-    fisp_msds,
+    gwi4_11a1,
+    fispq_msds,
     rohs_report,
-    subgroup
+    rohs_report_date,
+    rohs_report_expiration_date,
+    material_type
   }: ICreateSubpartDTO): Promise<Subpart> {
     const subpart = await prisma.subpart.create({
       data: {
@@ -21,22 +23,24 @@ export class SubpartsRepository implements ISubpartsRepository {
           }
         },
         name,
-        gwi_11a1,
-        fisp_msds,
+        gwi4_11a1,
+        fispq_msds,
         rohs_report,
-        subgroup: {
+        rohs_report_date,
+        rohs_report_expiration_date,
+        material_type: {
           connectOrCreate: {
             where: {
-              name: subgroup
+              name: material_type
             },
             create: {
-              name: subgroup
+              name: material_type
             }
           }
         }
       },
       include: {
-        subgroup: true
+        material_type: true
       }
     })
 
@@ -69,7 +73,7 @@ export class SubpartsRepository implements ISubpartsRepository {
     const subparts = await prisma.subpart.findMany({
       where: { part_id },
       include: {
-        subgroup: true
+        material_type: true
       }
     })
 
