@@ -80,14 +80,13 @@ enum PartStatus {
 }
 
 model Part {
-  id            String     @id @default(uuid())
-  code          String     @unique
-  description   String
-  status        PartStatus @default(NOT_SENT)
-  comment       String?
-  approval_date DateTime?
-  created_at    DateTime   @default(now())
-  updated_at    DateTime   @updatedAt
+  id          String     @id @default(uuid())
+  code        String     @unique
+  description String
+  status      PartStatus @default(NOT_SENT)
+  comment     String?
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
 
   subparts Subpart[]
 
@@ -100,16 +99,18 @@ model Part {
 }
 
 model Subpart {
-  id          String   @id @default(uuid())
-  name        String
-  gwi_11a1    String
-  fisp_msds   String
-  rohs_report String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  id                          String   @id @default(uuid())
+  name                        String
+  gwi4_11a1                   String
+  fispq_msds                  String
+  rohs_report                 String
+  rohs_report_date            DateTime
+  rohs_report_expiration_date DateTime
+  created_at                  DateTime @default(now())
+  updated_at                  DateTime @updatedAt
 
-  subgroup_id String
-  subgroup    Subgroup? @relation(fields: [subgroup_id], references: [id])
+  material_type_id String
+  material_type    MaterialType? @relation(fields: [material_type_id], references: [id])
 
   part_id String
   part    Part   @relation(fields: [part_id], references: [id], onDelete: Cascade)
@@ -117,16 +118,23 @@ model Subpart {
   @@map("subparts")
 }
 
-model Subgroup {
-  id         String    @id @default(uuid())
-  name       String    @unique
-  created_at DateTime  @default(now())
-  subparts   Subpart[]
-
-  @@map("subgroups")
+enum MaterialTypeName {
+  METAL
+  PLASTIC
+  PAPER
+  TAPE
 }
 
-enum ResolveReview {
+model MaterialType {
+  id         String           @id @default(uuid())
+  name       MaterialTypeName @unique
+  created_at DateTime         @default(now())
+  subparts   Subpart[]
+
+  @@map("material_types")
+}
+
+enum ReviewResolve {
   NOT_RESOLVED
   APPROVED
   DISAPPROVED
@@ -134,7 +142,7 @@ enum ResolveReview {
 
 model Review {
   id         String        @id @default(uuid())
-  resolve    ResolveReview @default(NOT_RESOLVED)
+  resolve    ReviewResolve @default(NOT_RESOLVED)
   comment    String?
   created_at DateTime      @default(now())
 
