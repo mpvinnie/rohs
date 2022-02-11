@@ -52,8 +52,8 @@ export class DeleteSubpartUseCase {
       )
     }
 
-    await this.storageProvider.deleteFile(subpart.gwi_11a1, 'subpart')
-    await this.storageProvider.deleteFile(subpart.fisp_msds, 'subpart')
+    await this.storageProvider.deleteFile(subpart.gwi4_11a1, 'subpart')
+    await this.storageProvider.deleteFile(subpart.fispq_msds, 'subpart')
     await this.storageProvider.deleteFile(subpart.rohs_report, 'subpart')
 
     await this.subpartsRepository.delete(subpart)
