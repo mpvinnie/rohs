@@ -43,7 +43,6 @@ export class ApproveReviewUseCase {
     const part = (await this.partsRepository.findById(review.part_id)) as Part
 
     part.status = 'APPROVED'
-    part.approval_date = new Date()
 
     await this.partsRepository.update(part)
 
