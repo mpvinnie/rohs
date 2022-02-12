@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import { ICreateContactDTO } from '@modules/providers/dtos/ICreateContactDTO'
+import { ICreateContactDTO } from '@modules/providers/dtos/ContactsDTO'
 import { IContactsRepository } from '@modules/providers/repositories/interfaces/IContactsRepository'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { AppError } from '@shared/errors/AppError'

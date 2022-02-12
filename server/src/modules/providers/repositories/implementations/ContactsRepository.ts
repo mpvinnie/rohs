@@ -1,4 +1,4 @@
-import { ICreateContactDTO } from '@modules/providers/dtos/ICreateContactDTO'
+import { ICreateContactDTO } from '@modules/providers/dtos/ContactsDTO'
 import { Contact } from '@prisma/client'
 import { prisma } from '@shared/infra/prisma'
 

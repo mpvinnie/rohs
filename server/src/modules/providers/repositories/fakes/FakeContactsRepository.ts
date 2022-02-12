@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import { ICreateContactDTO } from '@modules/providers/dtos/ICreateContactDTO'
+import { ICreateContactDTO } from '@modules/providers/dtos/ContactsDTO'
 import { Contact } from '@prisma/client'
 
 import { IContactsRepository } from '../interfaces/IContactsRepository'
