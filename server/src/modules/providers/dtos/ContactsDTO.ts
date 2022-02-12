@@ -20,3 +20,8 @@ export interface IUpdateContactDTO {
   position: string
   phone_number: string
 }
+
+export interface IDeleteContactDTO {
+  provider_id: string
+  contact_id: string
+}

@@ -1,13 +1,9 @@
 import { inject, injectable } from 'tsyringe'
 
+import { IDeleteContactDTO } from '@modules/providers/dtos/ContactsDTO'
 import { IContactsRepository } from '@modules/providers/repositories/interfaces/IContactsRepository'
 import { IProvidersRepository } from '@modules/providers/repositories/interfaces/IProvidersRepository'
 import { AppError } from '@shared/errors/AppError'
-
-export interface IRequest {
-  provider_id: string
-  contact_id: string
-}
 
 @injectable()
 export class DeleteContactUseCase {
@@ -18,7 +14,7 @@ export class DeleteContactUseCase {
     private contactsRepository: IContactsRepository
   ) {}
 
-  async execute({ provider_id, contact_id }: IRequest) {
+  async execute({ provider_id, contact_id }: IDeleteContactDTO) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {

@@ -2,10 +2,10 @@ import joi from 'joi'
 
 import {
   ICreateContactDTO,
+  IDeleteContactDTO,
   IListProviderContactsDTO,
   IUpdateContactDTO
 } from '../dtos/ContactsDTO'
-import { IRequest } from '../useCases/deleteContact/DeleteContactUseCase'
 
 export const createContactSchema = joi.object<ICreateContactDTO>({
   provider_id: joi
@@ -26,7 +26,7 @@ export const createContactSchema = joi.object<ICreateContactDTO>({
   position: joi.string().required()
 })
 
-export const deleteContactSchema = joi.object<IRequest>({
+export const deleteContactSchema = joi.object<IDeleteContactDTO>({
   provider_id: joi
     .string()
     .length(8)
