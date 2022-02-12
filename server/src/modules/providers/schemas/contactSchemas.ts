@@ -1,7 +1,9 @@
 import joi from 'joi'
 
-import { ICreateContactDTO } from '../dtos/ContactsDTO'
-import { IListProviderContactsDTO } from '../dtos/IListProviderContactsDTO'
+import {
+  ICreateContactDTO,
+  IListProviderContactsDTO
+} from '../dtos/ContactsDTO'
 import { IUpdateContactDTO } from '../dtos/IUpdateContactDTO'
 import { IRequest } from '../useCases/deleteContact/DeleteContactUseCase'
 

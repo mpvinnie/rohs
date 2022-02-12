@@ -6,3 +6,7 @@ export interface ICreateContactDTO {
   position: string
   phone_number: string
 }
+
+export interface IListProviderContactsDTO {
+  provider_id: string
+}
