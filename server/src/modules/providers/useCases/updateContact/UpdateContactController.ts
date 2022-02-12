@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { IUpdateContactDTO } from '@modules/providers/dtos/IUpdateContactDTO'
+import { IUpdateContactDTO } from '@modules/providers/dtos/ContactsDTO'
 import { updateContactSchema } from '@modules/providers/schemas/contactSchemas'
 import validateParams from '@utils/validateParams'
 

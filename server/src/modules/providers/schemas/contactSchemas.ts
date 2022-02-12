@@ -2,9 +2,9 @@ import joi from 'joi'
 
 import {
   ICreateContactDTO,
-  IListProviderContactsDTO
+  IListProviderContactsDTO,
+  IUpdateContactDTO
 } from '../dtos/ContactsDTO'
-import { IUpdateContactDTO } from '../dtos/IUpdateContactDTO'
 import { IRequest } from '../useCases/deleteContact/DeleteContactUseCase'
 
 export const createContactSchema = joi.object<ICreateContactDTO>({
