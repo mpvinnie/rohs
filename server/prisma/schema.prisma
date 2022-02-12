@@ -32,6 +32,8 @@ model Provider {
 
   parts Part[]
 
+  notification Notification[]
+
   @@map("providers")
 }
 
@@ -153,4 +155,16 @@ model Review {
   part    Part   @relation(fields: [part_id], references: [id], onDelete: Cascade)
 
   @@map("reviews")
+}
+
+model Notification {
+  id         String   @id @default(uuid())
+  message    String
+  read       Boolean  @default(false)
+  created_at DateTime @default(now())
+
+  provider_id String
+  provider    Provider @relation(fields: [provider_id], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
 }
