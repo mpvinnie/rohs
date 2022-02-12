@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import 'dotenv/config'
+import cors from 'cors'
 import express from 'express'
 import 'express-async-errors'
 
@@ -13,6 +14,8 @@ import { appRoutes } from './routes'
 const app = express()
 
 app.use(express.json())
+
+app.use(cors())
 
 app.use('/files/avatars', express.static(uploadConfig.uploadFolders.avatars))
 
