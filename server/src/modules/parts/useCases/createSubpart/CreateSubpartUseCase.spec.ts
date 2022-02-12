@@ -133,4 +133,40 @@ describe('CreateSubpart', () => {
       })
     ).rejects.toBeInstanceOf(AppError)
   })
+
+  it('should not be able create a subpart if current date is after rohs_report_expiration_date', async () => {
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      const date = new Date(Date.now())
+      const mockedDateMonth = new Date(date.setMonth(date.getMonth() + 24))
+      const mockedDateHours = date.setHours(mockedDateMonth.getHours() + 1)
+      return mockedDateHours
+    })
+
+    const provider = await providersRepository.create({
+      id: '12345678',
+      name: 'Provider Name',
+      cnpj: '12345679801234',
+      password: 'password',
+      segment: 'Segment'
+    })
+
+    const part = await partsRepository.create({
+      code: '123456',
+      provider_id: provider.id,
+      description: 'Description'
+    })
+
+    await expect(
+      createSubpart.execute({
+        provider_id: provider.id,
+        part_id: part.id,
+        name: 'Part Name',
+        gwi4_11a1: 'gwi_11a1.doc',
+        fispq_msds: 'fisp_msds.doc',
+        rohs_report: 'rosh_report.doc',
+        rohs_report_date: new Date(),
+        material_type: 'METAL'
+      })
+    ).rejects.toBeInstanceOf(AppError)
+  })
 })

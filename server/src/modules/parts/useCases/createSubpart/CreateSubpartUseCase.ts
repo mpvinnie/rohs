@@ -52,6 +52,16 @@ export class CreateSubpartUseCase {
       )
     }
 
+    const rohs_report_expiration_date = dayjs(rohs_report_date)
+      .add(2, 'year')
+      .toDate()
+
+    if (dayjs(new Date(Date.now())).isAfter(rohs_report_expiration_date)) {
+      throw new AppError(
+        'You can only create a subpart with a maximum of two year of report creation date'
+      )
+    }
+
     const gwi_11a1_filename = await this.storageProvider.saveFile(
       gwi4_11a1,
       'subpart'
@@ -64,10 +74,6 @@ export class CreateSubpartUseCase {
       rohs_report,
       'subpart'
     )
-
-    const rohs_report_expiration_date = dayjs(rohs_report_date)
-      .add(2, 'year')
-      .toDate()
 
     const subpart = await this.subpartsRepository.create({
       part_id,
