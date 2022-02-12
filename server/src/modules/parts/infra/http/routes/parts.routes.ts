@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import { CreatePartController } from '@modules/parts/useCases/createPart/CreatePartController'
+import { DeletePartController } from '@modules/parts/useCases/deletePart/DeletePartController'
 import { ListProviderPartsController } from '@modules/parts/useCases/listProviderParts/ListProviderPartsController'
 import { SendPartForReviewController } from '@modules/parts/useCases/sendPartForReview/SendPartForReviewController'
 import { ShowPartWithSubpartsController } from '@modules/parts/useCases/showPartWithSubparts/ShowPartWithSubpartsController'
@@ -19,3 +20,4 @@ partsRoutes.patch(
 )
 partsRoutes.get('/:id', new ShowPartWithSubpartsController().handle)
 partsRoutes.put('/:id', new UpdatePartController().handle)
+partsRoutes.delete('/:id', new DeletePartController().handle)

@@ -77,4 +77,8 @@ export class FakePartsRepository implements IPartsRepository {
 
     return parts
   }
+
+  async delete(part: Part): Promise<void> {
+    this.parts = this.parts.filter(findPart => findPart.id !== part.id)
+  }
 }

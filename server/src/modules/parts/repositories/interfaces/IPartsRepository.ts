@@ -15,4 +15,5 @@ export interface IPartsRepository {
   findById(id: string): Promise<Part | null | undefined>
   update(part: Part): Promise<Part>
   findAllAvailableForReview(): Promise<Part[]>
+  delete(part: Part): Promise<void>
 }

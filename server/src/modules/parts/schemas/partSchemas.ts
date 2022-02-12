@@ -4,6 +4,7 @@ import { IListPartsAvailableForReviewDTO } from '@modules/managers/dtos/PartsDTO
 
 import {
   ICreatePartDTO,
+  IDeletePartDTO,
   IListProviderPartsDTO,
   ISendPartForReviewDTO,
   IShowPartWithSubpartsDTO,
@@ -66,4 +67,14 @@ export const updatePartSchema = joi.object<IUpdatePartDTO>({
   part_id: joi.string().uuid().required(),
   description: joi.string().required(),
   comment: joi.string()
+})
+
+export const deletePartSchema = joi.object<IDeletePartDTO>({
+  provider_id: joi
+    .string()
+    .length(8)
+    .required()
+    .regex(/^\d+$/)
+    .message('"provider_id" must only have digits'),
+  part_id: joi.string().uuid().required()
 })

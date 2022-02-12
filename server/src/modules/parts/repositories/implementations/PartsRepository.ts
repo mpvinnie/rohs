@@ -117,4 +117,12 @@ export class PartsRepository implements IPartsRepository {
 
     return parts
   }
+
+  async delete(part: Part): Promise<void> {
+    await prisma.part.delete({
+      where: {
+        id: part.id
+      }
+    })
+  }
 }

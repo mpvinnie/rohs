@@ -25,3 +25,8 @@ export interface IUpdatePartDTO {
   description: string
   comment?: string
 }
+
+export interface IDeletePartDTO {
+  provider_id: string
+  part_id: string
+}
