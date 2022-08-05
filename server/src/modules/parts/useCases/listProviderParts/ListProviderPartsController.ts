@@ -3,7 +3,6 @@ import { container } from 'tsyringe'
 
 import { IListProviderPartsDTO } from '@modules/parts/dtos/PartsDTO'
 import { listProviderPartsSchema } from '@modules/parts/schemas/partSchemas'
-import { serializeModels } from '@utils/serialize'
 import validateParams from '@utils/validateParams'
 
 import { ListProviderPartsUseCase } from './ListProviderPartsUseCase'
