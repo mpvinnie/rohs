@@ -32,4 +32,27 @@ export class FakeNotificationsRepository implements INotificationsRepository {
 
     return notifications
   }
+
+  async findByProviderAndNotificationId(
+    provider_id: string,
+    notification_id: string
+  ): Promise<Notification | undefined> {
+    const notification = this.notifications.find(
+      notification =>
+        notification.recipient_id === provider_id &&
+        notification.id === notification_id
+    )
+
+    return notification
+  }
+
+  async update(notification: Notification): Promise<Notification> {
+    const findIndex = this.notifications.findIndex(
+      findNotification => findNotification.id === notification.id
+    )
+
+    this.notifications[findIndex] = notification
+
+    return this.notifications[findIndex]
+  }
 }

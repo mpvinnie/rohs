@@ -6,3 +6,8 @@ export interface ICreateNotificationDTO {
 export interface IListProviderNotificationsDTO {
   recipient_id: string
 }
+
+export interface IMarkNotificationAsReadDTO {
+  recipient_id: string
+  notification_id: string
+}

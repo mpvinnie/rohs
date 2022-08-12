@@ -23,4 +23,29 @@ export class NotificationsRepository implements INotificationsRepository {
 
     return notifications
   }
+
+  async findByProviderAndNotificationId(
+    provider_id: string,
+    notification_id: string
+  ): Promise<Notification | null> {
+    const notification = await prisma.notification.findFirst({
+      where: {
+        recipient_id: provider_id,
+        id: notification_id
+      }
+    })
+
+    return notification
+  }
+
+  async update({ id, is_read }: Notification): Promise<Notification> {
+    const updatedNotification = await prisma.notification.update({
+      where: { id },
+      data: {
+        is_read
+      }
+    })
+
+    return updatedNotification
+  }
 }
