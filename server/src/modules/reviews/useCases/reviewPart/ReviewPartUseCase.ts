@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
+import { INotificationsRepository } from '@modules/notifications/repositories/interfaces/INotificationsRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
 import { ICreateReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { IReviewsRepository } from '@modules/reviews/repositories/interfaces/IReviewsRepository'
@@ -14,7 +15,9 @@ export class ReviewPartUseCase {
     @inject('PartsRepository')
     private partsRepository: IPartsRepository,
     @inject('ReviewsRepository')
-    private reviewsRepository: IReviewsRepository
+    private reviewsRepository: IReviewsRepository,
+    @inject('NotificationsRepository')
+    private notificationsRepository: INotificationsRepository
   ) {}
 
   async execute({ manager_id, part_id }: ICreateReviewDTO) {
@@ -41,6 +44,11 @@ export class ReviewPartUseCase {
     const review = await this.reviewsRepository.create({
       manager_id,
       part_id
+    })
+
+    await this.notificationsRepository.create({
+      recipient_id: manager_id,
+      content: `Your part of part code ${part.code} is under review!`
     })
 
     return {

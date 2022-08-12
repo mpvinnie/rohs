@@ -25,7 +25,7 @@
     "dot-notation": "off",
     "prettier/prettier": "error",
     "camelcase": "off",
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {

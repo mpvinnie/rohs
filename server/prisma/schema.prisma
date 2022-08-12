@@ -154,3 +154,14 @@ model Review {
 
   @@map("reviews")
 }
+
+model Notification {
+  id         String   @id @default(uuid())
+  content    String
+  is_read    Boolean  @default(false)
+  created_at DateTime @default(now())
+
+  recipient_id String
+
+  @@map("notifications")
+}

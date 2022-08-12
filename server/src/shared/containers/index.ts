@@ -4,6 +4,8 @@ import './providers'
 
 import { ManagersRepository } from '@modules/managers/repositories/implementations/ManagersRepository'
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
+import { NotificationsRepository } from '@modules/notifications/repositories/implementations/NotificationsRepository'
+import { INotificationsRepository } from '@modules/notifications/repositories/interfaces/INotificationsRepository'
 import { PartsRepository } from '@modules/parts/repositories/implementations/PartsRepository'
 import { SubpartsRepository } from '@modules/parts/repositories/implementations/SubpartsRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
@@ -43,4 +45,9 @@ container.registerSingleton<ISubpartsRepository>(
 container.registerSingleton<IReviewsRepository>(
   'ReviewsRepository',
   ReviewsRepository
+)
+
+container.registerSingleton<INotificationsRepository>(
+  'NotificationsRepository',
+  NotificationsRepository
 )

@@ -1,4 +1,5 @@
 import { FakeManagersRepository } from '@modules/managers/repositories/fakes/FakeManagersRepository'
+import { FakeNotificationsRepository } from '@modules/notifications/repositories/fakes/FakeNotificationsRepository'
 import { FakePartsRepository } from '@modules/parts/repositories/fakes/FakePartsRepository'
 import { FakeReviewsRepository } from '@modules/reviews/repositories/fakes/FakeReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
@@ -8,22 +9,25 @@ import { ReviewPartUseCase } from './ReviewPartUseCase'
 let managersRepository: FakeManagersRepository
 let partsRepository: FakePartsRepository
 let reviewsRepository: FakeReviewsRepository
+let notificationsRepository: FakeNotificationsRepository
 let reviewPart: ReviewPartUseCase
 
 describe('ReviewPart', () => {
   beforeEach(() => {
     managersRepository = new FakeManagersRepository()
     partsRepository = new FakePartsRepository()
+    notificationsRepository = new FakeNotificationsRepository()
     reviewsRepository = new FakeReviewsRepository()
 
     reviewPart = new ReviewPartUseCase(
       managersRepository,
       partsRepository,
-      reviewsRepository
+      reviewsRepository,
+      notificationsRepository
     )
   })
 
-  it('should be able to review a part', async () => {
+  it('should be able to review a part and send a notification to its owner', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
@@ -45,9 +49,16 @@ describe('ReviewPart', () => {
       part_id: partSentForReview.id
     })
 
+    const notifications = await notificationsRepository.findByRecipientId(
+      manager.id
+    )
+
     expect(partForReview).toHaveProperty('id')
     expect(partForReview.part_id).toBe(partSentForReview.id)
     expect(partForReview.part.status).toBe('UNDER_REVIEW')
+    expect(notifications.length).toBe(1)
+    expect(notifications[0].recipient_id).toBe(manager.id)
+    expect(notifications[0].is_read).toBe(false)
   })
 
   it('should not be able to review a part if provider non exists', async () => {
