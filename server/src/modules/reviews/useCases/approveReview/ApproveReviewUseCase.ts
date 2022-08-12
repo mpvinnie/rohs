@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
+import { INotificationsRepository } from '@modules/notifications/repositories/interfaces/INotificationsRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
 import { IApproveReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { IReviewsRepository } from '@modules/reviews/repositories/interfaces/IReviewsRepository'
@@ -15,7 +16,9 @@ export class ApproveReviewUseCase {
     @inject('PartsRepository')
     private partsRepository: IPartsRepository,
     @inject('ReviewsRepository')
-    private reviewsRepository: IReviewsRepository
+    private reviewsRepository: IReviewsRepository,
+    @inject('NotificationsRepository')
+    private notificationsRepository: INotificationsRepository
   ) {}
 
   async execute({ manager_id, review_id, comment }: IApproveReviewDTO) {
@@ -50,6 +53,11 @@ export class ApproveReviewUseCase {
     review.resolve = 'APPROVED'
 
     const resolvedReview = await this.reviewsRepository.update(review)
+
+    await this.notificationsRepository.create({
+      recipient_id: manager.id,
+      content: `Your part of part code ${part.code} was approved!`
+    })
 
     return resolvedReview
   }
