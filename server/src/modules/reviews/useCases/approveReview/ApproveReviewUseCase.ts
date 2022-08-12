@@ -55,7 +55,7 @@ export class ApproveReviewUseCase {
     const resolvedReview = await this.reviewsRepository.update(review)
 
     await this.notificationsRepository.create({
-      recipient_id: manager.id,
+      recipient_id: part.provider_id,
       content: `Your part of part code ${part.code} was approved!`
     })
 

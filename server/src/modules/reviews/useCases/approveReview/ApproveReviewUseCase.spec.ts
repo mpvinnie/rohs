@@ -50,13 +50,13 @@ describe('ApproveReview', () => {
     })
 
     const notifications = await notificationsRepository.findByRecipientId(
-      manager.id
+      'provider_id'
     )
 
     expect(approvedReview.id).toBe(review.id)
     expect(approvedReview.resolve).toBe('APPROVED')
     expect(notifications.length).toBe(1)
-    expect(notifications[0].recipient_id).toBe(manager.id)
+    expect(notifications[0].recipient_id).toBe(part.provider_id)
     expect(notifications[0].is_read).toBe(false)
   })
 

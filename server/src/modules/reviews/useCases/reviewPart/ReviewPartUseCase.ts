@@ -47,7 +47,7 @@ export class ReviewPartUseCase {
     })
 
     await this.notificationsRepository.create({
-      recipient_id: manager_id,
+      recipient_id: part.provider_id,
       content: `Your part of part code ${part.code} is under review!`
     })
 
