@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
 import { IManagersRepository } from '@modules/managers/repositories/interfaces/IManagersRepository'
+import { INotificationsRepository } from '@modules/notifications/repositories/interfaces/INotificationsRepository'
 import { IPartsRepository } from '@modules/parts/repositories/interfaces/IPartsRepository'
 import { IDisapproveReviewDTO } from '@modules/reviews/dtos/ReviewsDTO'
 import { IReviewsRepository } from '@modules/reviews/repositories/interfaces/IReviewsRepository'
@@ -15,7 +16,9 @@ export class DisapproveReviewUseCase {
     @inject('PartsRepository')
     private partsRepository: IPartsRepository,
     @inject('ReviewsRepository')
-    private reviewsRepository: IReviewsRepository
+    private reviewsRepository: IReviewsRepository,
+    @inject('NotificationsRepository')
+    private notificationsRepository: INotificationsRepository
   ) {}
   async execute({ manager_id, review_id, comment }: IDisapproveReviewDTO) {
     const manager = await this.managersRepository.findById(manager_id)
@@ -52,6 +55,11 @@ export class DisapproveReviewUseCase {
     review.resolve = 'DISAPPROVED'
 
     const resolvedReview = await this.reviewsRepository.update(review)
+
+    await this.notificationsRepository.create({
+      recipient_id: part.provider_id,
+      content: `Your part with part code ${part.code} was disapproved`
+    })
 
     return resolvedReview
   }

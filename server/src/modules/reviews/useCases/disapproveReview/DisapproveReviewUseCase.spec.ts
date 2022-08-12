@@ -1,4 +1,5 @@
 import { FakeManagersRepository } from '@modules/managers/repositories/fakes/FakeManagersRepository'
+import { FakeNotificationsRepository } from '@modules/notifications/repositories/fakes/FakeNotificationsRepository'
 import { FakePartsRepository } from '@modules/parts/repositories/fakes/FakePartsRepository'
 import { FakeReviewsRepository } from '@modules/reviews/repositories/fakes/FakeReviewsRepository'
 import { AppError } from '@shared/errors/AppError'
@@ -8,6 +9,7 @@ import { DisapproveReviewUseCase } from './DisapproveReviewUseCase'
 let managersRepository: FakeManagersRepository
 let partsRepository: FakePartsRepository
 let reviewsRepository: FakeReviewsRepository
+let notificationsRepository: FakeNotificationsRepository
 let disapproveReview: DisapproveReviewUseCase
 
 describe('DisapproveReview', () => {
@@ -15,15 +17,17 @@ describe('DisapproveReview', () => {
     managersRepository = new FakeManagersRepository()
     partsRepository = new FakePartsRepository()
     reviewsRepository = new FakeReviewsRepository()
+    notificationsRepository = new FakeNotificationsRepository()
 
     disapproveReview = new DisapproveReviewUseCase(
       managersRepository,
       partsRepository,
-      reviewsRepository
+      reviewsRepository,
+      notificationsRepository
     )
   })
 
-  it('should be able to disapprove a review', async () => {
+  it('should be able to disapprove a review and send a notification to its owner', async () => {
     const manager = await managersRepository.create({
       email: 'manager@email.com',
       password: 'password'
@@ -46,8 +50,15 @@ describe('DisapproveReview', () => {
       comment: 'Comment'
     })
 
+    const notifications = await notificationsRepository.findByRecipientId(
+      'provider_id'
+    )
+
     expect(approvedReview.id).toBe(review.id)
     expect(approvedReview.resolve).toBe('DISAPPROVED')
+    expect(notifications.length).toBe(1)
+    expect(notifications[0].recipient_id).toBe(part.provider_id)
+    expect(notifications[0].is_read).toBe(false)
   })
 
   it('should not be able to disapprove a review if manager non exists', async () => {
