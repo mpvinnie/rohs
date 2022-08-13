@@ -38,6 +38,17 @@ export class NotificationsRepository implements INotificationsRepository {
     return notification
   }
 
+  async findUnreadByRecipientId(provider_id: string): Promise<Notification[]> {
+    const unreadNotifications = await prisma.notification.findMany({
+      where: {
+        recipient_id: provider_id,
+        is_read: false
+      }
+    })
+
+    return unreadNotifications
+  }
+
   async update({ id, is_read }: Notification): Promise<Notification> {
     const updatedNotification = await prisma.notification.update({
       where: { id },

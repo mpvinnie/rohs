@@ -2,6 +2,7 @@ import joi from 'joi'
 
 import {
   IListProviderNotificationsDTO,
+  IMarkAllAsReadDTO,
   IMarkNotificationAsReadDTO
 } from '../dtos/NotificationsDTO'
 
@@ -12,7 +13,7 @@ export const listProviderNotificationsSchema =
       .length(8)
       .required()
       .regex(/^\d+$/)
-      .message('"provider_id" must only have digits')
+      .message('"recipient_id" must only have digits')
   })
 
 export const markNotificationAsReadSchema =
@@ -23,5 +24,14 @@ export const markNotificationAsReadSchema =
       .length(8)
       .required()
       .regex(/^\d+$/)
-      .message('"provider_id" must only have digits')
+      .message('"recipient_id" must only have digits')
   })
+
+export const markAllAsReadSchema = joi.object<IMarkAllAsReadDTO>({
+  provider_id: joi
+    .string()
+    .length(8)
+    .required()
+    .regex(/^\d+$/)
+    .message('"provider_id" must only have digits')
+})

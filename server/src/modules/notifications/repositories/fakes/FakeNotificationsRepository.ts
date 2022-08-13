@@ -46,6 +46,15 @@ export class FakeNotificationsRepository implements INotificationsRepository {
     return notification
   }
 
+  async findUnreadByRecipientId(provider_id: string): Promise<Notification[]> {
+    const unreadNotifications = this.notifications.filter(
+      notification =>
+        notification.recipient_id === provider_id && !notification.is_read
+    )
+
+    return unreadNotifications
+  }
+
   async update(notification: Notification): Promise<Notification> {
     const findIndex = this.notifications.findIndex(
       findNotification => findNotification.id === notification.id
