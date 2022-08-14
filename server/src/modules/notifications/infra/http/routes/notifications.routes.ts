@@ -1,5 +1,6 @@
 import { Router } from 'express'
 
+import { DeleteNotificationController } from '@modules/notifications/useCases/deleteNotification/DeleteNotificationController'
 import { ListProviderNotificationsController } from '@modules/notifications/useCases/listProviderNotifications/ListProviderNotificationsController'
 import { MarkAllAsReadController } from '@modules/notifications/useCases/markAllAsRead/MarkAllAsReadController'
 import { MarkNotificationAsReadController } from '@modules/notifications/useCases/markNotificationAsRead/MarkNotificationAsReadController'
@@ -12,3 +13,4 @@ notificationsRoutes.use(ensureProviderAuthenticated)
 notificationsRoutes.get('/', new ListProviderNotificationsController().handle)
 notificationsRoutes.patch('/:id', new MarkNotificationAsReadController().handle)
 notificationsRoutes.put('/', new MarkAllAsReadController().handle)
+notificationsRoutes.delete('/:id', new DeleteNotificationController().handle)

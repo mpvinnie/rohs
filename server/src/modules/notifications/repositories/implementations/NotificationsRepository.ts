@@ -59,4 +59,10 @@ export class NotificationsRepository implements INotificationsRepository {
 
     return updatedNotification
   }
+
+  async delete(notification: Notification): Promise<void> {
+    await prisma.notification.delete({
+      where: { id: notification.id }
+    })
+  }
 }

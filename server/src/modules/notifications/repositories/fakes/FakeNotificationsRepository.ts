@@ -64,4 +64,10 @@ export class FakeNotificationsRepository implements INotificationsRepository {
 
     return this.notifications[findIndex]
   }
+
+  async delete(notification: Notification): Promise<void> {
+    this.notifications = this.notifications.filter(
+      findNotification => findNotification.id !== notification.id
+    )
+  }
 }

@@ -10,4 +10,5 @@ export interface INotificationsRepository {
   ): Promise<Notification | null | undefined>
   findUnreadByRecipientId(provider_id: string): Promise<Notification[]>
   update(notification: Notification): Promise<Notification>
+  delete(notification: Notification): Promise<void>
 }

@@ -1,6 +1,7 @@
 import joi from 'joi'
 
 import {
+  IDeleteNotificationDTO,
   IListProviderNotificationsDTO,
   IMarkAllAsReadDTO,
   IMarkNotificationAsReadDTO
@@ -34,4 +35,14 @@ export const markAllAsReadSchema = joi.object<IMarkAllAsReadDTO>({
     .required()
     .regex(/^\d+$/)
     .message('"provider_id" must only have digits')
+})
+
+export const deleteNotificationSchema = joi.object<IDeleteNotificationDTO>({
+  notification_id: joi.string().uuid().required(),
+  recipient_id: joi
+    .string()
+    .length(8)
+    .required()
+    .regex(/^\d+$/)
+    .message('"recipient_id" must only have digits')
 })

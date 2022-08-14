@@ -15,3 +15,8 @@ export interface IMarkNotificationAsReadDTO {
 export interface IMarkAllAsReadDTO {
   provider_id: string
 }
+
+export interface IDeleteNotificationDTO {
+  recipient_id: string
+  notification_id: string
+}
