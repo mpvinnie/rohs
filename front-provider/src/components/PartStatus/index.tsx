@@ -1,13 +1,22 @@
 import { Container } from './styles'
 
 type PartStatusProps = {
-  status: 'disapproved' | 'waiting' | 'approved'
+  status:
+    | 'DISAPPROVED'
+    | 'UNDER_REVIEW'
+    | 'APPROVED'
+    | 'EXPIRED'
+    | 'SENT_FOR_REVIEW'
+    | 'NOT_SENT'
 }
 
 const partStatus = {
-  disapproved: 'Desaprovado',
-  waiting: 'Aguardando',
-  approved: 'Aprovado'
+  NOT_SENT: 'NOT_SENT',
+  SENT_FOR_REVIEW: 'SENT_FOR_REVIEW',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  DISAPPROVED: 'DISAPPROVED',
+  EXPIRED: 'EXPIRED'
 }
 
 export function PartStatus({ status }: PartStatusProps): JSX.Element {

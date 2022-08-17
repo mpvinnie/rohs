@@ -1,5 +1,6 @@
 import { Bell, Search } from 'react-feather'
 
+import defaultAvatar from '../../assets/defaultAvatar.png'
 import { useAuth } from '../../hooks/AuthContext'
 import {
   Container,
@@ -30,7 +31,11 @@ export function Header(): JSX.Element {
               <strong>{provider.name}</strong>
               <span>{provider.segment.name}</span>
             </ProfileInfos>
-            <img src={provider.avatar_url} alt={provider.name} />
+            {!provider.avatar_url ? (
+              <img src={defaultAvatar} alt="Default Avatar" />
+            ) : (
+              <img src={provider.avatar_url} alt={provider.name} />
+            )}
           </Profile>
         </RightSide>
       </HeaderContent>

@@ -23,22 +23,17 @@ export function Parts(): JSX.Element {
 
   useEffect(() => {
     async function loadParts() {
-      const response = await api.get<Part[]>(
-        `/parts/${provider.id}?page=${page}&per_page=10`
-      )
+      const response = await api.get<Part[]>(`/providers/parts`)
 
       const serializedParts = response.data.map((part) => {
         return {
           id: part.id,
           provider_id: part.provider_id,
-          part_code: part.part_code,
+          code: part.code,
           description: part.description,
           status: part.status,
-          is_active: part.is_active,
           comment: part.comment,
-          is_blocked: part.is_blocked,
-          created_at: new Date(part.created_at).toLocaleDateString('pt-BR'),
-          disapproval_reasons: part.disapproval_reasons
+          created_at: new Date(part.created_at).toLocaleDateString('pt-BR')
         }
       })
       setParts(serializedParts)
@@ -59,7 +54,11 @@ export function Parts(): JSX.Element {
           <PartsContainer>
             <header>
               <h3>Partes</h3>
-              <Button icon={Plus} title="Criar nova" />
+              <Button
+                icon={Plus}
+                title="Criar nova"
+                onClick={() => push('/parts/new')}
+              />
             </header>
             <Table>
               <thead>
@@ -75,14 +74,14 @@ export function Parts(): JSX.Element {
                 {parts ? (
                   parts.map((part) => (
                     <tr key={part.id}>
-                      <td>{part.part_code}</td>
+                      <td>{part.code}</td>
                       <td>{part.description}</td>
                       <td>{part.created_at}</td>
                       <td>
-                        <PartStatus status={part.status} />
+                        <PartStatus status="SENT_FOR_REVIEW" />
                       </td>
                       <td>
-                        <button
+                        {/* <button
                           onClick={() =>
                             push(`/parts/subparts/${part.id}`, {
                               part_code: part.part_code,
@@ -95,7 +94,7 @@ export function Parts(): JSX.Element {
                           }
                         >
                           Detalhes
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   ))

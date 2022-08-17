@@ -8,20 +8,27 @@ export const GlobalStyle = createGlobalStyle`
 
     --gray_50: #F0F0F0;
     --gray_100: #C7C7C7;
+    --gray_400: #A0AEC0;
     --gray_500: #666666;
 
     --green_10: #E4EDEA;
+    --green_100: #C6F6D5;
     --green_300: #BEFFB9;
     --green_500: #2DD09E;
     --green_700: #152b38;
     --green_900: #0B151B;
 
+    --purple_200: #D6BCFA;
     --purple_300: #9EA0C5;
+    --purple_800: #44337A;
+    --purple_600: #6B46C1;
 
     --blue_300: #9EE7FE;
     --blue_500: #3D94EF;
     --blue_900: #0D2238;
 
+    --red_50: #FFF5F5;
+    --red_200: #FEB2B2;
     --red_300: #FFC7C7;
     --red_500: #E53E3E;
   }

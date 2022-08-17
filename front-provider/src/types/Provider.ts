@@ -37,17 +37,23 @@ type DisapprovalReason = {
   created_at: Date
 }
 
+enum PartStatus {
+  NOT_SENT = 'NOT_SENT',
+  SENT_FOR_REVIEW = 'SENT_FOR_REVIEW',
+  UNDER_REVIEW = 'UNDER_REVIEW',
+  APPROVED = 'APPROVED',
+  DISAPPROVED = 'DISAPPROVED',
+  EXPIRED = 'EXPIRED'
+}
+
 export type Part = {
   id: string
   provider_id: string
-  part_code: string
+  code: string
   description: string
-  status: 'disapproved' | 'waiting' | 'approved'
-  is_active: boolean
+  status: PartStatus
   comment?: string
-  is_blocked: boolean
   created_at: Date | string
-  disapproval_reasons: Array<DisapprovalReason>
 }
 
 export type Subpart = {

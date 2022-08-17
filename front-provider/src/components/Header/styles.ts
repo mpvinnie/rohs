@@ -65,8 +65,8 @@ export const Profile = styled.div`
   align-items: center;
 
   img {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     object-fit: cover;
     margin-left: 1rem;

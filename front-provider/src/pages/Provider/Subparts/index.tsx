@@ -86,7 +86,7 @@ export function Subparts(): JSX.Element {
               </div>
               <div>
                 <span>Status</span>
-                <PartStatus status={status} />
+                {/* <PartStatus status={status} /> */}
               </div>
             </SubpartInfo>
             {disapproval_reason && (
