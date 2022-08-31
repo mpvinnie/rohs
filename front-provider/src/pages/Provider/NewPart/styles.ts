@@ -20,13 +20,14 @@ export const Content = styled.div`
 `
 
 export const Form = styled.form`
+  width: 100%;
   background: var(--white);
   padding: 2rem;
-  width: 100vh;
   border-radius: 1rem;
 
-  display: flex;
-  flex-direction: column;
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 23px;
   }
 
   button {
@@ -36,20 +37,6 @@ export const Form = styled.form`
 `
 
 export const Header = styled.header`
-h3 {
-    margin-bottom: 1rem;
-    font-size: 23px;
-  }
-
-  input {
-    width: 50%;
-    margin: 0 1rem 1rem 0;
-  }
-
-  input:nth-child(2) {
-    width: 30%;
-  }
-
   p {
     width: 70%;
   }
@@ -69,4 +56,25 @@ h3 {
     &:hover {
       filter: brightness(0.9);
     }
+`
+
+export const InputWrapper = styled.div`
+  label {
+    font-size: 11px;
+  }
+
+  input {
+    width: 30%;
+    height: 3rem;
+    border-radius: 10px 10px;
+  }
+
+  input:nth-child(2) {
+    width: 60%;
+    margin-left: 1rem;
+  }
+`
+
+export const Details = styled.div`
+  display: flex;
 `
