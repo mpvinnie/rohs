@@ -1,6 +1,7 @@
 import fispqmsds from '../../../assets/fispqmsds.png'
 import addPart from '../../../assets/imgNewPart.png'
 import logoImg from '../../../assets/logo.svg'
+import { Button } from '../../../components/Button'
 import { FormButton } from '../../../components/FormButton'
 import { Input } from '../../../components/Input'
 import {
@@ -51,6 +52,9 @@ export function NewPart() {
                 <td>Subpart_Name</td>
                 <td>
                   <select id="subparts" name="lista-subparts">
+                    <option disabled selected>
+                      Selecione
+                    </option>
                     <option>Metal</option>
                     <option>Plastico</option>
                     <option>Papel</option>
@@ -72,6 +76,7 @@ export function NewPart() {
             </tbody>
           </Table>
           <FormButton isSubmitting={false} title={'Enviar Para Aprovação'} />
+          <Button title="Cancelar" to="/parts" />
         </Form>
       </Content>
     </Container>

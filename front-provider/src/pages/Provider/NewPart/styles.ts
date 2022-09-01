@@ -38,8 +38,15 @@ export const Form = styled.form`
   }
 
   button {
-    witdh: 50%;
-    margin-top: 2rem;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50rem;
+    height: 3rem;
+  }
+
+  button + button {
+    margin: 1rem auto 0;
+    background-color: var(--red_500);
   }
 `
 
@@ -49,8 +56,8 @@ export const Header = styled.header`
   }
 
   img {
-    width: 8rem;
-    height: 8rem;
+    width: 6rem;
+    height: 6rem;
 
     margin: 0 auto;
   }
@@ -72,6 +79,7 @@ export const InputWrapper = styled.div`
   margin-bottom: 2rem;
 
   div:nth-child(1) {
+    width: 30rem;
     margin-top: 1.5rem;
   }
 
@@ -111,22 +119,24 @@ export const Table = styled.table`
         padding: 1rem 0.5rem;
         text-align: center;
         font-size: 0.875rem;
-        font-weight: 400;
+        font-weight: 500;
         color: var(--blue_900);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
-        button {
-          font-weight: 600;
-          color: var(--blue_500);
-          background: none;
+        select {
+          width: 100%;
+          height: 2rem;
+          text-align: center;
+          font-size: 0.85rem;
+          font-weight: 400;
 
-          transition: filter 0.2s;
+          border-radius: 1rem;
+          border: 0 transparent solid;
 
-          &:hover {
-            filter: brightness(0.9);
-          }
+          box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
+
         }
       }
     }
