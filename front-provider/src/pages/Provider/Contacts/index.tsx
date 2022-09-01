@@ -36,9 +36,6 @@ export function Contacts(): JSX.Element {
       <Main>
         <Header />
         <Content>
-          <PathLinks>
-            <span>Contatos</span>
-          </PathLinks>
           <ContactsContainer>
             <header>
               <h3>Contatos</h3>

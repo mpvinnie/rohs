@@ -20,7 +20,7 @@ export function NewPart() {
       <Content>
         <img src={logoImg} alt="Rohs" />
         <Form>
-          <h3>Detalhes da Peça</h3>
+          <h3>Nova Peça</h3>
           <Header>
             <InputWrapper>
               <Input name="salcompCode" label="Salcomp Code. *" />
@@ -51,7 +51,7 @@ export function NewPart() {
               <tr>
                 <td>Subpart_Name</td>
                 <td>
-                  <select id="subparts" name="lista-subparts">
+                  {/* <select id="subparts" name="lista-subparts">
                     <option disabled selected>
                       Selecione
                     </option>
@@ -59,7 +59,14 @@ export function NewPart() {
                     <option>Plastico</option>
                     <option>Papel</option>
                     <option>Fita</option>
-                  </select>
+                  </select> */}
+                  <input type="text" name="material" list="materialType" />
+                  <datalist id="materialType">
+                    <option value="" />
+                    <option value="Cambridge" />
+                    <option value="Bosta" />
+                    <option value="Cambridge" />
+                  </datalist>
                 </td>
                 <td>
                   <a>
