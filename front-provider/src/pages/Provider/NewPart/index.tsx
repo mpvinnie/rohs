@@ -11,10 +11,11 @@ import {
   Header,
   InputWrapper,
   Details,
-  Table
+  Table,
+  OptionButtons
 } from './styles'
 
-export function NewPart() {
+export function NewPart(): JSX.Element {
   return (
     <Container>
       <Content>
@@ -60,7 +61,7 @@ export function NewPart() {
                     <option>Papel</option>
                     <option>Fita</option>
                   </select> */}
-                  <input type="text" name="material" list="materialType" />
+                  <Input type="text" name="material" list="materialType" />
                   <datalist id="materialType">
                     <option value="" />
                     <option value="Cambridge" />
@@ -82,8 +83,16 @@ export function NewPart() {
               </tr>
             </tbody>
           </Table>
-          <FormButton isSubmitting={false} title={'Enviar Para Aprovação'} />
-          <Button title="Cancelar" to="/parts" />
+          <OptionButtons>
+            <FormButton
+              isSubmitting={false}
+              title={'Enviar Para Aprovação'}
+              style={{
+                maxWidth: '16rem'
+              }}
+            />
+            <Button title="Cancelar" to="/parts" />
+          </OptionButtons>
         </Form>
       </Content>
     </Container>

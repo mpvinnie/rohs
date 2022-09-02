@@ -7,6 +7,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 `
 
 export const Content = styled.div`
@@ -36,18 +37,6 @@ export const Form = styled.form`
     margin-bottom: 1rem;
     font-size: 23px;
   }
-
-  button {
-    justify-content: center;
-    margin: 0 auto;
-    width: 50rem;
-    height: 3rem;
-  }
-
-  button + button {
-    margin: 1rem auto 0;
-    background-color: var(--red_500);
-  }
 `
 
 export const Header = styled.header`
@@ -72,6 +61,7 @@ export const Header = styled.header`
     &:hover {
       filter: brightness(0.9);
     }
+  }
 `
 
 export const InputWrapper = styled.div`
@@ -116,7 +106,7 @@ export const Table = styled.table`
       td {
         border-bottom: 1px solid var(--gray_100);
         max-width: 8rem;
-        padding: 1rem 0.5rem;
+        padding: 0.5rem;
         text-align: center;
         font-size: 0.875rem;
         font-weight: 500;
@@ -125,18 +115,12 @@ export const Table = styled.table`
         overflow: hidden;
         text-overflow: ellipsis;
 
-        select {
-          width: 100%;
-          height: 2rem;
-          text-align: center;
-          font-size: 0.85rem;
-          font-weight: 400;
+        input {
+          font-size: 0.875rem;
+        }
 
-          border-radius: 1rem;
-          border: 0 transparent solid;
-
-          box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
-
+        img {
+          margin: 0;
         }
       }
     }
@@ -144,8 +128,6 @@ export const Table = styled.table`
 
   a {
     align-self: flex-end;
-    margin: 0.5rem 0 2.5rem;
-    font-size: 0.875rem;
     color: var(--blue_500);
     transition: filter 0.2s;
 
@@ -153,4 +135,16 @@ export const Table = styled.table`
       cursor: pointer;
       filter: brightness(0.9);
     }
+  }
+`
+
+export const OptionButtons = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+
+  button + button {
+    margin-left: 1rem;
+    background-color: var(--red_500);
+  }
 `
