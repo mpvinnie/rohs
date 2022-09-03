@@ -1,10 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ArrowLeft } from 'react-feather'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { FormButton } from '../../../components/FormButton'
 import { Input } from '../../../components/Input'
+import { api } from '../../../services/api'
 import { CreateContact } from '../../../types/Provider'
 import { createContactFormSchema } from '../../../validation/createContactFormSchema'
 import {
@@ -16,6 +18,8 @@ import {
 } from './styles'
 
 export function NewContact(): JSX.Element {
+  const { goBack } = useHistory()
+
   const {
     register,
     handleSubmit,
@@ -29,19 +33,27 @@ export function NewContact(): JSX.Element {
     name,
     email,
     position,
-    phone,
-    secondary_phone
+    phone_number
   }) => {
-    const data = {
-      department,
-      name,
-      email,
-      position,
-      phone,
-      secondary_phone
-    }
+    console.log(`chegou aqui`)
+    try {
+      const data = {
+        department,
+        name,
+        email,
+        position,
+        phone_number
+      }
 
-    // await signIn(data)
+      await api.post('/providers/contacts', data)
+
+      goBack()
+      return toast.success('Contato criado com sucesso!')
+    } catch (err) {
+      return toast.error(
+        `Ocorreu um erro ao tentar criar um novo contato, por favor tente novamente! ${err.response.data.message}`
+      )
+    }
   }
 
   return (
@@ -62,17 +74,17 @@ export function NewContact(): JSX.Element {
         <NewContactFormContainer onSubmit={handleSubmit(handleCreateContact)}>
           <h2>Novo contato</h2>
           <Input
-            label="Departamento"
-            placeholder="Insira um departamento"
-            {...register('department')}
-            error={errors.department}
-          />
-
-          <Input
             label="Nome"
             placeholder="Insira um nome"
             {...register('name')}
             error={errors.name}
+          />
+
+          <Input
+            label="Departamento"
+            placeholder="Insira um departamento"
+            {...register('department')}
+            error={errors.department}
           />
 
           <Input
@@ -90,17 +102,10 @@ export function NewContact(): JSX.Element {
           />
 
           <Input
-            label="Contato primário"
-            placeholder="Insira um número de telefone"
-            {...register('phone')}
-            error={errors.phone}
-          />
-
-          <Input
-            label="Contato secundário"
-            placeholder="Insira um número de telefone"
-            {...register('secondary_phone')}
-            error={errors.secondary_phone}
+            label="Celular"
+            placeholder="Insira um número de celular"
+            {...register('phone_number')}
+            error={errors.phone_number}
           />
 
           <FormButton

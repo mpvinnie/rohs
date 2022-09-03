@@ -15,19 +15,18 @@ export type UpdateProviderFirstAccess = Pick<Provider, 'segment'>
 
 export type Contact = {
   id: string
-  provider_id: string
-  department: string
   name: string
   email: string
   position: string
-  phone: string
-  secondary_phone?: string
-  created_at: Date
+  phone_number: string
+  department: {
+    name: string
+  }
 }
 
 export type CreateContact = Pick<
   Contact,
-  'department' | 'name' | 'email' | 'position' | 'phone' | 'secondary_phone'
+  'department' | 'name' | 'email' | 'position' | 'phone_number'
 >
 
 type DisapprovalReason = {

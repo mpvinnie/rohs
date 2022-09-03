@@ -24,7 +24,7 @@ export function Contacts(): JSX.Element {
   const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
-    api.get(`/providers/contacts?page=${page}&per_page=10`).then((response) => {
+    api.get('/providers/contacts').then((response) => {
       setContacts(response.data)
       setTotalCount(Number(response.headers['x-total-count']))
     })
@@ -44,12 +44,11 @@ export function Contacts(): JSX.Element {
             <Table>
               <thead>
                 <tr>
-                  <th>Departamento</th>
                   <th>Nome</th>
+                  <th>Departamento</th>
                   <th>Position</th>
                   <th>Email</th>
-                  <th>Contato Primário</th>
-                  <th>Contato Secundário</th>
+                  <th>Celular</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -58,16 +57,11 @@ export function Contacts(): JSX.Element {
                 {contacts ? (
                   contacts.map((contact) => (
                     <tr key={contact.id}>
-                      <td>{contact.department}</td>
                       <td>{contact.name}</td>
+                      <td>{contact.department.name}</td>
                       <td>{contact.position}</td>
                       <td>{contact.email}</td>
-                      <td>{contact.phone}</td>
-                      <td>
-                        {contact.secondary_phone
-                          ? contact.secondary_phone
-                          : '--'}
-                      </td>
+                      <td>{contact.phone_number}</td>
                       <td>
                         <ButtonOptions type="button" option="edit">
                           <Edit2 size={16} />

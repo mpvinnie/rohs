@@ -8,13 +8,8 @@ export const createContactFormSchema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
   position: yup.string().required(),
-  phone: yup
+  phone_number: yup
     .string()
     .matches(phoneRegExp, 'Phone number is not valid')
-    .required(),
-  secondary_phone: yup
-    .string()
-    .matches(phoneRegExp, 'Seconday Phone is not valid')
-    .optional()
-    .nullable()
+    .required()
 })
