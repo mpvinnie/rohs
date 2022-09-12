@@ -30,7 +30,8 @@ model Provider {
   segment  Segment   @relation(fields: [segment_id], references: [id])
   contacts Contact[]
 
-  parts Part[]
+  parts     Part[]
+  documents Document[]
 
   @@map("providers")
 }
@@ -93,8 +94,6 @@ model Part {
   provider_id String
   provider    Provider @relation(fields: [provider_id], references: [id], onDelete: Cascade)
 
-  reviews Review[]
-
   @@map("parts")
 }
 
@@ -134,6 +133,25 @@ model MaterialType {
   @@map("material_types")
 }
 
+enum DocumentStatus {
+  WAITING
+  APPROVED
+  DISAPPROVED
+}
+
+model Document {
+  id      String         @id @default(uuid())
+  name    String
+  status  DocumentStatus @default(WAITING)
+  comment String?
+  url     String
+
+  provider_id String
+  provider    Provider @relation(fields: [provider_id], references: [id], onDelete: Cascade)
+
+  @@map("documents")
+}
+
 enum ReviewResolve {
   NOT_RESOLVED
   APPROVED
@@ -149,8 +167,8 @@ model Review {
   manager_id String
   manager    Manager @relation(fields: [manager_id], references: [id], onDelete: SetNull)
 
-  part_id String
-  part    Part   @relation(fields: [part_id], references: [id], onDelete: Cascade)
+  part_or_document_id        String
+  part_code_or_document_name String
 
   @@map("reviews")
 }
