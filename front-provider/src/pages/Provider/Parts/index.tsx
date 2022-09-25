@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
-import { useHistory } from 'react-router-dom'
 
-import { Button } from '../../../components/Button'
 import { Header } from '../../../components/Header'
+import { NewPartModal } from '../../../components/Modals/NewPartModal'
 import { Pagination } from '../../../components/Pagination'
 import { PartStatus } from '../../../components/PartStatus'
 import { Sidebar } from '../../../components/Sidebar'
@@ -11,15 +10,20 @@ import { SidebarLinkTypes } from '../../../components/Sidebar/SidebarItem'
 import { useAuth } from '../../../hooks/AuthContext'
 import { api } from '../../../services/api'
 import { Part } from '../../../types/Provider'
-import { Container, Main, Content, PartsContainer, Table } from './styles'
+import {
+  Container,
+  Main,
+  Content,
+  PartsContainer,
+  Table,
+  Button
+} from './styles'
 
 export function Parts(): JSX.Element {
   const [parts, setParts] = useState<Part[]>([])
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
   const { provider } = useAuth()
-
-  const { push } = useHistory()
 
   useEffect(() => {
     async function loadParts() {
@@ -43,8 +47,6 @@ export function Parts(): JSX.Element {
     loadParts()
   }, [page, provider.id])
 
-  console.log(parts)
-
   return (
     <Container>
       <Sidebar selected={SidebarLinkTypes.PARTS} />
@@ -54,11 +56,11 @@ export function Parts(): JSX.Element {
           <PartsContainer>
             <header>
               <h3>Partes</h3>
-              <Button
-                icon={Plus}
-                title="Criar nova"
-                onClick={() => push('/parts/new')}
-              />
+              <Button>
+                <Plus size={24} />
+                Criar nova
+              </Button>
+              <NewPartModal />
             </header>
             <Table>
               <thead>

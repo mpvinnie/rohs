@@ -74,35 +74,30 @@ export function NewContact(): JSX.Element {
         <NewContactFormContainer onSubmit={handleSubmit(handleCreateContact)}>
           <h2>Novo contato</h2>
           <Input
-            label="Nome"
             placeholder="Insira um nome"
             {...register('name')}
             error={errors.name}
           />
 
           <Input
-            label="Departamento"
             placeholder="Insira um departamento"
             {...register('department')}
             error={errors.department}
           />
 
           <Input
-            label="E-mail"
             placeholder="Insira um e-mail"
             {...register('email')}
             error={errors.email}
           />
 
           <Input
-            label="Posição"
             placeholder="Insira a posição"
             {...register('position')}
             error={errors.position}
           />
 
           <Input
-            label="Celular"
             placeholder="Insira um número de celular"
             {...register('phone_number')}
             error={errors.phone_number}

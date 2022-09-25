@@ -6,10 +6,18 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --white: #ffffff;
 
-    --gray_50: #F0F0F0;
-    --gray_100: #C7C7C7;
-    --gray_400: #A0AEC0;
-    --gray_500: #666666;
+    --gray_50: #F9FAFB;
+    --gray_100: #F3F4F6;
+    --gray_400: #9CA3AF;
+    --gray_500: #6B7280;
+    --gray-800: #1a202c;
+    --gray_900_transparent_60: rgba(17, 24, 39, 0.6);
+
+    --zinc-500: #71717a;
+    --zinc-800: #27272a;
+    --zinc-900: #1c1917;
+
+    --emerald-500: #10b981;
 
     --green_10: #E4EDEA;
     --green_100: #C6F6D5;
@@ -20,17 +28,21 @@ export const GlobalStyle = createGlobalStyle`
 
     --purple_200: #D6BCFA;
     --purple_300: #9EA0C5;
-    --purple_800: #44337A;
+    --purple-500: #a855f7;
     --purple_600: #6B46C1;
+    --purple_800: #44337A;
 
     --blue_300: #9EE7FE;
     --blue_500: #3D94EF;
     --blue_900: #0D2238;
 
+    --rose-600: #E11D48;
+
     --red_50: #FFF5F5;
     --red_200: #FEB2B2;
     --red_300: #FFC7C7;
     --red_500: #E53E3E;
+
   }
 
   * {
@@ -51,12 +63,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: var(--green_900);
+    background: var(--zinc-900);
+    color: var(--white);
     -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
   }
 
@@ -86,5 +99,9 @@ export const GlobalStyle = createGlobalStyle`
 
   input[type=number] {
     -moz-appearance: textfield;
+  }
+
+  .Toastify__toast--error {
+    background: #E11D48;
   }
 `

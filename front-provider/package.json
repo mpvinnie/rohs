@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^2.8.0",
+    "@radix-ui/react-dialog": "^1.0.0",
     "apexcharts": "3.28.1",
     "axios": "^0.21.1",
     "date-fns": "^2.23.0",

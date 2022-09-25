@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: var(--green_900);
   width: 100%;
   height: 100vh;
 
@@ -21,7 +20,7 @@ export const Content = styled.div`
 `
 
 export const Form = styled.form`
-  background: var(--white);
+  background: var(--zinc-800);
   padding: 2rem;
   width: 23rem;
   border-radius: 1rem;
@@ -29,11 +28,15 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
+  button {
+    margin-top: 1.5rem;
+  }
+
   a {
-    align-self: flex-end;
-    margin: 0.5rem 0 2.5rem;
+    align-self: center;
+    margin: 1rem 0;
     font-size: 0.875rem;
-    color: var(--blue_500);
+    color: var(--purple-500);
     transition: filter 0.2s;
 
     &:hover {

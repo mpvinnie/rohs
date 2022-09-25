@@ -1,3 +1,4 @@
+import * as Dialog from '@radix-ui/react-dialog'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -24,7 +25,7 @@ export const Main = styled.main`
   align-items: center;
 `
 
-export const Content = styled.div`
+export const Content = styled(Dialog.Root)`
   width: 100%;
   padding: 3.5rem;
   display: flex;
@@ -52,6 +53,18 @@ export const PartsContainer = styled.div`
       color: var(--blue_900);
     }
   }
+`
+
+export const Button = styled(Dialog.Trigger)`
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.2rem;
+  background-color: var(--green_500);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 600;
 `
 
 export const Table = styled.table`

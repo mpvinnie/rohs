@@ -39,7 +39,6 @@ export function SignIn(): JSX.Element {
         <Form onSubmit={handleSubmit(handleSignIn)}>
           <Input
             type="number"
-            label="ID"
             placeholder="Digite seu ID"
             {...register('id')}
             error={errors.id}
@@ -47,19 +46,18 @@ export function SignIn(): JSX.Element {
 
           <Input
             type="password"
-            label="Senha"
             placeholder="Digite sua senha"
             {...register('password')}
             error={errors.password}
           />
-
-          <Link to="#">Esqueci minha senha</Link>
 
           <FormButton
             title="Entrar"
             type="submit"
             isSubmitting={isSubmitting}
           />
+
+          <Link to="#">Esqueci minha senha</Link>
         </Form>
       </Content>
     </Container>

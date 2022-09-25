@@ -7,49 +7,55 @@ type ContainerProps = {
 
 export const Container = styled.div<ContainerProps>`
   width: 100%;
+  padding: 0.5rem 1rem;
 
   display: flex;
-  flex-direction: column;
+  align-items: center;
 
-  border-bottom: 2px solid var(--gray_100);
+  border: 2px solid var(--zinc-900);
+  border-radius: 0.5rem;
+
+  background: var(--zinc-900);
 
   ${(props) =>
     props.isInvalid &&
     css`
-      border-color: var(--red_500);
+      border-color: var(--rose-600);
     `}
 
   ${(props) =>
     props.isFocused &&
     css`
-      border-color: var(--green_500);
+      border-color: var(--emerald-500);
     `}
 
   div + & {
-    margin-top: 1.5rem;
-  }
-
-  label {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--gray_500);
+    margin-top: 0.5rem;
   }
 
   input {
+    flex: 1;
     border: 0;
-    padding: 0.125rem 0 0.5rem;
+    background: transparent;
 
-    color: var(--green_500);
+    color: var(--white);
     font-size: 1rem;
 
     &::placeholder {
-      color: var(--gray_100);
+      color: var(--zinc-500);
     }
   }
 `
 
+export const ErrorContainer = styled.div`
+  height: 0.875rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.3rem;
+`
+
 export const Error = styled.span`
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--red_500);
+  font-size: 0.6rem;
+  color: var(--rose-600);
 `
