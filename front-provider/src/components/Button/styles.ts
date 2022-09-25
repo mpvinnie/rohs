@@ -7,7 +7,7 @@ export const Container = styled.button`
   justify-content: space-between;
   border-radius: 0.5rem;
   color: var(--white);
-  background: var(--green_500);
+  background: var(--emerald-500);
 
   transition: filter 0.2s;
 

@@ -18,7 +18,7 @@ export const Container = styled.button<ContainerProps>`
   ${(props) =>
     props.isCurrent &&
     css`
-      background: var(--green_500);
+      background: var(--emerald-500);
       color: var(--white);
       font-weight: 600;
     `}

@@ -20,7 +20,7 @@ export const createPartSchema = joi.object<ICreatePartDTO>({
     .message('"provider_id" must only have digits'),
   code: joi.string().required(),
   description: joi.string().required(),
-  comment: joi.string()
+  comment: joi.string().allow(null, '')
 })
 
 export const listProviderPartsSchema = joi.object<IListProviderPartsDTO>({

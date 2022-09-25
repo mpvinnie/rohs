@@ -12,7 +12,6 @@ import {
   Container,
   Main,
   Content,
-  PathLinks,
   ContactsContainer,
   Table,
   ButtonOptions

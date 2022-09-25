@@ -55,6 +55,8 @@ export type Part = {
   created_at: Date | string
 }
 
+export type CreatePart = Pick<Part, 'code' | 'comment' | 'description'>
+
 export type Subpart = {
   id: string
   provider_id: string

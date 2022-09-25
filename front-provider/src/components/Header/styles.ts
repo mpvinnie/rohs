@@ -2,13 +2,11 @@ import styled from 'styled-components'
 
 export const Container = styled.header`
   width: 100%;
-  max-height: 6rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 3.5rem;
-  background: var(--white);
+  padding: 1.5rem 0;
 `
 
 export const HeaderContent = styled.div`
@@ -25,8 +23,8 @@ export const LeftSide = styled.div``
 export const SearchContainer = styled.div`
   width: 20rem;
   border-radius: 2rem;
-  background: var(--green_10);
-  padding: 1rem 2rem;
+  background: var(--zinc-800);
+  padding: 0.875rem 1.5rem;
 
   display: flex;
   align-items: center;
@@ -38,15 +36,19 @@ export const SearchContainer = styled.div`
     margin-right: 1rem;
     border: 0;
     font-size: 1rem;
-    color: var(--blue_900);
+    color: var(--white);
 
     &::placeholder {
-      color: var(--purple_300);
+      color: var(--zinc-500);
     }
   }
 
-  svg {
-    color: var(--purple_300);
+  button {
+    background: inherit;
+
+    svg {
+      color: var(--purple-500);
+    }
   }
 `
 
@@ -55,8 +57,8 @@ export const RightSide = styled.div`
   align-items: center;
 
   svg {
-    color: var(--purple_300);
-    margin: 0 2rem;
+    color: var(--purple-500);
+    margin: 0 2.5rem;
   }
 `
 
@@ -80,12 +82,12 @@ export const ProfileInfos = styled.div`
 
   strong {
     font-size: 1rem;
-    color: var(--blue_900);
-    line-height: 1rem;
+    color: var(--white);
+    line-height: 1.5rem;
   }
 
   span {
     font-size: 0.875rem;
-    color: var(--purple_300);
+    color: var(--zinc-500);
   }
 `

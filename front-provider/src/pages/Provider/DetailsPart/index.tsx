@@ -2,11 +2,10 @@ import fispqmsds from '../../../assets/fispqmsds.png'
 import addPart from '../../../assets/imgNewPart.png'
 import logoImg from '../../../assets/logo.svg'
 import { Button } from '../../../components/Button'
-import { FormButton } from '../../../components/FormButton'
 import { PartStatus } from '../../../components/PartStatus'
 import { Container, Content, Form, Header, Details, Table } from './styles'
 
-export function DetailsPart() {
+export function DetailsPart(): JSX.Element {
   return (
     <Container>
       <Content>

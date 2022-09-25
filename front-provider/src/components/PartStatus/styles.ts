@@ -12,7 +12,7 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   width: min-content;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -20,22 +20,22 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.status === 'DISAPPROVED' &&
     css`
-      background: var(--red_300);
-      color: var(--red_500);
+      background: var(--red-500);
+      color: var(--red-300);
     `};
 
   ${(props) =>
     props.status === 'APPROVED' &&
     css`
-      background: var(--green_300);
-      color: var(--green_500);
+      background: var(--green-500);
+      color: var(--green-800);
     `};
 
   ${(props) =>
     props.status === 'UNDER_REVIEW' &&
     css`
-      background: var(--blue_300);
-      color: var(--blue_500);
+      background: var(--cyan-500);
+      color: var(--cyan-800);
     `};
 
   ${(props) =>
@@ -48,21 +48,14 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.status === 'SENT_FOR_REVIEW' &&
     css`
-      background: var(--purple_200);
-      color: var(--purple_600);
+      background: var(--yellow-500);
+      color: var(--yellow-800);
     `};
 
   ${(props) =>
     props.status === 'NOT_SENT' &&
     css`
-      background: var(--gray_50);
-      color: var(--gray_400);
-    `};
-
-  ${(props) =>
-    props.status === 'WAITING' &&
-    css`
-      background: var(--blue_300);
-      color: var(--blue_500);
+      background: var(--zinc-800);
+      color: var(--zinc-500);
     `};
 `

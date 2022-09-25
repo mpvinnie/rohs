@@ -12,7 +12,7 @@ export const Container = styled(Link)<ContainerProps>`
   color: var(--white);
   background: transparent;
 
-  transition: background-color 0.2s;
+  transition: filter 0.2s;
 
   @media (max-width: 1040px) {
     svg {
@@ -39,13 +39,13 @@ export const Container = styled(Link)<ContainerProps>`
   }
 
   &:hover {
-    background: var(--green_700);
+    filter: brightness(0.6);
   }
 
   ${(props) =>
     props.is_selected === 1 &&
     css`
-      color: var(--green_500);
+      color: var(--emerald-500);
       font-weight: 700;
     `}
 `

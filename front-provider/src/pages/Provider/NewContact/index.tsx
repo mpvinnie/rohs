@@ -35,7 +35,6 @@ export function NewContact(): JSX.Element {
     position,
     phone_number
   }) => {
-    console.log(`chegou aqui`)
     try {
       const data = {
         department,

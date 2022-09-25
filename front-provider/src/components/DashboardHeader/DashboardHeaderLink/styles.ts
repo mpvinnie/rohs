@@ -14,7 +14,7 @@ export const Container = styled(Link)`
   padding: 1rem;
 
   svg {
-    color: var(--green_500);
+    color: var(--emerald-500);
     margin-bottom: 1.5rem;
   }
 

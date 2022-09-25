@@ -5,9 +5,9 @@ export const Container = styled.aside`
   grid-area: sidebar;
 
   width: 100%;
-  background: var(--green_900);
   display: flex;
   flex-direction: column;
+  background: var(--zinc-800);
 `
 
 export const LogoContainer = styled.div`
@@ -32,7 +32,7 @@ export const NavigationLinks = styled.div`
 export const Footer = styled(Link)`
   width: 100%;
   height: 3.5rem;
-  background: var(--green_700);
+  background: var(--zinc-800);
 
   padding: 0.5rem 2rem;
 

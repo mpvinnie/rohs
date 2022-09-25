@@ -18,11 +18,11 @@ export const Main = styled.main`
 
   width: 100%;
 
-  background: var(--gray_50);
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
 `
 
 export const Content = styled(Dialog.Root)`
@@ -33,12 +33,9 @@ export const Content = styled(Dialog.Root)`
 `
 
 export const PartsContainer = styled.div`
-  background: var(--white);
-  border-radius: 1rem;
-  padding: 2rem;
   width: 100%;
   max-width: 70rem;
-  box-shadow: 0px 8px 18px 1px rgba(0, 0, 0, 0.25);
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -48,20 +45,19 @@ export const PartsContainer = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    h3 {
-      font-size: 1.5rem;
-      color: var(--blue_900);
+    h1 {
+      font-weight: 900;
     }
   }
 `
 
-export const Button = styled(Dialog.Trigger)`
+export const ButtonTrigger = styled(Dialog.Trigger)`
   padding: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   border-radius: 0.2rem;
-  background-color: var(--green_500);
+  background-color: var(--emerald-500);
   color: var(--white);
   font-size: 1rem;
   font-weight: 600;
@@ -71,17 +67,22 @@ export const Table = styled.table`
   width: 100%;
   margin: 2rem 0;
 
+  border-radius: 0.5rem 0.5rem 0 0;
   border-collapse: collapse;
+  overflow: hidden;
 
   thead {
+    width: 100%;
+    background: var(--zinc-800);
+    color: var(--purple-500);
+    margin-bottom: 0.5rem;
+
     tr {
       th {
-        border-bottom: 1px solid var(--gray_100);
-        padding: 0.5rem;
+        padding: 0.5rem 0.75rem;
         text-align: left;
         font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--purple_300);
+        font-weight: 600;
       }
     }
   }
@@ -89,13 +90,12 @@ export const Table = styled.table`
   tbody {
     tr {
       td {
-        border-bottom: 1px solid var(--gray_100);
         max-width: 8rem;
-        padding: 1rem 0.5rem;
+        padding: 0.75rem;
         text-align: left;
         font-size: 0.875rem;
         font-weight: 400;
-        color: var(--blue_900);
+        color: var(--white);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -113,5 +113,20 @@ export const Table = styled.table`
         }
       }
     }
+  }
+`
+
+export const NoRegistersContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--zinc-500);
   }
 `

@@ -37,18 +37,6 @@ export const Content = styled.div`
   flex-direction: column;
 `
 
-export const PathLinks = styled.div`
-  margin-bottom: 1.5rem;
-  width: 100%;
-  max-width: 70rem;
-
-  span {
-    color: var(--blue_500);
-    font-weight: 600;
-    font-size: 1rem;
-  }
-`
-
 export const ContactsContainer = styled.div`
   background: var(--white);
   border-radius: 1rem;

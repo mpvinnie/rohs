@@ -10,13 +10,13 @@ type PartStatusProps = {
     | 'NOT_SENT'
 }
 
-const partStatus = {
-  NOT_SENT: 'NOT_SENT',
-  SENT_FOR_REVIEW: 'SENT_FOR_REVIEW',
-  UNDER_REVIEW: 'UNDER_REVIEW',
-  APPROVED: 'APPROVED',
-  DISAPPROVED: 'DISAPPROVED',
-  EXPIRED: 'EXPIRED'
+export const partStatus = {
+  NOT_SENT: 'Em configuração',
+  SENT_FOR_REVIEW: 'Enviado para análise',
+  UNDER_REVIEW: 'Sob análise',
+  APPROVED: 'Aprovado',
+  DISAPPROVED: 'Desaprovado',
+  EXPIRED: 'Expirado'
 }
 
 export function PartStatus({ status }: PartStatusProps): JSX.Element {

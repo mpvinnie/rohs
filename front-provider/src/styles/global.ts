@@ -11,19 +11,20 @@ export const GlobalStyle = createGlobalStyle`
     --gray_400: #9CA3AF;
     --gray_500: #6B7280;
     --gray-800: #1a202c;
-    --gray_900_transparent_60: rgba(17, 24, 39, 0.6);
 
     --zinc-500: #71717a;
     --zinc-800: #27272a;
     --zinc-900: #1c1917;
+    --zinc-900-50: rgba(24, 24, 27, 0.5);
 
     --emerald-500: #10b981;
 
     --green_10: #E4EDEA;
     --green_100: #C6F6D5;
     --green_300: #BEFFB9;
-    --green_500: #2DD09E;
+    --green-500: #22C55E;
     --green_700: #152b38;
+    --green-800: #166534;
     --green_900: #0B151B;
 
     --purple_200: #D6BCFA;
@@ -32,16 +33,22 @@ export const GlobalStyle = createGlobalStyle`
     --purple_600: #6B46C1;
     --purple_800: #44337A;
 
+    --yellow-500: #EAB308;
+    --yellow-800: #854D0E;
+
     --blue_300: #9EE7FE;
     --blue_500: #3D94EF;
     --blue_900: #0D2238;
+
+    --cyan-500: #06B6D4;
+    --cyan-800: #155e75;
 
     --rose-600: #E11D48;
 
     --red_50: #FFF5F5;
     --red_200: #FEB2B2;
-    --red_300: #FFC7C7;
-    --red_500: #E53E3E;
+    --red_300: #FCA5A5;
+    --red-500: #EF4444;
 
   }
 
@@ -102,6 +109,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .Toastify__toast--error {
-    background: #E11D48;
+    background: var(--rose-600);
+  }
+
+  .Toastify__toast--success {
+    background: var(--emerald-500);
   }
 `

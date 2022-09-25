@@ -73,7 +73,7 @@ export const Details = styled.div`
   margin-bottom: 1rem;
 
   h4 {
-    color: var(--green_500);
+    color: var(--emerald-500);
   }
 
   div {

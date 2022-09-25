@@ -52,7 +52,7 @@ export const PathLinks = styled.div`
   }
 
   strong {
-    color: var(--green_500);
+    color: var(--emerald-500);
   }
 `
 

@@ -21,7 +21,9 @@ export function Header(): JSX.Element {
         <LeftSide>
           <SearchContainer>
             <input type="text" placeholder="Buscar nessa página" />
-            <Search size={24} />
+            <button>
+              <Search size={24} />
+            </button>
           </SearchContainer>
         </LeftSide>
         <RightSide>
