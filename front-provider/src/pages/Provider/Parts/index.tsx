@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Plus } from 'react-feather'
 
 import { Header } from '../../../components/Header'
@@ -7,6 +7,7 @@ import { Pagination } from '../../../components/Pagination'
 import { PartStatus } from '../../../components/PartStatus'
 import { Sidebar } from '../../../components/Sidebar'
 import { SidebarLinkTypes } from '../../../components/Sidebar/SidebarItem'
+import { Table } from '../../../components/Table'
 import { api } from '../../../services/api'
 import { Part } from '../../../types/Provider'
 import {
@@ -14,7 +15,6 @@ import {
   Main,
   Content,
   PartsContainer,
-  Table,
   ButtonTrigger,
   NoRegistersContainer
 } from './styles'
@@ -29,7 +29,6 @@ export function Parts(): JSX.Element {
   const [parts, setParts] = useState<Part[]>([])
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
-  // const { provider } = useAuth()
 
   useEffect(() => {
     async function loadParts() {
@@ -57,6 +56,21 @@ export function Parts(): JSX.Element {
     loadParts()
   }, [page])
 
+  const partTableData = useMemo(() => {
+    return parts.map((part) => {
+      return {
+        id: part.id,
+        render: [
+          part.code,
+          part.description,
+          part.comment || '',
+          <PartStatus key={part.id} status={part.status} />
+        ],
+        redirectTo: '/parts'
+      }
+    })
+  }, [parts])
+
   return (
     <Container>
       <Sidebar selected={SidebarLinkTypes.PARTS} />
@@ -76,50 +90,16 @@ export function Parts(): JSX.Element {
             </header>
             {totalCount > 0 ? (
               <>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>Part Code</th>
-                      <th>Descrição</th>
-                      <th>Submit Date</th>
-                      <th>Status</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {parts ? (
-                      parts.map((part) => (
-                        <tr key={part.id}>
-                          <td>{part.code}</td>
-                          <td>{part.description}</td>
-                          <td>{part.created_at}</td>
-                          <td>
-                            <PartStatus status={part.status} />
-                          </td>
-                          <td>
-                            {/* <button
-                            onClick={() =>
-                              push(`/parts/subparts/${part.id}`, {
-                                part_code: part.part_code,
-                                disapproval_reason:
-                                  part.disapproval_reasons.length > 0
-                                    ? part.disapproval_reasons[0].message
-                                    : null,
-                                status: part.status
-                              })
-                            }
-                          >
-                            Detalhes
-                          </button> */}
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <p>Nenhuma parte encontrada</p>
-                    )}
-                  </tbody>
-                </Table>
-
+                <Table
+                  titles={[
+                    'Part code',
+                    'Descrição',
+                    'Comentário',
+                    'Report Date',
+                    ''
+                  ]}
+                  data={partTableData}
+                />
                 <Pagination
                   totalCountOfRegisters={totalCount}
                   currentPage={page}
