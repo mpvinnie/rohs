@@ -43,11 +43,11 @@ export const GlobalStyle = createGlobalStyle`
     --cyan-500: #06B6D4;
     --cyan-800: #155e75;
 
+    --rose-500: #f43f5e;
     --rose-600: #E11D48;
 
     --red_50: #FFF5F5;
     --red_200: #FEB2B2;
-    --red_300: #FCA5A5;
     --red-500: #EF4444;
 
   }

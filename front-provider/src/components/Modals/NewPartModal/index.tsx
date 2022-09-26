@@ -7,9 +7,9 @@ import { toast } from 'react-toastify'
 import { api } from '../../../services/api'
 import { CreatePart } from '../../../types/Provider'
 import { createPartSchema } from '../../../validation/createPartSchema'
+import { Input } from '../../Form/Input'
+import { SubmitButton } from '../../Form/SubmitButton'
 import { Textarea } from '../../Form/Textarea'
-import { FormButton } from '../../FormButton'
-import { Input } from '../../Input'
 import { Close, Content, Overlay, Title } from './styles'
 
 interface NewPartModalProps {
@@ -73,7 +73,7 @@ export function NewPartModal({
           />
           <footer>
             <Close>Cancelar</Close>
-            <FormButton
+            <SubmitButton
               type="submit"
               title="Criar parte"
               isSubmitting={isSubmitting}

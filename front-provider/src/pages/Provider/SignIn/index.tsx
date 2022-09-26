@@ -3,8 +3,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import logoImg from '../../../assets/logo.svg'
-import { FormButton } from '../../../components/FormButton'
-import { Input } from '../../../components/Input'
+import { Input } from '../../../components/Form/Input'
+import { SubmitButton } from '../../../components/Form/SubmitButton'
 import { SignInCredentials, useAuth } from '../../../hooks/AuthContext'
 import { signInFormSchema } from '../../../validation/signInFormSchema'
 import { Container, Content, Form } from './styles'
@@ -51,7 +51,7 @@ export function SignIn(): JSX.Element {
             error={errors.password}
           />
 
-          <FormButton
+          <SubmitButton
             title="Entrar"
             type="submit"
             isSubmitting={isSubmitting}

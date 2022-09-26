@@ -21,7 +21,7 @@ export const Container = styled.div<ContainerProps>`
     props.status === 'DISAPPROVED' &&
     css`
       background: var(--red-500);
-      color: var(--red-300);
+      color: var(--white);
     `};
 
   ${(props) =>
@@ -41,8 +41,8 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.status === 'EXPIRED' &&
     css`
-      background: var(--red_200);
-      color: var(--red_50);
+      background: var(--rose-500);
+      color: var(--white);
     `};
 
   ${(props) =>

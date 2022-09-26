@@ -4,8 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { FormButton } from '../../../components/FormButton'
-import { Input } from '../../../components/Input'
+import { Input } from '../../../components/Form/Input'
+import { SubmitButton } from '../../../components/Form/SubmitButton'
 import { api } from '../../../services/api'
 import { CreateContact } from '../../../types/Provider'
 import { createContactFormSchema } from '../../../validation/createContactFormSchema'
@@ -102,7 +102,7 @@ export function NewContact(): JSX.Element {
             error={errors.phone_number}
           />
 
-          <FormButton
+          <SubmitButton
             type="submit"
             isSubmitting={isSubmitting}
             title="Criar contato"

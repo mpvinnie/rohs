@@ -3,16 +3,16 @@ import ReactLoading from 'react-loading'
 
 import { Container } from './styles'
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ISubmitButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isSubmitting: boolean
   title: string
 }
 
-export function FormButton({
+export function SubmitButton({
   isSubmitting,
   title,
   ...rest
-}: IButtonProps): JSX.Element {
+}: ISubmitButtonProps): JSX.Element {
   return (
     <Container disabled={isSubmitting} {...rest}>
       {isSubmitting ? (
