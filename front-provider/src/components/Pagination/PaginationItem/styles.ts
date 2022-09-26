@@ -9,8 +9,8 @@ export const Container = styled.button<ContainerProps>`
   height: 2.5rem;
   border-radius: 0.5rem;
 
-  background: var(--green_10);
-  color: var(--blue_900);
+  background: var(--zinc-800);
+  color: var(--zinc-500);
   font-size: 1rem;
 
   transition: filter 0.2s;

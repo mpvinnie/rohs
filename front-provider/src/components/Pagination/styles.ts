@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  color: var(--blue_900);
+  color: var(--purple-500);
 `
 
 export const PaginationItemsContainer = styled.div`

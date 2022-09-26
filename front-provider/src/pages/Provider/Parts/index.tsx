@@ -3,6 +3,7 @@ import { Plus } from 'react-feather'
 
 import { Header } from '../../../components/Header'
 import { NewPartModal } from '../../../components/Modals/NewPartModal'
+import { Pagination } from '../../../components/Pagination'
 import { PartStatus } from '../../../components/PartStatus'
 import { Sidebar } from '../../../components/Sidebar'
 import { SidebarLinkTypes } from '../../../components/Sidebar/SidebarItem'
@@ -18,18 +19,27 @@ import {
   NoRegistersContainer
 } from './styles'
 
+interface IPart {
+  parts: Part[]
+  _count: number
+}
+
 export function Parts(): JSX.Element {
   const [isModalOpened, setIsModalOpened] = useState(false)
   const [parts, setParts] = useState<Part[]>([])
-  // const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
   // const { provider } = useAuth()
 
   useEffect(() => {
     async function loadParts() {
-      const response = await api.get<Part[]>(`/providers/parts`)
+      const response = await api.get<IPart>(
+        `/providers/parts?page=${page}&per_page=10`
+      )
+      const { parts } = response.data
+      const { _count } = response.data
 
-      const serializedParts = response.data.map((part) => {
+      const serializedParts = parts.map((part) => {
         return {
           id: part.id,
           provider_id: part.provider_id,
@@ -41,12 +51,11 @@ export function Parts(): JSX.Element {
         }
       })
       setParts(serializedParts)
-      // setTotalCount(Number(response.headers['x-total-count']))
-      setTotalCount(Number(parts.length))
+      setTotalCount(_count)
     }
 
     loadParts()
-  }, [parts.length])
+  }, [page])
 
   return (
     <Container>
@@ -85,7 +94,7 @@ export function Parts(): JSX.Element {
                           <td>{part.description}</td>
                           <td>{part.created_at}</td>
                           <td>
-                            <PartStatus status="DISAPPROVED" />
+                            <PartStatus status={part.status} />
                           </td>
                           <td>
                             {/* <button
@@ -111,12 +120,11 @@ export function Parts(): JSX.Element {
                   </tbody>
                 </Table>
 
-                {/* <Pagination
-                      totalCountOfRegisters={totalCount}
-                      currentPage={page}
-                      onPageChange={setPage}
-                    />
-                */}
+                <Pagination
+                  totalCountOfRegisters={totalCount}
+                  currentPage={page}
+                  onPageChange={setPage}
+                />
               </>
             ) : (
               <NoRegistersContainer>

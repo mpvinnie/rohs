@@ -23,6 +23,7 @@ export const Main = styled.main`
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
 `
 
 export const Content = styled(Dialog.Root)`
@@ -42,11 +43,14 @@ export const PartsContainer = styled.div`
 
   header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 
     h1 {
       font-weight: 900;
+    }
+
+    button {
+      margin-top: 0.5rem;
     }
   }
 `
