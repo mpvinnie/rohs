@@ -23,14 +23,18 @@ export const createPartSchema = joi.object<ICreatePartDTO>({
   comment: joi.string().allow(null, '')
 })
 
-export const listProviderPartsSchema = joi.object<IListProviderPartsDTO>({
-  provider_id: joi
-    .string()
-    .length(8)
-    .required()
-    .regex(/^\d+$/)
-    .message('"provider_id" must only have digits')
-})
+export const listProviderPartsSchema = joi
+  .object<IListProviderPartsDTO>({
+    provider_id: joi
+      .string()
+      .length(8)
+      .required()
+      .regex(/^\d+$/)
+      .message('"provider_id" must only have digits'),
+    page: joi.number(),
+    per_page: joi.number()
+  })
+  .with('page', 'per_page')
 
 export const sendPartForReviewSchema = joi.object<ISendPartForReviewDTO>({
   provider_id: joi

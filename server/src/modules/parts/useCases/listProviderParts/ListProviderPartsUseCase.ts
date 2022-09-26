@@ -14,7 +14,7 @@ export class ListProviderPartsUseCase {
     private partsRepository: IPartsRepository
   ) {}
 
-  async execute({ provider_id }: IListProviderPartsDTO) {
+  async execute({ provider_id, page, per_page }: IListProviderPartsDTO) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {
@@ -23,6 +23,22 @@ export class ListProviderPartsUseCase {
 
     const parts = await this.partsRepository.findAllByProviderId(provider_id)
 
-    return parts
+    const _count = parts.length
+
+    if (page && per_page) {
+      const skip = (page - 1) * per_page
+      const take = page * per_page
+
+      const paginatedParts = parts.slice(skip, take)
+      return {
+        parts: paginatedParts,
+        _count
+      }
+    }
+
+    return {
+      parts,
+      _count
+    }
   }
 }

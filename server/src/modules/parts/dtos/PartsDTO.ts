@@ -7,6 +7,8 @@ export interface ICreatePartDTO {
 
 export interface IListProviderPartsDTO {
   provider_id: string
+  page?: number
+  per_page?: number
 }
 
 export interface ISendPartForReviewDTO {
