@@ -1,3 +1,4 @@
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import styled from 'styled-components'
 
 export const Container = styled.table`
@@ -11,7 +12,7 @@ export const Container = styled.table`
   thead {
     width: 100%;
     background: var(--zinc-800);
-    color: var(--purple-500);
+    color: var(--rose-500);
     margin-bottom: 0.5rem;
 
     tr {
@@ -38,11 +39,12 @@ export const Container = styled.table`
         text-overflow: ellipsis;
 
         border-bottom: 1px solid var(--zinc-800);
-
-        a {
-          color: var(--zinc-500);
-        }
       }
     }
   }
+`
+
+export const Trigger = styled(DropdownMenu.Trigger)`
+  background: transparent;
+  color: var(--zinc-500);
 `

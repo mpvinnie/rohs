@@ -15,7 +15,7 @@ export function Routes(): JSX.Element {
       <Route path="/" exact component={SignIn} />
       <Route isPrivate path="/dashboard" exact component={Dashboard} />
       <Route isPrivate path="/parts" exact component={Parts} />
-      <Route isPrivate path="/parts/details" exact component={DetailsPart} />
+      <Route isPrivate path="/parts/:id" exact component={DetailsPart} />
       <Route isPrivate path="/documents" exact component={Documents} />
       <Route isPrivate path="/contacts" exact component={Contacts} />
       <Route isPrivate path="/contacts/new" exact component={NewContact} />

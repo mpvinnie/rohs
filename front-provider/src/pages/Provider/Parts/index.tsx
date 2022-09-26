@@ -64,6 +64,7 @@ export function Parts(): JSX.Element {
           part.code,
           part.description,
           part.comment || '',
+          String(part.created_at),
           <PartStatus key={part.id} status={part.status} />
         ],
         redirectTo: '/parts'
@@ -96,6 +97,7 @@ export function Parts(): JSX.Element {
                     'Descrição',
                     'Comentário',
                     'Report Date',
+                    'Status',
                     ''
                   ]}
                   data={partTableData}

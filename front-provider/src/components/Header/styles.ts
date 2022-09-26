@@ -47,7 +47,7 @@ export const SearchContainer = styled.div`
     background: inherit;
 
     svg {
-      color: var(--purple-500);
+      color: var(--zinc-500);
     }
   }
 `
@@ -57,7 +57,7 @@ export const RightSide = styled.div`
   align-items: center;
 
   svg {
-    color: var(--purple-500);
+    color: var(--zinc-500);
     margin: 0 2.5rem;
   }
 `

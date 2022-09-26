@@ -44,6 +44,9 @@ export class PartsRepository implements IPartsRepository {
       },
       include: {
         reviews: true
+      },
+      orderBy: {
+        created_at: 'desc'
       }
     })
 

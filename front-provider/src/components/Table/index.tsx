@@ -1,7 +1,8 @@
-import { MoreVertical } from 'react-feather'
-import { Link } from 'react-router-dom'
+import { Root } from '@radix-ui/react-dropdown-menu'
+import { Linkedin, MoreVertical } from 'react-feather'
 
-import { Container } from './styles'
+import { DropdownMenu } from '../DropdownMenu'
+import { Container, Trigger } from './styles'
 
 interface TableProps {
   titles: string[]
@@ -24,16 +25,19 @@ export function Table({ titles, data }: TableProps): JSX.Element {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item.id}>
-            {item.render.map((line, index) => (
-              <td key={index}>{line}</td>
-            ))}
-            <td>
-              <Link to={`${item.redirectTo}/${item.id}`}>
-                <MoreVertical size={18} />
-              </Link>
-            </td>
-          </tr>
+          <Root key={item.id}>
+            <tr>
+              {item.render.map((line, index) => (
+                <td key={index}>{line}</td>
+              ))}
+              <td>
+                <Trigger>
+                  <MoreVertical size={18} />
+                </Trigger>
+              </td>
+              <DropdownMenu redirectTo={item.redirectTo} id={item.id} />
+            </tr>
+          </Root>
         ))}
       </tbody>
     </Container>
