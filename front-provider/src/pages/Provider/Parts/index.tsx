@@ -67,7 +67,8 @@ export function Parts(): JSX.Element {
           String(part.created_at),
           <PartStatus key={part.id} status={part.status} />
         ],
-        redirectTo: '/parts'
+        redirectTo: '/parts',
+        part_status: part.status
       }
     })
   }, [parts])

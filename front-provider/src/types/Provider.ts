@@ -29,14 +29,7 @@ export type CreateContact = Pick<
   'department' | 'name' | 'email' | 'position' | 'phone_number'
 >
 
-type DisapprovalReason = {
-  id: string
-  part_id: string
-  message: string
-  created_at: Date
-}
-
-enum PartStatus {
+export enum PartStatus {
   NOT_SENT = 'NOT_SENT',
   SENT_FOR_REVIEW = 'SENT_FOR_REVIEW',
   UNDER_REVIEW = 'UNDER_REVIEW',

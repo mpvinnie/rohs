@@ -6,11 +6,15 @@ import { Arrow, Content, Item, Portal } from './styles'
 interface DropdownMenuProps {
   redirectTo: string
   id: string
+  canEdit?: boolean
+  canDelete?: boolean
 }
 
 export function DropdownMenu({
   redirectTo,
-  id
+  id,
+  canEdit = false,
+  canDelete = false
 }: DropdownMenuProps): JSX.Element {
   return (
     <Portal>
@@ -19,14 +23,18 @@ export function DropdownMenu({
           Detalhes
           <Activity size={16} />
         </Link>
-        <Item>
-          Editar
-          <Edit size={16} />
-        </Item>
-        <Item>
-          Excluir
-          <Trash size={16} />
-        </Item>
+        {canEdit && (
+          <Item>
+            Editar
+            <Edit size={16} />
+          </Item>
+        )}
+        {canDelete && (
+          <Item>
+            Excluir
+            <Trash size={16} />
+          </Item>
+        )}
         <Arrow />
       </Content>
     </Portal>

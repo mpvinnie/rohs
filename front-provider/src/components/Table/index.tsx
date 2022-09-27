@@ -1,6 +1,7 @@
 import { Root } from '@radix-ui/react-dropdown-menu'
-import { Linkedin, MoreVertical } from 'react-feather'
+import { MoreVertical } from 'react-feather'
 
+import { PartStatus } from '../../types/Provider'
 import { DropdownMenu } from '../DropdownMenu'
 import { Container, Trigger } from './styles'
 
@@ -10,6 +11,7 @@ interface TableProps {
     id: string
     render: (string | JSX.Element)[]
     redirectTo: string
+    part_status?: PartStatus
   }[]
 }
 
@@ -35,7 +37,20 @@ export function Table({ titles, data }: TableProps): JSX.Element {
                   <MoreVertical size={18} />
                 </Trigger>
               </td>
-              <DropdownMenu redirectTo={item.redirectTo} id={item.id} />
+              <DropdownMenu
+                redirectTo={item.redirectTo}
+                id={item.id}
+                canEdit={
+                  item.part_status === 'NOT_SENT' ||
+                  item.part_status === 'DISAPPROVED' ||
+                  item.part_status === 'EXPIRED'
+                }
+                canDelete={
+                  item.part_status === 'NOT_SENT' ||
+                  item.part_status === 'DISAPPROVED' ||
+                  item.part_status === 'EXPIRED'
+                }
+              />
             </tr>
           </Root>
         ))}
