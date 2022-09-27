@@ -5,6 +5,15 @@ type ContainerProps = {
   isFocused: boolean
 }
 
+export const Wrapper = styled.div`
+  label {
+    font-size: 0.875rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--zinc-500);
+  }
+`
+
 export const Container = styled.div<ContainerProps>`
   width: 100%;
   padding: 0.5rem 1rem;

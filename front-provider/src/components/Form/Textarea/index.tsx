@@ -6,17 +6,18 @@ import {
 } from 'react'
 import { FieldError } from 'react-hook-form'
 
-import { Container, ErrorContainer, Error } from './styles'
+import { Container, ErrorContainer, Error, Wrapper } from './styles'
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string
+  label?: string
   error?: FieldError
 }
 
 const TextareaBase: ForwardRefRenderFunction<
   HTMLTextAreaElement,
   TextareaProps
-> = ({ name, error, ...rest }, ref): JSX.Element => {
+> = ({ name, error, label, ...rest }, ref): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false)
 
   function handleFocus() {
@@ -28,9 +29,11 @@ const TextareaBase: ForwardRefRenderFunction<
   }
 
   return (
-    <>
+    <Wrapper>
+      <label htmlFor={name}>{label}</label>
       <Container isInvalid={!!error} isFocused={isFocused}>
         <textarea
+          id={name}
           name={name}
           {...rest}
           ref={ref}
@@ -40,7 +43,7 @@ const TextareaBase: ForwardRefRenderFunction<
         />
       </Container>
       <ErrorContainer>{error && <Error>{error.message}</Error>}</ErrorContainer>
-    </>
+    </Wrapper>
   )
 }
 

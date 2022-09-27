@@ -6,15 +6,16 @@ import {
 } from 'react'
 import { FieldError } from 'react-hook-form'
 
-import { Container, ErrorContainer, Error } from './styles'
+import { Container, ErrorContainer, Error, Wrapper } from './styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
+  label?: string
   error?: FieldError
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { name, error, ...rest },
+  { name, error, label, ...rest },
   ref
 ): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false)
@@ -28,9 +29,11 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   }
 
   return (
-    <>
+    <Wrapper>
+      <label htmlFor={name}>{label}</label>
       <Container isInvalid={!!error} isFocused={isFocused}>
         <input
+          id={name}
           name={name}
           {...rest}
           ref={ref}
@@ -39,7 +42,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         />
       </Container>
       <ErrorContainer>{error && <Error>{error.message}</Error>}</ErrorContainer>
-    </>
+    </Wrapper>
   )
 }
 

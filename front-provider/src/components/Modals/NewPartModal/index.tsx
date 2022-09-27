@@ -57,17 +57,20 @@ export function NewPartModal({
         <Title>Criar nova parte</Title>
         <form onSubmit={handleSubmit(handleCreatePart)}>
           <Input
+            label="Code"
             placeholder="Part Code"
             {...register('code')}
             error={errors.code}
           />
           <Input
+            label="Comentário"
             placeholder="Comentário (opcional)"
             {...register('comment')}
             error={errors.comment}
           />
           <Textarea
-            placeholder="Descrição"
+            label="Descrição"
+            placeholder="Insira uma breve descrição sobre a parte"
             {...register('description')}
             error={errors.description}
           />

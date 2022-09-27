@@ -38,6 +38,7 @@ export function SignIn(): JSX.Element {
         <img src={logoImg} alt="RoHS" />
         <Form onSubmit={handleSubmit(handleSignIn)}>
           <Input
+            label="ID"
             type="number"
             placeholder="Digite seu ID"
             {...register('id')}
@@ -45,6 +46,7 @@ export function SignIn(): JSX.Element {
           />
 
           <Input
+            label="Senha"
             type="password"
             placeholder="Digite sua senha"
             {...register('password')}
