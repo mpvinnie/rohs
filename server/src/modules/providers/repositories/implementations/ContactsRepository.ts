@@ -63,6 +63,9 @@ export class ContactsRepository implements IContactsRepository {
       },
       include: {
         department: true
+      },
+      orderBy: {
+        created_at: 'desc'
       }
     })
 

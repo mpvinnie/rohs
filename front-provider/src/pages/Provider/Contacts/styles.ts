@@ -1,8 +1,5 @@
-import styled, { css } from 'styled-components'
-
-type ButtonOptionsProps = {
-  option: 'edit' | 'delete'
-}
+import * as Dialog from '@radix-ui/react-dialog'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
@@ -21,105 +18,66 @@ export const Main = styled.main`
 
   width: 100%;
 
-  background: var(--gray_50);
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 `
 
-export const Content = styled.div`
+export const Content = styled(Dialog.Root)`
   width: 100%;
-  height: 100%;
-  padding: 1.5rem;
+  padding: 3.5rem;
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  justify-content: center;
 `
 
 export const ContactsContainer = styled.div`
-  background: var(--white);
-  border-radius: 1rem;
-  padding: 2rem;
   width: 100%;
   max-width: 70rem;
-  box-shadow: 0px 8px 18px 1px rgba(0, 0, 0, 0.25);
+  height: 100%;
 
   display: flex;
   flex-direction: column;
 
   header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 
-    h3 {
-      font-size: 1.5rem;
-      color: var(--blue_900);
+    h1 {
+      font-weight: 900;
+    }
+
+    button {
+      margin-top: 0.5rem;
     }
   }
 `
 
-export const Table = styled.table`
-  width: 100%;
-  margin: 2rem 0;
-
-  border-collapse: collapse;
-
-  thead {
-    tr {
-      th {
-        border-bottom: 1px solid var(--gray_100);
-        padding: 0.5rem;
-        text-align: left;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--purple_300);
-      }
-    }
-  }
-
-  tbody {
-    tr {
-      td {
-        border-bottom: 1px solid var(--gray_100);
-        max-width: 8rem;
-        padding: 1rem 0.5rem;
-        text-align: left;
-        font-size: 0.875rem;
-        font-weight: 400;
-        color: var(--blue_900);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-  }
-`
-
-export const ButtonOptions = styled.button<ButtonOptionsProps>`
+export const ButtonTrigger = styled(Dialog.Trigger)`
+  padding: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.3rem;
-  border-radius: 50%;
+  gap: 0.5rem;
+  border-radius: 0.2rem;
+  background-color: var(--emerald-500);
   color: var(--white);
+  font-size: 1rem;
+  font-weight: 600;
+`
 
-  transition: filter 0.2s;
+export const NoRegistersContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  &:hover {
-    filter: brightness(0.9);
+  span {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--zinc-500);
   }
-
-  ${(props) =>
-    props.option === 'edit' &&
-    css`
-      background: var(--blue_500);
-    `}
-
-  ${(props) =>
-    props.option === 'delete' &&
-    css`
-      background: var(--red_500);
-    `}
 `

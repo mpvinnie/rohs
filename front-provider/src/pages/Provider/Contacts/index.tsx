@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react'
-import { Edit2, Plus, Trash } from 'react-feather'
+import { useEffect, useMemo, useState } from 'react'
+import { Plus } from 'react-feather'
 
-import { Button } from '../../../components/Button'
 import { Header } from '../../../components/Header'
+import { NewPartModal } from '../../../components/Modals/NewPartModal'
 import { Pagination } from '../../../components/Pagination'
 import { Sidebar } from '../../../components/Sidebar'
 import { SidebarLinkTypes } from '../../../components/Sidebar/SidebarItem'
+import { Table } from '../../../components/Table'
 import { api } from '../../../services/api'
 import { Contact } from '../../../types/Provider'
 import {
@@ -13,77 +14,98 @@ import {
   Main,
   Content,
   ContactsContainer,
-  Table,
-  ButtonOptions
+  ButtonTrigger,
+  NoRegistersContainer
 } from './styles'
 
+interface IContact {
+  contacts: Contact[]
+  _count: number
+}
+
 export function Contacts(): JSX.Element {
+  const [isModalOpened, setIsModalOpened] = useState(false)
   const [contacts, setContacts] = useState<Contact[]>([])
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
-    api.get('/providers/contacts').then((response) => {
-      setContacts(response.data)
-      setTotalCount(Number(response.headers['x-total-count']))
-    })
+    async function loadContacts() {
+      const response = await api.get<IContact>(
+        `/providers/contacts?page=${page}&per_page=10`
+      )
+      const { contacts } = response.data
+      const { _count } = response.data
+
+      setContacts(contacts)
+      setTotalCount(_count)
+    }
+
+    loadContacts()
   }, [page])
+
+  const contactTableData = useMemo(() => {
+    return contacts.map((contact) => {
+      return {
+        id: contact.id,
+        render: [
+          contact.name,
+          contact.email,
+          contact.phone_number,
+          contact.position,
+          contact.department.name
+        ],
+        redirectTo: '/contacts'
+      }
+    })
+  }, [contacts])
 
   return (
     <Container>
       <Sidebar selected={SidebarLinkTypes.CONTACTS} />
       <Main>
         <Header />
-        <Content>
+        <Content open={isModalOpened} onOpenChange={setIsModalOpened}>
           <ContactsContainer>
             <header>
-              <h3>Contatos</h3>
-              <Button icon={Plus} title="Criar novo" to="/contacts/new" />
+              <h1>Contatos</h1>
+              {totalCount > 0 && (
+                <ButtonTrigger>
+                  <Plus size={24} />
+                  Criar novo
+                </ButtonTrigger>
+              )}
+              <NewPartModal setIsModalOpened={setIsModalOpened} />
             </header>
-            <Table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Departamento</th>
-                  <th>Position</th>
-                  <th>Email</th>
-                  <th>Celular</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {contacts ? (
-                  contacts.map((contact) => (
-                    <tr key={contact.id}>
-                      <td>{contact.name}</td>
-                      <td>{contact.department.name}</td>
-                      <td>{contact.position}</td>
-                      <td>{contact.email}</td>
-                      <td>{contact.phone_number}</td>
-                      <td>
-                        <ButtonOptions type="button" option="edit">
-                          <Edit2 size={16} />
-                        </ButtonOptions>
-                      </td>
-                      <td>
-                        <ButtonOptions type="button" option="delete">
-                          <Trash size={16} />
-                        </ButtonOptions>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <p>Nenhum contato encontrado</p>
-                )}
-              </tbody>
-            </Table>
-
-            <Pagination
-              totalCountOfRegisters={totalCount}
-              currentPage={page}
-              onPageChange={setPage}
-            />
+            {totalCount > 0 ? (
+              <>
+                <Table
+                  titles={[
+                    'Nome',
+                    'Email',
+                    'Número de Telefone',
+                    'Posição',
+                    'Departamento',
+                    ''
+                  ]}
+                  data={contactTableData}
+                />
+                <Pagination
+                  totalCountOfRegisters={totalCount}
+                  currentPage={page}
+                  onPageChange={setPage}
+                />
+              </>
+            ) : (
+              <NoRegistersContainer>
+                <span>Nenhum registro encontrado</span>
+                <ButtonTrigger>
+                  <Plus size={24} />
+                  Criar novo contato
+                </ButtonTrigger>
+                <NewPartModal setIsModalOpened={setIsModalOpened} />
+              </NoRegistersContainer>
+            )}
           </ContactsContainer>
         </Content>
       </Main>

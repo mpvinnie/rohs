@@ -36,14 +36,18 @@ export const deleteContactSchema = joi.object<IDeleteContactDTO>({
   contact_id: joi.string().uuid().required()
 })
 
-export const listProviderContactsSchema = joi.object<IListProviderContactsDTO>({
-  provider_id: joi
-    .string()
-    .length(8)
-    .required()
-    .regex(/^\d+$/)
-    .message('"provider_id" must only have digits')
-})
+export const listProviderContactsSchema = joi
+  .object<IListProviderContactsDTO>({
+    provider_id: joi
+      .string()
+      .length(8)
+      .required()
+      .regex(/^\d+$/)
+      .message('"provider_id" must only have digits'),
+    page: joi.number(),
+    per_page: joi.number()
+  })
+  .with('page', 'per_page')
 
 export const updateContactSchema = joi.object<IUpdateContactDTO>({
   provider_id: joi

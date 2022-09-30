@@ -9,6 +9,8 @@ export interface ICreateContactDTO {
 
 export interface IListProviderContactsDTO {
   provider_id: string
+  page?: number
+  per_page?: number
 }
 
 export interface IUpdateContactDTO {

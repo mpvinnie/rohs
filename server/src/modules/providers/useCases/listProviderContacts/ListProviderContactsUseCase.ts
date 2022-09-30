@@ -14,7 +14,7 @@ export class ListProviderContactsUseCase {
     private contactsRepository: IContactsRepository
   ) {}
 
-  async execute({ provider_id }: IListProviderContactsDTO) {
+  async execute({ provider_id, page, per_page }: IListProviderContactsDTO) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {
@@ -23,6 +23,22 @@ export class ListProviderContactsUseCase {
 
     const contacts = await this.contactsRepository.findByProviderId(provider_id)
 
-    return contacts
+    const _count = contacts.length
+
+    if (page && per_page) {
+      const skip = (page - 1) * per_page
+      const take = page * per_page
+
+      const paginatedContacts = contacts.slice(skip, take)
+      return {
+        contacts: paginatedContacts,
+        _count
+      }
+    }
+
+    return {
+      contacts,
+      _count
+    }
   }
 }
