@@ -8,14 +8,20 @@ import validateParams from '@utils/validateParams'
 
 import { ShowPartWithSubpartsUseCase } from './ShowPartWithSubpartsUseCase'
 
+interface IParams {
+  page?: number
+  per_page?: number
+}
+
 export class ShowPartWithSubpartsController {
   async handle(request: Request, response: Response) {
     const { id: part_id } = request.params
+    const { page, per_page } = request.query as IParams
 
     const { provider_id } = request
 
     validateParams<IShowPartWithSubpartsDTO>(
-      { provider_id, part_id },
+      { provider_id, part_id, page, per_page },
       showPartWithSubpartsSchema
     )
 
@@ -23,7 +29,9 @@ export class ShowPartWithSubpartsController {
 
     const partWithSubparts = await showPartWithSubparts.execute({
       provider_id,
-      part_id
+      part_id,
+      page,
+      per_page
     })
 
     const serializedPart = serializeModel(partWithSubparts, 'partWithSubpart')

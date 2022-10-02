@@ -38,6 +38,21 @@ export enum PartStatus {
   EXPIRED = 'EXPIRED'
 }
 
+export enum ReviewResolve {
+  NOT_RESOLVED = 'NOT_RESOLVED',
+  APPROVED = 'APPROVED',
+  DISAPPROVED = 'DISAPPROVED'
+}
+
+export type Review = {
+  id: string
+  resolve: ReviewResolve
+  comment?: string
+  created_at: Date
+  manager_id: string
+  part_id: string
+}
+
 export type Part = {
   id: string
   provider_id: string
@@ -50,18 +65,40 @@ export type Part = {
 
 export type CreatePart = Pick<Part, 'code' | 'comment' | 'description'>
 
+export enum MaterialTypeName {
+  METAL = 'METAL',
+  PLASTIC = 'PLASTIC',
+  PAPER = 'PAPER',
+  TAPE = 'TAPE'
+}
+
 export type Subpart = {
   id: string
-  provider_id: string
-  part_id: string
   name: string
-  subgroup: string
-  report_date: Date | string
-  gwi_11a1: string
-  fisp_msds: string
+  gwi4_11a1: string
+  fispq_msds: string
   rohs_report: string
-  gwi_11a1_url: string
-  fisp_msds_url: string
+  rohs_report_date: Date
+  rohs_report_expiration_date: Date
+  created_at: Date
+  part_id: string
+  material_type: {
+    name: MaterialTypeName
+  }
+  gwi4_11a1_url: string
+  fispq_msds_url: string
   rohs_report_url: string
-  created_at: Date | string
+}
+
+export type PartWithSubparts = {
+  id: string
+  code: string
+  description: string
+  status: PartStatus
+  comment?: string
+  created_at: Date
+  provider_id: string
+  reviews: Review[]
+  subparts: Subpart[]
+  _count_subparts: 1
 }

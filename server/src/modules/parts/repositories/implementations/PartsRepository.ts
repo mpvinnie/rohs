@@ -63,7 +63,11 @@ export class PartsRepository implements IPartsRepository {
         id: part_id
       },
       include: {
-        reviews: true
+        reviews: {
+          orderBy: {
+            created_at: 'desc'
+          }
+        }
       }
     })
 

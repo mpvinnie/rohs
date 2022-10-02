@@ -17,7 +17,12 @@ export class ShowPartWithSubpartsUseCase {
     private subpartsRepository: ISubpartsRepository
   ) {}
 
-  async execute({ provider_id, part_id }: IShowPartWithSubpartsDTO) {
+  async execute({
+    provider_id,
+    part_id,
+    page,
+    per_page
+  }: IShowPartWithSubpartsDTO) {
     const provider = await this.providersRepository.findById(provider_id)
 
     if (!provider) {
@@ -35,9 +40,24 @@ export class ShowPartWithSubpartsUseCase {
 
     const subparts = await this.subpartsRepository.findAllByPartId(part_id)
 
+    const _count = subparts.length
+
+    if (page && per_page) {
+      const skip = (page - 1) * per_page
+      const take = page * per_page
+
+      const paginatedSubparts = subparts.slice(skip, take)
+      return {
+        ...part,
+        subparts: paginatedSubparts,
+        _count_subparts: _count
+      }
+    }
+
     return {
       ...part,
-      subparts
+      subparts,
+      _count_subparts: _count
     }
   }
 }

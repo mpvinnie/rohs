@@ -19,6 +19,8 @@ export interface ISendPartForReviewDTO {
 export interface IShowPartWithSubpartsDTO {
   provider_id: string
   part_id: string
+  page?: number
+  per_page?: number
 }
 
 export interface IUpdatePartDTO {

@@ -1,6 +1,8 @@
+import { HTMLAttributes } from 'react'
+
 import { Container } from './styles'
 
-type PartStatusProps = {
+interface PartStatusProps extends HTMLAttributes<HTMLDivElement> {
   status:
     | 'DISAPPROVED'
     | 'UNDER_REVIEW'
@@ -19,6 +21,10 @@ export const partStatus = {
   EXPIRED: 'Expirado'
 }
 
-export function PartStatus({ status }: PartStatusProps): JSX.Element {
-  return <Container status={status}>{partStatus[status]}</Container>
+export function PartStatus({ status, ...rest }: PartStatusProps): JSX.Element {
+  return (
+    <Container {...rest} status={status}>
+      {partStatus[status]}
+    </Container>
+  )
 }

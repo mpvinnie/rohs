@@ -13,9 +13,9 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   padding: 0.25rem 0.5rem;
-  width: min-content;
   border-radius: 0.5rem;
   font-weight: 600;
+  width: fit-content;
 
   ${(props) =>
     props.status === 'DISAPPROVED' &&
@@ -28,14 +28,14 @@ export const Container = styled.div<ContainerProps>`
     props.status === 'APPROVED' &&
     css`
       background: var(--green-500);
-      color: var(--green-800);
+      color: var(--white);
     `};
 
   ${(props) =>
     props.status === 'UNDER_REVIEW' &&
     css`
       background: var(--cyan-500);
-      color: var(--cyan-800);
+      color: var(--white);
     `};
 
   ${(props) =>
@@ -49,13 +49,13 @@ export const Container = styled.div<ContainerProps>`
     props.status === 'SENT_FOR_REVIEW' &&
     css`
       background: var(--yellow-500);
-      color: var(--yellow-800);
+      color: var(--white);
     `};
 
   ${(props) =>
     props.status === 'NOT_SENT' &&
     css`
       background: var(--zinc-800);
-      color: var(--zinc-500);
+      color: var(--white);
     `};
 `

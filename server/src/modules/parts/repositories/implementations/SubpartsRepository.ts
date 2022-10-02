@@ -74,6 +74,9 @@ export class SubpartsRepository implements ISubpartsRepository {
       where: { part_id },
       include: {
         material_type: true
+      },
+      orderBy: {
+        created_at: 'desc'
       }
     })
 

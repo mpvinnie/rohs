@@ -53,7 +53,9 @@ export const showPartWithSubpartsSchema = joi.object<IShowPartWithSubpartsDTO>({
     .required()
     .regex(/^\d+$/)
     .message('"provider_id" must only have digits'),
-  part_id: joi.string().uuid().required()
+  part_id: joi.string().uuid().required(),
+  page: joi.number(),
+  per_page: joi.number()
 })
 
 export const listPartsAvailableForReviewSchema =
