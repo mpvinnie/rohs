@@ -1,6 +1,8 @@
+import { Root } from '@radix-ui/react-dialog'
 import { useEffect, useMemo, useState } from 'react'
 import { Plus } from 'react-feather'
 
+import { Button } from '../../../components/Button'
 import { Header } from '../../../components/Header'
 import { NewPartModal } from '../../../components/Modals/NewPartModal'
 import { Pagination } from '../../../components/Pagination'
@@ -14,7 +16,6 @@ import {
   Main,
   Content,
   ContactsContainer,
-  ButtonTrigger,
   NoRegistersContainer
 } from './styles'
 
@@ -63,52 +64,42 @@ export function Contacts(): JSX.Element {
   return (
     <Container>
       <Sidebar selected={SidebarLinkTypes.CONTACTS} />
-      <Main>
-        <Header />
-        <Content open={isModalOpened} onOpenChange={setIsModalOpened}>
-          <ContactsContainer>
-            <header>
-              <h1>Contatos</h1>
-              {totalCount > 0 && (
-                <ButtonTrigger>
-                  <Plus size={24} />
-                  Criar novo
-                </ButtonTrigger>
+      <Root open={isModalOpened} onOpenChange={setIsModalOpened}>
+        <Main>
+          <Header title="Contatos" buttonTitle="Criar novo" />
+          <NewPartModal setIsModalOpened={setIsModalOpened} />
+          <Content open={isModalOpened} onOpenChange={setIsModalOpened}>
+            <ContactsContainer>
+              {totalCount > 0 ? (
+                <>
+                  <Table
+                    titles={[
+                      'Nome',
+                      'Email',
+                      'Número de Telefone',
+                      'Posição',
+                      'Departamento',
+                      ''
+                    ]}
+                    data={contactTableData}
+                  />
+                  <Pagination
+                    totalCountOfRegisters={totalCount}
+                    currentPage={page}
+                    onPageChange={setPage}
+                  />
+                </>
+              ) : (
+                <NoRegistersContainer>
+                  <span>Nenhum registro encontrado</span>
+                  <Button title="Criar novo" icon={Plus} />
+                  <NewPartModal setIsModalOpened={setIsModalOpened} />
+                </NoRegistersContainer>
               )}
-              <NewPartModal setIsModalOpened={setIsModalOpened} />
-            </header>
-            {totalCount > 0 ? (
-              <>
-                <Table
-                  titles={[
-                    'Nome',
-                    'Email',
-                    'Número de Telefone',
-                    'Posição',
-                    'Departamento',
-                    ''
-                  ]}
-                  data={contactTableData}
-                />
-                <Pagination
-                  totalCountOfRegisters={totalCount}
-                  currentPage={page}
-                  onPageChange={setPage}
-                />
-              </>
-            ) : (
-              <NoRegistersContainer>
-                <span>Nenhum registro encontrado</span>
-                <ButtonTrigger>
-                  <Plus size={24} />
-                  Criar novo contato
-                </ButtonTrigger>
-                <NewPartModal setIsModalOpened={setIsModalOpened} />
-              </NoRegistersContainer>
-            )}
-          </ContactsContainer>
-        </Content>
-      </Main>
+            </ContactsContainer>
+          </Content>
+        </Main>
+      </Root>
     </Container>
   )
 }

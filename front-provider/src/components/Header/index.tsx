@@ -1,45 +1,25 @@
-import { Bell, Search } from 'react-feather'
+import { Bell, Plus } from 'react-feather'
 
-import defaultAvatar from '../../assets/defaultAvatar.png'
-import { useAuth } from '../../hooks/AuthContext'
-import {
-  Container,
-  HeaderContent,
-  LeftSide,
-  SearchContainer,
-  RightSide,
-  Profile,
-  ProfileInfos
-} from './styles'
+import { Button } from '../Button'
+import { Container, HeaderContent, InteractionButtons } from './styles'
 
-export function Header(): JSX.Element {
-  const { provider } = useAuth()
+interface HeaderProps {
+  title: string
+  buttonTitle?: string
+}
 
+export function Header({
+  title,
+  buttonTitle = 'Criar nova'
+}: HeaderProps): JSX.Element {
   return (
     <Container>
       <HeaderContent>
-        <LeftSide>
-          <SearchContainer>
-            <input type="text" placeholder="Buscar nessa página" />
-            <button>
-              <Search size={24} />
-            </button>
-          </SearchContainer>
-        </LeftSide>
-        <RightSide>
-          <Bell size={20} />
-          <Profile>
-            <ProfileInfos>
-              <strong>{provider.name}</strong>
-              <span>{provider.segment.name}</span>
-            </ProfileInfos>
-            {!provider.avatar_url ? (
-              <img src={defaultAvatar} alt="Default Avatar" />
-            ) : (
-              <img src={provider.avatar_url} alt={provider.name} />
-            )}
-          </Profile>
-        </RightSide>
+        <h2>{title}</h2>
+        <InteractionButtons>
+          <Bell size={18} />
+          <Button icon={Plus} title={buttonTitle} isButtonTrigger />
+        </InteractionButtons>
       </HeaderContent>
     </Container>
   )

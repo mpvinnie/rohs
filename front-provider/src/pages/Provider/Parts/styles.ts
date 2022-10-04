@@ -26,7 +26,7 @@ export const Main = styled.main`
   padding: 0 1rem;
 `
 
-export const Content = styled(Dialog.Root)`
+export const Content = styled.div`
   width: 100%;
   padding: 3.5rem;
   display: flex;
@@ -40,19 +40,6 @@ export const PartsContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  header {
-    display: flex;
-    justify-content: space-between;
-
-    h1 {
-      font-weight: 900;
-    }
-
-    button {
-      margin-top: 0.5rem;
-    }
-  }
 `
 
 export const ButtonTrigger = styled(Dialog.Trigger)`

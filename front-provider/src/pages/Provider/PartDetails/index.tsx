@@ -90,7 +90,7 @@ export function PartDetails(): JSX.Element {
     <Container>
       <Sidebar selected={SidebarLinkTypes.PARTS} />
       <Main>
-        <Header />
+        <Header title="Detalhes da parte" />
         <Content open={isModalOpened} onOpenChange={setIsModalOpened}>
           <PartDetailsContainer>
             <SubpartHeaderNavigation

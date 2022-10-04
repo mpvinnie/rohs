@@ -55,18 +55,6 @@ export const ContactsContainer = styled.div`
   }
 `
 
-export const ButtonTrigger = styled(Dialog.Trigger)`
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 0.2rem;
-  background-color: var(--emerald-500);
-  color: var(--white);
-  font-size: 1rem;
-  font-weight: 600;
-`
-
 export const NoRegistersContainer = styled.div`
   width: 100%;
   height: 100%;

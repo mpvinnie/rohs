@@ -1,28 +1,25 @@
 import { ButtonHTMLAttributes } from 'react'
 import { Icon } from 'react-feather'
-import { useHistory } from 'react-router'
 
-import { Container } from './styles'
+import { Container, ButtonTrigger } from './styles'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: Icon
-  title?: string
-  to?: string
+  title: string
+  isButtonTrigger?: boolean
 }
 
 export function Button({
   icon: Icon,
   title,
-  to,
+  isButtonTrigger = false,
   ...rest
 }: ButtonProps): JSX.Element {
-  const { push } = useHistory()
-
-  return to ? (
-    <Container {...rest} onClick={() => push(to)}>
+  return isButtonTrigger ? (
+    <ButtonTrigger {...rest}>
       {Icon && <Icon />}
       {title}
-    </Container>
+    </ButtonTrigger>
   ) : (
     <Container {...rest}>
       {Icon && <Icon />}
