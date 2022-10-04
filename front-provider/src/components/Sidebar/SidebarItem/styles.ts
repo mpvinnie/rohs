@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
-type ContainerProps = {
+type Props = {
   is_selected: number
 }
 
-export const Container = styled(Link)<ContainerProps>`
-  padding: 0.5rem 2rem;
+export const Container = styled(Link)<Props>`
   display: flex;
   align-items: center;
   color: var(--white);
@@ -14,38 +13,49 @@ export const Container = styled(Link)<ContainerProps>`
 
   transition: filter 0.2s;
 
-  @media (max-width: 1040px) {
-    svg {
-      margin-right: 0;
-    }
-  }
-
   svg {
-    margin-right: 1rem;
-
-    @media (max-width: 1040px) {
-      margin-right: 0;
-      width: 1.5rem;
-      height: 1.5rem;
-    }
+    margin-right: 1.714rem;
   }
 
   span {
     font-size: 1rem;
 
-    @media (max-width: 1040px) {
+    @media (max-width: 1080px) {
       display: none;
     }
   }
 
   &:hover {
-    filter: brightness(0.6);
+    filter: brightness(0.9);
   }
 
   ${(props) =>
     props.is_selected === 1 &&
     css`
       color: var(--emerald-500);
-      font-weight: 700;
     `}
+
+  @media (max-width: 1080px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
+
+export const SelectionIndicator = styled.div<Props>`
+  background: transparent;
+  width: 0.285rem;
+  height: 2.285rem;
+  margin-right: 1.428rem;
+  border-radius: 0 0.571rem 0.571rem 0;
+
+  ${(props) =>
+    props.is_selected &&
+    css`
+      background-color: var(--emerald-500);
+    `}
+
+  @media (max-width: 1080px) {
+    background: transparent;
+  }
 `

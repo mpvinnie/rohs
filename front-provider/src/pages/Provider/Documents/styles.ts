@@ -5,7 +5,7 @@ export const Container = styled.div`
   grid-template-areas: 'sidebar main';
   grid-template-columns: minmax(15rem, 15rem) 1fr;
 
-  @media (max-width: 1040px) {
+  @media (max-width: 1080px) {
     grid-template-columns: minmax(6rem, 6rem) 1fr;
   }
 `

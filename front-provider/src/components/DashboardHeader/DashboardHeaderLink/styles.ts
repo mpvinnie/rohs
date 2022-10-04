@@ -32,7 +32,7 @@ export const Container = styled(Link)`
     text-align: center;
   }
 
-  @media (max-width: 1040px) {
+  @media (max-width: 1080px) {
     width: 16rem;
 
     span {

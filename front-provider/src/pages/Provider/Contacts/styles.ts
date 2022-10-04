@@ -1,12 +1,11 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'sidebar main';
-  grid-template-columns: minmax(15rem, 15rem) 1fr;
+  grid-template-columns: minmax(20rem, 20rem) 1fr;
 
-  @media (max-width: 1040px) {
+  @media (max-width: 1080px) {
     grid-template-columns: minmax(6rem, 6rem) 1fr;
   }
 
@@ -26,7 +25,7 @@ export const Main = styled.main`
   padding: 0 1rem;
 `
 
-export const Content = styled(Dialog.Root)`
+export const Content = styled.div`
   width: 100%;
   padding: 3.5rem;
   display: flex;

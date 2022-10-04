@@ -45,7 +45,7 @@ export const Footer = styled(Link)`
   svg {
     margin-right: 1rem;
 
-    @media (max-width: 1040px) {
+    @media (max-width: 1080px) {
       margin-right: 0;
     }
   }
@@ -53,7 +53,7 @@ export const Footer = styled(Link)`
   span {
     font-size: 1rem;
 
-    @media (max-width: 1040px) {
+    @media (max-width: 1080px) {
       display: none;
     }
   }

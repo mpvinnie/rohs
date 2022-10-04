@@ -1,7 +1,7 @@
 import { Icon } from 'react-feather'
 import { LinkProps } from 'react-router-dom'
 
-import { Container } from './styles'
+import { Container, SelectionIndicator } from './styles'
 
 export enum SidebarLinkTypes {
   DASHBOARD = 'Dashboard',
@@ -26,7 +26,8 @@ export function SidebarItem({
 }: SidebarItemProps): JSX.Element {
   return (
     <Container to={to} is_selected={Number(isSelected)} {...rest}>
-      <Icon size={20} />
+      <SelectionIndicator is_selected={Number(isSelected)} />
+      <Icon size={16} />
       <span>{title}</span>
     </Container>
   )

@@ -17,7 +17,6 @@ import {
   Main,
   Content,
   PartsContainer,
-  ButtonTrigger,
   NoRegistersContainer
 } from './styles'
 

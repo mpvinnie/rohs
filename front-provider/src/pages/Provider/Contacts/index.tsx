@@ -68,7 +68,7 @@ export function Contacts(): JSX.Element {
         <Main>
           <Header title="Contatos" buttonTitle="Criar novo" />
           <NewPartModal setIsModalOpened={setIsModalOpened} />
-          <Content open={isModalOpened} onOpenChange={setIsModalOpened}>
+          <Content>
             <ContactsContainer>
               {totalCount > 0 ? (
                 <>

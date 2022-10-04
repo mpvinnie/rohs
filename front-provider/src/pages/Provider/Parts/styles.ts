@@ -1,12 +1,11 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'sidebar main';
-  grid-template-columns: minmax(15rem, 15rem) 1fr;
+  grid-template-columns: minmax(20rem, 20rem) 1fr;
 
-  @media (max-width: 1040px) {
+  @media (max-width: 1080px) {
     grid-template-columns: minmax(6rem, 6rem) 1fr;
   }
 
@@ -40,18 +39,6 @@ export const PartsContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-`
-
-export const ButtonTrigger = styled(Dialog.Trigger)`
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 0.2rem;
-  background-color: var(--emerald-500);
-  color: var(--white);
-  font-size: 1rem;
-  font-weight: 600;
 `
 
 export const NoRegistersContainer = styled.div`
