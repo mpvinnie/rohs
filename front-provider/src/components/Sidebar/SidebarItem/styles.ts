@@ -14,12 +14,14 @@ export const Container = styled(Link)<Props>`
   transition: filter 0.2s;
 
   svg {
-    margin-right: 1.714rem;
+    margin-right: 1.5rem;
+
+    @media (max-width: 1080px) {
+      margin-right: 0;
+    }
   }
 
   span {
-    font-size: 1rem;
-
     @media (max-width: 1080px) {
       display: none;
     }
@@ -39,23 +41,24 @@ export const Container = styled(Link)<Props>`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1rem;
   }
 `
 
 export const SelectionIndicator = styled.div<Props>`
   background: transparent;
-  width: 0.285rem;
-  height: 2.285rem;
-  margin-right: 1.428rem;
-  border-radius: 0 0.571rem 0.571rem 0;
+  width: 0.25rem;
+  height: 2rem;
+  margin-right: 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+
+  @media (max-width: 1080px) {
+    display: none;
+  }
 
   ${(props) =>
     props.is_selected &&
     css`
       background-color: var(--emerald-500);
     `}
-
-  @media (max-width: 1080px) {
-    background: transparent;
-  }
 `

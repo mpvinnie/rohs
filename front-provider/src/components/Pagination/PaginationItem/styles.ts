@@ -11,7 +11,6 @@ export const Container = styled.button<ContainerProps>`
 
   background: var(--zinc-800);
   color: var(--zinc-500);
-  font-size: 1rem;
 
   transition: filter 0.2s;
 

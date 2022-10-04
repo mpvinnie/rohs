@@ -27,7 +27,6 @@ export const Container = styled(Link)`
   }
 
   p {
-    font-size: 1rem;
     color: var(--purple_300);
     text-align: center;
   }

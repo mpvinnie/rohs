@@ -49,7 +49,6 @@ export const Container = styled.div<ContainerProps>`
     resize: none;
 
     color: var(--white);
-    font-size: 1rem;
 
     &::placeholder {
       color: var(--zinc-500);

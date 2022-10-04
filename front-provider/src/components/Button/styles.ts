@@ -16,7 +16,6 @@ export const Container = styled.button`
     filter: brightness(0.9);
   }
 
-  font-size: 1rem;
   font-weight: 600;
 `
 
@@ -35,6 +34,5 @@ export const ButtonTrigger = styled(Trigger)`
     filter: brightness(0.9);
   }
 
-  font-size: 1rem;
   font-weight: 600;
 `

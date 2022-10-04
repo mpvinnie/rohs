@@ -47,6 +47,5 @@ export const Close = styled(Dialog.Close)`
   }
 
   color: var(--white);
-  font-size: 1rem;
   font-weight: 600;
 `

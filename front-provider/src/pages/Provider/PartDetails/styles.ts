@@ -85,7 +85,6 @@ export const ButtonTrigger = styled(Dialog.Trigger)`
   border-radius: 0.2rem;
   background-color: var(--emerald-500);
   color: var(--white);
-  font-size: 1rem;
   font-weight: 600;
 `
 

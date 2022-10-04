@@ -10,7 +10,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   span {
-    font-size: 1rem;
     color: var(--white);
     font-weight: 600;
   }

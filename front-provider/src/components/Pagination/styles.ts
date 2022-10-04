@@ -17,6 +17,5 @@ export const PaginationItemsContainer = styled.div`
     width: 2.5rem;
     color: var(--blue_900);
     text-align: center;
-    font-size: 1rem;
   }
 `

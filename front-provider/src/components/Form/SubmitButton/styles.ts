@@ -11,7 +11,6 @@ export const Container = styled.button`
 
   background: var(--emerald-500);
   color: var(--white);
-  font-size: 1rem;
   font-weight: 700;
   transition: filter 0.2s;
 

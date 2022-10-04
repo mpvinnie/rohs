@@ -60,14 +60,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: 87.5%;
-
     @media (max-width: 1080px) {
-      font-size: 81.25%;
+      font-size: 87.5%;
     }
 
     @media (max-width: 720px) {
-      font-size: 75%;
+      font-size: 81.25%;
     }
   }
 
@@ -116,5 +114,9 @@ export const GlobalStyle = createGlobalStyle`
 
   .Toastify__toast--success {
     background: var(--emerald-500);
+  }
+
+  p, strong, a, span, input, label, button, textarea {
+    font-size: 14px;
   }
 `

@@ -37,7 +37,6 @@ export const Header = styled.header`
 export const PathLinks = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1rem;
 
   a {
     color: var(--gray_500);

@@ -51,8 +51,6 @@ export const Footer = styled(Link)`
   }
 
   span {
-    font-size: 1rem;
-
     @media (max-width: 1080px) {
       display: none;
     }

@@ -48,7 +48,6 @@ export const Container = styled.div<ContainerProps>`
     background: transparent;
 
     color: var(--white);
-    font-size: 1rem;
 
     &::placeholder {
       color: var(--zinc-500);
