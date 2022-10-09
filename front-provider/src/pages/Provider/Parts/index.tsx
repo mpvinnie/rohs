@@ -82,7 +82,6 @@ export function Parts(): JSX.Element {
           <Header title="Partes" />
           <NewPartModal setIsModalOpened={setIsModalOpened} />
           <Content>
-            <p>Teste</p>
             <PartsContainer>
               {totalCount > 0 ? (
                 <>

@@ -1,10 +1,11 @@
 import * as Dialog from '@radix-ui/react-dialog'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'sidebar main';
-  grid-template-columns: minmax(15rem, 15rem) 1fr;
+  grid-template-columns: minmax(20rem, 20rem) 1fr;
 
   @media (max-width: 1080px) {
     grid-template-columns: minmax(6rem, 6rem) 1fr;
@@ -21,14 +22,15 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   margin-bottom: 2rem;
   padding: 0 1rem;
 `
 
-export const Content = styled(Dialog.Root)`
+export const Content = styled.div`
   width: 100%;
-  padding: 3.5rem;
+  height: 100%;
+  padding: 0 3.5rem;
   display: flex;
   justify-content: center;
 `
@@ -52,6 +54,10 @@ export const PartDetailsContainer = styled.div`
     button {
       margin-top: 0.5rem;
     }
+  }
+
+  h3 {
+    margin: 1.5rem 0;
   }
 `
 

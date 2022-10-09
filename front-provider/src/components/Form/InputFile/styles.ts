@@ -2,11 +2,10 @@ import styled, { css } from 'styled-components'
 
 type ContainerProps = {
   isInvalid: boolean
-  isFocused: boolean
 }
 
 export const Wrapper = styled.div`
-  label {
+  & > label {
     font-size: 0.875rem;
     display: block;
     margin-bottom: 0.5rem;
@@ -32,27 +31,20 @@ export const Container = styled.div<ContainerProps>`
       border-color: var(--rose-600);
     `}
 
-  ${(props) =>
-    props.isFocused &&
-    css`
-      border-color: var(--emerald-500);
-    `}
-
   div + & {
     margin-top: 0.5rem;
   }
 
   input {
-    flex: 1;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
     border: 0;
     background: transparent;
     color-scheme: dark;
 
     color: var(--white);
-
-    &::placeholder {
-      color: var(--zinc-500);
-    }
   }
 `
 

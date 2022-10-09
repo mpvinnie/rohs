@@ -72,6 +72,22 @@ export enum MaterialTypeName {
   TAPE = 'TAPE'
 }
 
+export const materialTypeNames = {
+  METAL: 'Metal',
+  PLASTIC: 'Plástico',
+  PAPER: 'Papel',
+  TAPE: 'Fita'
+}
+
+export type CreateSubpart = Pick<
+  Subpart,
+  'name' | 'material_type' | 'rohs_report_date'
+> & {
+  gwi4_11a1: FileList
+  fispq_msds: FileList
+  rohs_report: FileList
+}
+
 export type Subpart = {
   id: string
   name: string

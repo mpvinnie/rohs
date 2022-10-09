@@ -1,41 +1,37 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import styled, { css } from 'styled-components'
 
 interface NavigationButtonProps {
   selected: boolean
 }
 
-export const Container = styled.header`
+export const Container = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
+  border-bottom: 1px solid var(--zinc-800);
 
-  div {
+  a {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: transparent;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
 
-    a {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      background: transparent;
-      margin-right: 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    color: white;
+    transition: background-color 0.2s;
 
-      color: white;
-      transition: background-color 0.2s;
-
-      &:hover {
-        background-color: var(--zinc-800);
-      }
+    &:hover {
+      background-color: var(--zinc-800);
     }
   }
 `
 
 export const NavigationButton = styled.button<NavigationButtonProps>`
   background: none;
-  padding: 0 2rem 0.25rem;
+  padding: 1rem 2rem;
   color: var(--zinc-500);
 
   & + button {
@@ -46,18 +42,7 @@ export const NavigationButton = styled.button<NavigationButtonProps>`
     props.selected &&
     css`
       color: var(--white);
-      border-bottom: 1px solid var(--emerald-500);
+      border-bottom: 2px solid var(--emerald-500);
       font-weight: 600;
     `}
-`
-
-export const ButtonTrigger = styled(Dialog.Trigger)`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  background: var(--emerald-500);
-  color: var(--white);
-  font-weight: 600;
 `

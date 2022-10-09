@@ -6,11 +6,13 @@ import { Container, HeaderContent, InteractionButtons } from './styles'
 interface HeaderProps {
   title: string
   buttonTitle?: string
+  showButton?: boolean
 }
 
 export function Header({
   title,
-  buttonTitle = 'Criar nova'
+  buttonTitle = 'Criar nova',
+  showButton = true
 }: HeaderProps): JSX.Element {
   return (
     <Container>
@@ -18,7 +20,9 @@ export function Header({
         <h2>{title}</h2>
         <InteractionButtons>
           <Bell size={18} />
-          <Button icon={Plus} title={buttonTitle} isButtonTrigger />
+          {showButton && (
+            <Button icon={Plus} title={buttonTitle} isButtonTrigger />
+          )}
         </InteractionButtons>
       </HeaderContent>
     </Container>

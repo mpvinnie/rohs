@@ -42,16 +42,15 @@ export const Container = styled.div<ContainerProps>`
     margin-top: 0.5rem;
   }
 
-  input {
+  select {
     flex: 1;
     border: 0;
     background: transparent;
-    color-scheme: dark;
 
     color: var(--white);
 
-    &::placeholder {
-      color: var(--zinc-500);
+    option {
+      background: var(--zinc-800);
     }
   }
 `
